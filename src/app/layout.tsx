@@ -1,0 +1,65 @@
+import type { Metadata } from "next";
+import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import "./globals.css";
+import Navbar from "@/components/global/Navbar";
+import Footer from "@/components/global/Footer";
+import FloatingWhatsApp from "@/components/global/FloatingWhatsApp";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "Nexora | High-Impact Digital Marketing & Web Solutions",
+  description:
+    "Nexora is a bespoke digital marketing and web solutions platform. We engineer high-performance Next.js web architecture, tactile UI/UX systems, and algorithmic revenue flywheels.",
+  keywords: [
+    "Digital Marketing",
+    "Web Development",
+    "Next.js Architecture",
+    "UI/UX Design",
+    "SEO",
+    "Performance Marketing",
+    "Nexora",
+  ],
+  authors: [{ name: "Nexora Creations GROUP" }],
+  openGraph: {
+    title: "Nexora | High-Impact Digital Marketing & Web Solutions",
+    description:
+      "Engineering bespoke digital ecosystems, tactile web interfaces, and high-converting marketing funnels.",
+    type: "website",
+    locale: "en_US",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={`${outfit.variable} ${plusJakarta.variable}`}>
+      <body className="bg-white text-brand-navy min-h-screen flex flex-col antialiased selection:bg-[#00D2FF] selection:text-[#00144A]">
+        {/* Top Glassmorphic Navigation */}
+        <Navbar />
+
+        {/* Main Content Area */}
+        <main className="flex-grow">{children}</main>
+
+        {/* Global Footer */}
+        <Footer />
+
+        {/* Persistent Floating WhatsApp Widget */}
+        <FloatingWhatsApp />
+      </body>
+    </html>
+  );
+}

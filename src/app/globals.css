@@ -1,0 +1,238 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 100% 15%;
+    --navy: #00144A;
+    --navy-dark: #000B2B;
+    --cyan: #00D2FF;
+    --accent: #FF4B72;
+  }
+
+  * {
+    border-color: #E2E8F0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #FFFFFF;
+    color: #00144A;
+    font-family: var(--font-jakarta), sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-outfit), sans-serif;
+  }
+}
+
+/* ==========================================================================
+   TACTILE MECHANICAL KEYCAP EFFECT (REFINED, SUBTLE BORDERS)
+   ========================================================================== */
+
+/* Base Tactile Card - Clean keycap switch with subtle border & thick bottom shadow */
+.tactile-card {
+  position: relative;
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 1rem; /* rounded-2xl */
+  box-shadow: 0 6px 0 #000B2B;
+  transform: translateY(0);
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.15s ease;
+  will-change: transform, box-shadow;
+}
+
+.tactile-card:hover {
+  transform: translateY(2px);
+  box-shadow: 0 4px 0 #000B2B;
+  border-color: #CBD5E1;
+}
+
+.tactile-card:active {
+  transform: translateY(4px) !important;
+  box-shadow: 0 2px 0 #000B2B !important;
+}
+
+/* Tactile Buttons */
+.tactile-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  border-radius: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.12s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Navy Primary Keycap */
+.tactile-btn-navy {
+  background-color: #00144A;
+  color: #FFFFFF;
+  border: 1px solid #002277;
+  box-shadow: 0 5px 0 #000B2B;
+}
+.tactile-btn-navy:hover {
+  background-color: #001e6e;
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #000B2B;
+}
+.tactile-btn-navy:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #000B2B;
+}
+
+/* Cyan Accent Keycap */
+.tactile-btn-cyan {
+  background-color: #00D2FF;
+  color: #00144A;
+  border: 1px solid #70e6ff;
+  box-shadow: 0 5px 0 #0087a3;
+}
+.tactile-btn-cyan:hover {
+  background-color: #33dcff;
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #0087a3;
+}
+.tactile-btn-cyan:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #0087a3;
+}
+
+/* White / Light Tactile Keycap */
+.tactile-btn-white {
+  background-color: #FFFFFF;
+  color: #00144A;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 5px 0 #000B2B;
+}
+.tactile-btn-white:hover {
+  background-color: #F8FAFC;
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #000B2B;
+}
+.tactile-btn-white:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #000B2B;
+}
+
+/* Accent Pink Keycap */
+.tactile-btn-accent {
+  background-color: #FF4B72;
+  color: #FFFFFF;
+  border: 1px solid #ff7b98;
+  box-shadow: 0 5px 0 #B82245;
+}
+.tactile-btn-accent:hover {
+  background-color: #ff6384;
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #B82245;
+}
+.tactile-btn-accent:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #B82245;
+}
+
+/* Small tactile key pill */
+.tactile-key-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-bottom: 2.5px solid #CBD5E1;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.625rem;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: #00144A;
+}
+
+/* ==========================================================================
+   MARQUEE & ANIMATION HELPERS
+   ========================================================================== */
+
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 2rem;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused !important;
+}
+
+.marquee-track {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  min-width: 100%;
+  animation: marquee 35s linear infinite;
+}
+
+/* Subtle grid backdrop */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 20, 74, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 20, 74, 0.03) 1px, transparent 1px);
+}
+
+.bg-radial-gradient {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 210, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+/* WhatsApp Ripple Effect */
+@keyframes ambient-ripple {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 16px rgba(37, 211, 102, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.whatsapp-ripple {
+  animation: ambient-ripple 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F8FAFC;
+}
+::-webkit-scrollbar-thumb {
+  background: #00144A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00D2FF;
+}
