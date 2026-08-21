@@ -166,28 +166,42 @@
 }
 
 /* ==========================================================================
-   MARQUEE & ANIMATION HELPERS
+   SEAMLESS INFINITE MARQUEE (NO JUMPING / NO REWINDING)
    ========================================================================== */
+
+@keyframes marquee-scroll-infinite {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
 
 .marquee-container {
   display: flex;
   overflow: hidden;
   user-select: none;
-  gap: 2rem;
+  width: 100%;
 }
 
-.marquee-container:hover .marquee-track {
+.marquee-group {
+  display: flex;
+  width: max-content;
+}
+
+.marquee-group:hover .marquee-track {
   animation-play-state: paused !important;
 }
 
 .marquee-track {
-  flex-shrink: 0;
   display: flex;
+  flex-shrink: 0;
   align-items: center;
-  justify-content: space-around;
-  gap: 2rem;
-  min-width: 100%;
-  animation: marquee 35s linear infinite;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
+  will-change: transform;
+  animation: marquee-scroll-infinite 28s linear infinite;
 }
 
 /* Subtle grid backdrop */

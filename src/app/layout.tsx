@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/global/Navbar";
-import Footer from "@/components/global/Footer";
-import FloatingWhatsApp from "@/components/global/FloatingWhatsApp";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -47,18 +44,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${outfit.variable} ${plusJakarta.variable}`}>
-      <body className="bg-white text-brand-navy min-h-screen flex flex-col antialiased selection:bg-[#00D2FF] selection:text-[#00144A]">
-        {/* Top Glassmorphic Navigation */}
-        <Navbar />
-
-        {/* Main Content Area */}
-        <main className="flex-grow">{children}</main>
-
-        {/* Global Footer */}
-        <Footer />
-
-        {/* Persistent Floating WhatsApp Widget */}
-        <FloatingWhatsApp />
+      <body className="antialiased selection:bg-[#00D2FF] selection:text-[#00144A]">
+        {children}
       </body>
     </html>
   );

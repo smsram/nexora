@@ -9,9 +9,9 @@ import {
   Rocket, 
   Shield, 
   Zap, 
-  Compass,
-  Flame,
-  Radio
+  Compass, 
+  Flame, 
+  Radio 
 } from "lucide-react";
 
 interface ClientBrand {
@@ -21,76 +21,81 @@ interface ClientBrand {
 }
 
 const clientBrands: ClientBrand[] = [
-  { name: "Apex Global", category: "FinTech Scaleup", icon: <Building2 className="w-5 h-5" /> },
-  { name: "Lumina Intelligence", category: "AI Systems", icon: <Cpu className="w-5 h-5" /> },
-  { name: "Vertex Media", category: "Omnichannel Commerce", icon: <Layers className="w-5 h-5" /> },
-  { name: "Nova Growth", category: "SaaS Enterprise", icon: <Rocket className="w-5 h-5" /> },
-  { name: "Pulse Technologies", category: "HealthTech Platform", icon: <Radio className="w-5 h-5" /> },
-  { name: "Zenith Core", category: "Cyber Infrastructure", icon: <Shield className="w-5 h-5" /> },
-  { name: "Hyperion Web", category: "Web3 Protocol", icon: <Globe2 className="w-5 h-5" /> },
-  { name: "Stratos Labs", category: "Deep Learning", icon: <Zap className="w-5 h-5" /> },
-  { name: "Vanguard Studio", category: "Luxury D2C", icon: <Compass className="w-5 h-5" /> },
-  { name: "Ignite Venture", category: "Growth Capital", icon: <Flame className="w-5 h-5" /> },
+  { name: "Apex Global", category: "FinTech Scaleup", icon: <Building2 className="w-4 h-4" /> },
+  { name: "Lumina Intelligence", category: "AI Systems", icon: <Cpu className="w-4 h-4" /> },
+  { name: "Vertex Media", category: "Omnichannel Commerce", icon: <Layers className="w-4 h-4" /> },
+  { name: "Nova Growth", category: "SaaS Enterprise", icon: <Rocket className="w-4 h-4" /> },
+  { name: "Pulse Technologies", category: "HealthTech Platform", icon: <Radio className="w-4 h-4" /> },
+  { name: "Zenith Core", category: "Cyber Infrastructure", icon: <Shield className="w-4 h-4" /> },
+  { name: "Hyperion Web", category: "Web3 Protocol", icon: <Globe2 className="w-4 h-4" /> },
+  { name: "Stratos Labs", category: "Deep Learning", icon: <Zap className="w-4 h-4" /> },
+  { name: "Vanguard Studio", category: "Luxury D2C", icon: <Compass className="w-4 h-4" /> },
+  { name: "Ignite Venture", category: "Growth Capital", icon: <Flame className="w-4 h-4" /> },
 ];
 
 export const TrustMarquee: React.FC = () => {
   return (
-    <section className="py-12 bg-slate-50/70 border-y border-slate-200/80 overflow-hidden relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
+    <section className="py-14 bg-slate-50/60 border-y border-slate-200/80 overflow-hidden relative select-none">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-7 text-center">
         <p className="font-outfit text-xs font-bold uppercase tracking-[0.25em] text-slate-500">
           Trusted by Industry Innovators & Global Brands
         </p>
       </div>
 
-      {/* Marquee Wrapper with Smooth Pause-on-Hover */}
-      <div className="relative w-full overflow-hidden marquee-container group">
+      {/* Marquee Viewport with Left/Right Edge Fades and Hover-Pause */}
+      <div className="relative w-full overflow-hidden marquee-container">
         
-        {/* Left and Right Fade Gradients */}
-        <div className="absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent z-10 pointer-events-none" />
+        {/* Left Edge Fade Mask */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-36 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent z-10 pointer-events-none" />
+        
+        {/* Right Edge Fade Mask */}
+        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-36 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent z-10 pointer-events-none" />
 
-        {/* Track 1 (Right to Left) */}
-        <div className="marquee-track flex items-center gap-6">
-          {clientBrands.map((client, idx) => (
-            <div
-              key={`marquee-1-${idx}`}
-              className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-[0_5px_0_#000B2B] hover:border-[#00D2FF] hover:translate-y-[2px] hover:shadow-[0_3px_0_#000B2B] transition-all duration-150 cursor-pointer min-w-[210px] select-none"
-            >
-              <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-brand-navy group-hover:text-[#0099BE]">
-                {client.icon}
+        {/* Dual-Track 100% Seamless Infinite Loop */}
+        <div className="marquee-group flex">
+          {/* Primary Track */}
+          <div className="marquee-track flex items-center">
+            {clientBrands.map((client, idx) => (
+              <div
+                key={`marquee-track1-${idx}`}
+                className="inline-flex items-center gap-3.5 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-[#00D2FF] hover:shadow-md transition-all duration-200 cursor-pointer flex-shrink-0"
+              >
+                <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-brand-navy group-hover:text-[#0099BE] flex-shrink-0">
+                  {client.icon}
+                </div>
+                <div className="flex flex-col text-left pr-1">
+                  <span className="font-outfit font-bold text-xs text-brand-navy whitespace-nowrap leading-tight">
+                    {client.name}
+                  </span>
+                  <span className="font-jakarta text-[10px] font-medium text-slate-500 mt-0.5 leading-tight whitespace-nowrap">
+                    {client.category}
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span className="font-outfit font-extrabold text-sm text-brand-navy whitespace-nowrap">
-                  {client.name}
-                </span>
-                <span className="font-jakarta text-[10px] font-medium text-slate-500">
-                  {client.category}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* Track 2 (Seamless Duplicate) */}
-        <div aria-hidden="true" className="marquee-track flex items-center gap-6">
-          {clientBrands.map((client, idx) => (
-            <div
-              key={`marquee-2-${idx}`}
-              className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-[0_5px_0_#000B2B] hover:border-[#00D2FF] hover:translate-y-[2px] hover:shadow-[0_3px_0_#000B2B] transition-all duration-150 cursor-pointer min-w-[210px] select-none"
-            >
-              <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-brand-navy group-hover:text-[#0099BE]">
-                {client.icon}
+          {/* Exact Clone Track for 100% Seamless Infinite Wrapping */}
+          <div aria-hidden="true" className="marquee-track flex items-center">
+            {clientBrands.map((client, idx) => (
+              <div
+                key={`marquee-track2-${idx}`}
+                className="inline-flex items-center gap-3.5 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-[#00D2FF] hover:shadow-md transition-all duration-200 cursor-pointer flex-shrink-0"
+              >
+                <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-brand-navy group-hover:text-[#0099BE] flex-shrink-0">
+                  {client.icon}
+                </div>
+                <div className="flex flex-col text-left pr-1">
+                  <span className="font-outfit font-bold text-xs text-brand-navy whitespace-nowrap leading-tight">
+                    {client.name}
+                  </span>
+                  <span className="font-jakarta text-[10px] font-medium text-slate-500 mt-0.5 leading-tight whitespace-nowrap">
+                    {client.category}
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span className="font-outfit font-extrabold text-sm text-brand-navy whitespace-nowrap">
-                  {client.name}
-                </span>
-                <span className="font-jakarta text-[10px] font-medium text-slate-500">
-                  {client.category}
-                </span>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
       </div>

@@ -2,50 +2,35 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import NexoraLogo from "./NexoraLogo";
 
-// Logical order of active sections present on this page
-const navLinks = [
-  { name: "Services", href: "#services", id: "services" },
-  { name: "Story", href: "#story", id: "story" },
-  { name: "Team", href: "#team", id: "team" },
-  { name: "Domains", href: "#domains", id: "domains" },
-  { name: "Contact", href: "#contact", id: "contact" },
+export interface NavItem {
+  name: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Testimonials", href: "/testimonials" },
+  { name: "Portfolio", href: "/portfolio" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Blogs", href: "/blogs" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export const Navbar: React.FC = () => {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>("");
-  const [logoError, setLogoError] = useState(false);
 
-  // Scroll spy / Intersection Observer for dynamic active nav state
+  // Check scroll position for header glassmorphic background
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-
-      const scrollPosition = window.scrollY + 200;
-      const sectionElements = navLinks.map((link) => ({
-        id: link.id,
-        element: document.getElementById(link.id),
-      }));
-
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const item = sectionElements[i];
-        if (item.element) {
-          const top = item.element.offsetTop;
-          if (scrollPosition >= top) {
-            setActiveSection(item.id);
-            return;
-          }
-        }
-      }
-
-      if (window.scrollY < 300) {
-        setActiveSection("");
-      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -53,81 +38,118 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Handle Home and nav clicks
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    item: NavItem
+  ) => {
+    if (item.href === "/") {
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("nexora_skip_intro_trigger", "true");
+      }
+      if (pathname === "/") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
+  const handleMobileNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    item: NavItem
+  ) => {
+    if (item.href === "/") {
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("nexora_skip_intro_trigger", "true");
+      }
+      if (pathname === "/") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    setTimeout(() => {
+      setMobileMenuOpen(false);
+    }, 180);
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("nexora_skip_intro_trigger", "true");
+    }
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // Helper to determine if an item is active
+  const isItemActive = (item: NavItem): boolean => {
+    if (item.href === "/") {
+      return pathname === "/";
+    }
+    return pathname === item.href || pathname.startsWith(`${item.href}/`);
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-3.5"
+        isScrolled || mobileMenuOpen
+          ? "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-3.5"
           : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Left: Brand Logo (public/Nexora.png) */}
-        <Link href="/" className="flex items-center gap-3 group focus:outline-none">
-          <div className="relative h-10 w-auto min-w-[130px] flex items-center">
-            {!logoError ? (
-              <Image
-                src="/Nexora.png"
-                alt="Nexora"
-                width={145}
-                height={42}
-                className="h-9 w-auto object-contain transition-transform group-hover:scale-105"
-                onError={() => setLogoError(true)}
-                priority
-              />
-            ) : (
-              /* Fallback if logo file is pending placement */
-              <div className="flex items-center gap-2">
-                <div className="w-9 h-9 rounded-xl bg-[#00144A] border border-[#002277] shadow-[0_3px_0_#000B2B] flex items-center justify-center text-[#00D2FF]">
-                  <span className="font-outfit font-black text-lg">N</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-outfit text-xl font-black tracking-tight text-brand-navy leading-none">
-                    NEXORA
-                  </span>
-                  <span className="font-outfit text-[9px] font-bold tracking-[0.2em] text-[#0099BE] uppercase">
-                    Creations
-                  </span>
-                </div>
-              </div>
-            )}
-          </div>
+        {/* Left: Brand Logo */}
+        <Link
+          href="/"
+          onClick={handleLogoClick}
+          className="flex items-center focus:outline-none"
+        >
+          <NexoraLogo showText={true} size="md" variant="light" />
         </Link>
 
-        {/* Center: Desktop Navigation Links with Scroll Spy Active Indicator */}
-        <nav className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 backdrop-blur-md">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
+        {/* Center: Desktop Navigation Bar with Spring Active Pill */}
+        <nav className="hidden lg:flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 backdrop-blur-md">
+          {navItems.map((item) => {
+            const isActive = isItemActive(item);
             return (
               <Link
-                key={link.name}
-                href={link.href}
-                className={`relative px-4 py-1.5 text-xs font-semibold font-jakarta rounded-full transition-all duration-200 ${
+                key={item.name}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item)}
+                className={`relative px-3.5 py-1.5 text-xs font-semibold font-jakarta rounded-full transition-colors duration-200 cursor-pointer select-none ${
                   isActive
-                    ? "text-brand-navy font-bold"
-                    : "text-slate-600 hover:text-brand-navy"
+                    ? "text-[#00144A] font-bold"
+                    : "text-slate-600 hover:text-[#00144A]"
                 }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="activeNavPill"
                     className="absolute inset-0 rounded-full bg-white shadow-sm border border-slate-200 -z-0"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 420,
+                      damping: 30,
+                    }}
                   />
                 )}
                 <span className="relative z-10 flex items-center gap-1.5">
-                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#00D2FF]" />}
-                  {link.name}
+                  {isActive && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00D2FF]" />
+                  )}
+                  {item.name}
                 </span>
               </Link>
             );
           })}
         </nav>
 
-        {/* Right: Tactile CTA Button */}
+        {/* Right: CTA Button */}
         <div className="hidden sm:flex items-center gap-3">
           <Link
-            href="#contact"
+            href="/contact"
             className="tactile-btn tactile-btn-navy text-xs py-2.5 px-5 flex items-center gap-2 group"
           >
             <span>Get Started</span>
@@ -139,55 +161,79 @@ export const Navbar: React.FC = () => {
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           type="button"
-          className="md:hidden p-2 rounded-xl bg-white border border-slate-200 text-brand-navy shadow-tactile active:translate-y-[2px]"
+          className="lg:hidden p-2.5 rounded-xl bg-white/90 border border-slate-200 text-[#00144A] shadow-tactile active:translate-y-[2px] cursor-pointer"
           aria-label="Toggle Navigation Menu"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer (Smoothly increases header height downwards) */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden bg-white border-b border-slate-200 shadow-xl overflow-hidden"
+            transition={{
+              duration: 0.32,
+              ease: [0.25, 1, 0.5, 1], // Smooth height expansion
+            }}
+            className="lg:hidden overflow-hidden border-t border-slate-200/60 mt-3"
           >
-            <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col gap-2.5">
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.id;
+            <div className="max-w-7xl mx-auto px-4 pt-3 pb-6 flex flex-col gap-2 bg-white/95 backdrop-blur-md">
+              {navItems.map((item, idx) => {
+                const isActive = isItemActive(item);
                 return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`font-outfit font-bold text-base py-2.5 px-4 rounded-xl transition-colors flex items-center justify-between ${
-                      isActive
-                        ? "bg-slate-100 text-brand-navy border border-slate-200"
-                        : "text-slate-700 hover:bg-slate-50"
-                    }`}
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.035, duration: 0.2 }}
                   >
-                    <span className="flex items-center gap-2">
-                      {isActive && <span className="w-2 h-2 rounded-full bg-[#00D2FF]" />}
-                      {link.name}
-                    </span>
-                    <ArrowRight className="w-4 h-4 text-slate-400" />
-                  </Link>
+                    <Link
+                      href={item.href}
+                      onClick={(e) => handleMobileNavClick(e, item)}
+                      className={`font-outfit font-bold text-sm py-2.5 px-4 rounded-xl transition-all duration-200 flex items-center justify-between cursor-pointer ${
+                        isActive
+                          ? "bg-slate-100 text-[#00144A] border border-slate-200 shadow-sm"
+                          : "text-slate-700 hover:bg-slate-50 hover:text-[#00144A]"
+                      }`}
+                    >
+                      <span className="flex items-center gap-2.5">
+                        {isActive ? (
+                          <span className="w-2 h-2 rounded-full bg-[#00D2FF]" />
+                        ) : (
+                          <span className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                        )}
+                        {item.name}
+                      </span>
+                      <ArrowRight
+                        className={`w-3.5 h-3.5 transition-transform ${
+                          isActive
+                            ? "text-[#0099BE] translate-x-0.5"
+                            : "text-slate-400"
+                        }`}
+                      />
+                    </Link>
+                  </motion.div>
                 );
               })}
 
-              <div className="pt-4 mt-2 border-t border-slate-100">
+              <motion.div
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navItems.length * 0.035, duration: 0.2 }}
+                className="pt-3 mt-1 border-t border-slate-100"
+              >
                 <Link
-                  href="#contact"
+                  href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="tactile-btn tactile-btn-cyan text-sm py-3 text-center w-full"
+                  className="tactile-btn tactile-btn-cyan text-xs py-3 text-center w-full block"
                 >
                   Schedule Consultation
                 </Link>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         )}
