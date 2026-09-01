@@ -97,43 +97,40 @@ export const TeamSlider: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-100 dark:bg-[#001133] border border-slate-200 dark:border-slate-800 shadow-[0_2px_0_#94a3b8] dark:shadow-[0_2px_0_#00030d] mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-[#0099BE]" />
-              <span className="font-outfit text-xs font-bold uppercase tracking-wider text-[#00144A] dark:text-white">
-                Leadership & Craft
-              </span>
-            </div>
-            <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl font-black text-[#00144A] dark:text-white tracking-tight leading-tight">
-              Architects Behind the{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] dark:from-white via-[#0099BE] to-[#00D2FF]">
-                Machine.
-              </span>
-            </h2>
+        <div className="mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-100 dark:bg-[#001133] border border-slate-200 dark:border-slate-800 shadow-[0_2px_0_#94a3b8] dark:shadow-[0_2px_0_#00030d] mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-[#0099BE]" />
+            <span className="font-outfit text-xs font-bold uppercase tracking-wider text-[#00144A] dark:text-white">
+              Leadership & Craft
+            </span>
           </div>
+          <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl font-black text-[#00144A] dark:text-white tracking-tight leading-tight">
+            Architects Behind the{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] dark:from-white via-[#0099BE] to-[#00D2FF]">
+              Machine.
+            </span>
+          </h2>
+        </div>
 
-          {/* Navigation Arrows with Tactile Mechanics */}
-          <div className="flex items-center gap-3">
+        {/* Carousel Frame */}
+        <div className="relative min-h-[480px]">
+          {/* Navigation Arrows (Vertically centered on the right side) */}
+          <div className="absolute right-3 sm:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
             <button
               onClick={() => paginate(-1)}
-              className="tactile-btn tactile-btn-white p-3 rounded-2xl"
+              className="tactile-btn tactile-btn-white p-3 rounded-2xl shadow-tactile dark:shadow-tactile-dark"
               aria-label="Previous Team Member"
             >
               <ChevronLeft className="w-5 h-5 text-[#00144A] dark:text-white" />
             </button>
             <button
               onClick={() => paginate(1)}
-              className="tactile-btn tactile-btn-navy p-3 rounded-2xl"
+              className="tactile-btn tactile-btn-navy p-3 rounded-2xl shadow-tactile dark:shadow-tactile-dark"
               aria-label="Next Team Member"
             >
               <ChevronRight className="w-5 h-5 text-white" />
             </button>
           </div>
-        </div>
-
-        {/* Carousel Frame */}
-        <div className="relative min-h-[480px]">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentIndex}
