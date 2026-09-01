@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -43,9 +44,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${plusJakarta.variable}`}>
-      <body className="antialiased selection:bg-[#00D2FF] selection:text-[#00144A]">
-        {children}
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${outfit.variable} ${plusJakarta.variable}`}
+    >
+      <body className="antialiased selection:bg-[#00D2FF] selection:text-[#00144A] bg-white dark:bg-[#000B2B] text-[#00144A] dark:text-white transition-colors duration-200">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

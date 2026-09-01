@@ -13,6 +13,7 @@ import {
   CheckCircle2
 } from "lucide-react";
 import NexoraLogo from "./NexoraLogo";
+import { servicesData } from "@/data/servicesData";
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -27,14 +28,14 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#00144A] text-white pt-20 pb-12 border-t-4 border-[#00D2FF] relative overflow-hidden">
+    <footer className="bg-[#00144A] dark:bg-[#00081C] text-white pt-20 pb-12 border-t-4 border-[#00D2FF] relative overflow-hidden transition-colors duration-300">
       {/* Background Decorative Glow */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00D2FF]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Top Newsletter Strip */}
-        <div className="bg-[#000B2B] rounded-3xl border border-slate-800 p-8 sm:p-10 mb-16 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="bg-[#000B2B] dark:bg-[#000F2E] rounded-3xl border border-slate-800 p-8 sm:p-10 mb-16 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="max-w-xl text-center lg:text-left">
             <span className="uppercase tracking-wider text-[10px] bg-[#00144A] text-[#00D2FF] border border-[#002277] px-3 py-1 rounded-full mb-3 inline-block font-semibold">
               Nexora Insights
@@ -51,7 +52,7 @@ export const Footer: React.FC = () => {
             {subscribed ? (
               <div className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-emerald-950/80 border border-emerald-500 text-emerald-300 font-outfit text-sm font-semibold">
                 <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                <span>You're subscribed to Nexora Insights!</span>
+                <span>You&apos;re subscribed to Nexora Insights!</span>
               </div>
             ) : (
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -68,7 +69,7 @@ export const Footer: React.FC = () => {
                 </div>
                 <button
                   type="submit"
-                  className="bg-[#00D2FF] hover:bg-[#00b8e6] text-[#00144A] font-bold text-xs py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md active:translate-y-0.5"
+                  className="bg-[#00D2FF] hover:bg-[#00b8e6] text-[#00144A] font-bold text-xs py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md active:translate-y-0.5 cursor-pointer"
                 >
                   <span>Subscribe</span>
                   <Send className="w-3.5 h-3.5" />
@@ -122,17 +123,22 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Col 2: Services */}
+          {/* Col 2: Dynamic Services Capabilities from servicesData */}
           <div>
             <h4 className="font-outfit text-sm font-bold uppercase tracking-wider text-white mb-4">
               Capabilities
             </h4>
             <ul className="space-y-2.5 font-jakarta text-xs text-slate-400">
-              <li><Link href="/services" className="hover:text-[#00D2FF] transition-colors">Web Architecture</Link></li>
-              <li><Link href="/services" className="hover:text-[#00D2FF] transition-colors">AI Digital Marketing</Link></li>
-              <li><Link href="/services" className="hover:text-[#00D2FF] transition-colors">Hyper-Growth SEO</Link></li>
-              <li><Link href="/services" className="hover:text-[#00D2FF] transition-colors">Brand & Tactile UI/UX</Link></li>
-              <li><Link href="/services" className="hover:text-[#00D2FF] transition-colors">Paid Ads & Scaling</Link></li>
+              {servicesData.map((service) => (
+                <li key={service.id}>
+                  <Link
+                    href={`/services?service=${service.slug}`}
+                    className="hover:text-[#00D2FF] transition-colors"
+                  >
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

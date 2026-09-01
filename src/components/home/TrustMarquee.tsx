@@ -35,9 +35,9 @@ const clientBrands: ClientBrand[] = [
 
 export const TrustMarquee: React.FC = () => {
   return (
-    <section className="py-14 bg-slate-50/60 border-y border-slate-200/80 overflow-hidden relative select-none">
+    <section className="py-14 bg-slate-50/60 dark:bg-[#000517] border-y border-slate-200/80 dark:border-slate-800 overflow-hidden relative select-none transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-7 text-center">
-        <p className="font-outfit text-xs font-bold uppercase tracking-[0.25em] text-slate-500">
+        <p className="font-outfit text-xs font-bold uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
           Trusted by Industry Innovators & Global Brands
         </p>
       </div>
@@ -46,10 +46,10 @@ export const TrustMarquee: React.FC = () => {
       <div className="relative w-full overflow-hidden marquee-container">
         
         {/* Left Edge Fade Mask */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-36 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-36 bg-gradient-to-r from-slate-50 dark:from-[#000517] via-slate-50/80 dark:via-[#000517]/80 to-transparent z-10 pointer-events-none" />
         
         {/* Right Edge Fade Mask */}
-        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-36 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-36 bg-gradient-to-l from-slate-50 dark:from-[#000517] via-slate-50/80 dark:via-[#000517]/80 to-transparent z-10 pointer-events-none" />
 
         {/* Dual-Track 100% Seamless Infinite Loop */}
         <div className="marquee-group flex">
@@ -58,16 +58,16 @@ export const TrustMarquee: React.FC = () => {
             {clientBrands.map((client, idx) => (
               <div
                 key={`marquee-track1-${idx}`}
-                className="inline-flex items-center gap-3.5 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-[#00D2FF] hover:shadow-md transition-all duration-200 cursor-pointer flex-shrink-0"
+                className="inline-flex items-center gap-3.5 px-5 py-3 rounded-2xl bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 shadow-sm hover:border-[#00D2FF] hover:shadow-md transition-all duration-200 cursor-pointer flex-shrink-0"
               >
-                <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-brand-navy group-hover:text-[#0099BE] flex-shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 flex items-center justify-center text-[#00144A] dark:text-[#00D2FF] group-hover:text-[#0099BE] flex-shrink-0">
                   {client.icon}
                 </div>
                 <div className="flex flex-col text-left pr-1">
-                  <span className="font-outfit font-bold text-xs text-brand-navy whitespace-nowrap leading-tight">
+                  <span className="font-outfit font-bold text-xs text-[#00144A] dark:text-white whitespace-nowrap leading-tight">
                     {client.name}
                   </span>
-                  <span className="font-jakarta text-[10px] font-medium text-slate-500 mt-0.5 leading-tight whitespace-nowrap">
+                  <span className="font-jakarta text-[10px] font-medium text-slate-500 dark:text-slate-400 mt-0.5 leading-tight whitespace-nowrap">
                     {client.category}
                   </span>
                 </div>
@@ -80,16 +80,16 @@ export const TrustMarquee: React.FC = () => {
             {clientBrands.map((client, idx) => (
               <div
                 key={`marquee-track2-${idx}`}
-                className="inline-flex items-center gap-3.5 px-5 py-3 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-[#00D2FF] hover:shadow-md transition-all duration-200 cursor-pointer flex-shrink-0"
+                className="inline-flex items-center gap-3.5 px-5 py-3 rounded-2xl bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 shadow-sm hover:border-[#00D2FF] hover:shadow-md transition-all duration-200 cursor-pointer flex-shrink-0"
               >
-                <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-brand-navy group-hover:text-[#0099BE] flex-shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 flex items-center justify-center text-[#00144A] dark:text-[#00D2FF] group-hover:text-[#0099BE] flex-shrink-0">
                   {client.icon}
                 </div>
                 <div className="flex flex-col text-left pr-1">
-                  <span className="font-outfit font-bold text-xs text-brand-navy whitespace-nowrap leading-tight">
+                  <span className="font-outfit font-bold text-xs text-[#00144A] dark:text-white whitespace-nowrap leading-tight">
                     {client.name}
                   </span>
-                  <span className="font-jakarta text-[10px] font-medium text-slate-500 mt-0.5 leading-tight whitespace-nowrap">
+                  <span className="font-jakarta text-[10px] font-medium text-slate-500 dark:text-slate-400 mt-0.5 leading-tight whitespace-nowrap">
                     {client.category}
                   </span>
                 </div>

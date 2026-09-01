@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import ServiceCard from "@/components/shared/ServiceCard";
 import { servicesData } from "@/data/servicesData";
 
-export const ServiceGrid: React.FC = () => {
+export const ServicesSection: React.FC = () => {
   return (
     <section id="services" className="py-24 bg-white dark:bg-[#000517] relative transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,5 +59,4 @@ export const ServiceGrid: React.FC = () => {
   );
 };
 
-export const ServicesSection = ServiceGrid;
-export default ServiceGrid;
+export default ServicesSection;

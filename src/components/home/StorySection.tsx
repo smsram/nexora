@@ -6,9 +6,9 @@ import { TactileCard } from "@/components/ui/TactileCard";
 
 export const StorySection: React.FC = () => {
   return (
-    <section id="story" className="py-24 bg-slate-50/70 border-t border-slate-200/80 relative overflow-hidden">
+    <section id="story" className="py-24 bg-slate-50/70 dark:bg-[#000517] border-t border-slate-200/80 dark:border-slate-800 relative overflow-hidden transition-colors duration-200">
       {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#00D2FF]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#00D2FF]/10 dark:bg-[#00D2FF]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -17,53 +17,53 @@ export const StorySection: React.FC = () => {
           
           {/* Left: Brand Narrative */}
           <div className="lg:col-span-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xl bg-white border border-slate-200 shadow-tactile mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xl bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark mb-4">
               <Sparkles className="w-3.5 h-3.5 text-[#00D2FF]" />
-              <span className="font-outfit text-xs font-bold uppercase tracking-wider text-brand-navy">
+              <span className="font-outfit text-xs font-bold uppercase tracking-wider text-[#00144A] dark:text-white">
                 The Nexora Ethos
               </span>
             </div>
 
-            <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl font-black text-brand-navy tracking-tight leading-[1.12] mb-6">
+            <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl font-black text-[#00144A] dark:text-white tracking-tight leading-[1.12] mb-6">
               Rejecting Commodity Templates.{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] via-[#0099BE] to-[#00D2FF]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] dark:from-white via-[#0099BE] to-[#00D2FF]">
                 Engineering Tactile Excellence.
               </span>
             </h2>
 
-            <div className="space-y-4 font-jakarta text-slate-600 leading-relaxed text-base">
+            <div className="space-y-4 font-jakarta text-slate-600 dark:text-slate-300 leading-relaxed text-base">
               <p>
-                The digital landscape is saturated with lookalike websites, generic ad copy, and fragile agency promises. Nexora was founded on a contrary principle: <strong className="text-brand-navy">digital platforms should feel as physical, tactile, and deliberate as Swiss horology.</strong>
+                The digital landscape is saturated with lookalike websites, generic ad copy, and fragile agency promises. Nexora was founded on a contrary principle: <strong className="text-[#00144A] dark:text-[#00D2FF]">digital platforms should feel as physical, tactile, and deliberate as Swiss horology.</strong>
               </p>
               <p>
-                We fuse senior full-stack web engineering with aggressive algorithmic growth marketing. We don't just deliver clicks or pretty mockups—we engineer revenue pipelines, sub-second web platforms, and unmistakable category authority.
+                We fuse senior full-stack web engineering with aggressive algorithmic growth marketing. We don&apos;t just deliver clicks or pretty mockups—we engineer revenue pipelines, sub-second web platforms, and unmistakable category authority.
               </p>
             </div>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm flex items-start gap-3">
-                <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="p-4 rounded-xl bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-3">
+                <div className="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Check className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-outfit font-bold text-sm text-brand-navy">
+                  <h4 className="font-outfit font-bold text-sm text-[#00144A] dark:text-white">
                     Zero Outsourcing
                   </h4>
-                  <p className="font-jakarta text-xs text-slate-500 mt-0.5">
+                  <p className="font-jakarta text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     Direct collaboration with dedicated senior architects and growth leaders.
                   </p>
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm flex items-start gap-3">
-                <div className="w-7 h-7 rounded-lg bg-cyan-100 text-[#0099BE] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="p-4 rounded-xl bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-3">
+                <div className="w-7 h-7 rounded-lg bg-cyan-100 dark:bg-cyan-950 text-[#0099BE] dark:text-[#00D2FF] flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Award className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-outfit font-bold text-sm text-brand-navy">
+                  <h4 className="font-outfit font-bold text-sm text-[#00144A] dark:text-white">
                     Bespoke Codebases
                   </h4>
-                  <p className="font-jakarta text-xs text-slate-500 mt-0.5">
+                  <p className="font-jakarta text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     Proprietary Next.js design systems tailored specifically to your conversion funnel.
                   </p>
                 </div>

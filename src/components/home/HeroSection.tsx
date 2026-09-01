@@ -104,25 +104,25 @@ export const HeroSection: React.FC = () => {
   );
 
   return (
-    <section id="hero" className="relative min-h-[88vh] pt-32 pb-20 overflow-hidden bg-white bg-grid-pattern flex items-center">
+    <section id="hero" className="relative min-h-[88vh] pt-32 pb-20 overflow-hidden bg-white dark:bg-[#000517] bg-grid-pattern flex items-center transition-colors duration-200">
       {/* Ambient background light gradients */}
-      <div className="absolute top-12 left-1/4 w-96 h-96 bg-[#00D2FF]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[30rem] h-[30rem] bg-[#00144A]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-12 left-1/4 w-96 h-96 bg-[#00D2FF]/10 dark:bg-[#00D2FF]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[30rem] h-[30rem] bg-[#00144A]/5 dark:bg-[#00D2FF]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Left Column: Refined Typography & Actions */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
-            {/* Main Headline with optimized leading and balanced line breaks */}
+            {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
-              className="font-outfit text-4xl sm:text-5xl md:text-6xl lg:text-[4.15rem] font-black tracking-tight text-brand-navy leading-tight max-w-2xl mb-6"
+              className="font-outfit text-4xl sm:text-5xl md:text-6xl lg:text-[4.15rem] font-black tracking-tight text-[#00144A] dark:text-white leading-tight max-w-2xl mb-6"
             >
               High-Impact{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] via-[#0099BE] to-[#00D2FF]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] dark:from-white via-[#0099BE] to-[#00D2FF]">
                 Digital Marketing
               </span>{" "}
               & Web Solutions.
@@ -133,7 +133,7 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.12 }}
-              className="font-jakarta text-lg sm:text-xl text-slate-600 max-w-xl leading-relaxed mb-8"
+              className="font-jakarta text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed mb-8"
             >
               Nexora engineers bespoke digital ecosystems. We combine tactile web architecture, precision performance marketing, and conversion-first creative systems to scale category leaders.
             </motion.p>
@@ -146,7 +146,7 @@ export const HeroSection: React.FC = () => {
               className="flex flex-wrap items-center gap-4 sm:gap-5 w-full sm:w-auto mb-10"
             >
               <Link
-                href="#services"
+                href="/services"
                 className="tactile-btn tactile-btn-navy text-sm py-3.5 px-7 flex items-center gap-2 group w-full sm:w-auto"
               >
                 <span>Explore Solutions</span>
@@ -154,26 +154,26 @@ export const HeroSection: React.FC = () => {
               </Link>
 
               <Link
-                href="#contact"
+                href="/contact"
                 className="tactile-btn tactile-btn-white text-sm py-3.5 px-7 flex items-center gap-2 group w-full sm:w-auto"
               >
-                <Play className="w-3.5 h-3.5 fill-[#00144A] text-[#00144A]" />
+                <Play className="w-3.5 h-3.5 fill-[#00144A] dark:fill-[#00D2FF] text-[#00144A] dark:text-[#00D2FF]" />
                 <span>Book Discovery Call</span>
               </Link>
             </motion.div>
 
-            {/* Bottom Trust Metrics with Clean Navy Accents */}
+            {/* Bottom Trust Metrics */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.32 }}
-              className="pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-4 sm:gap-8 w-full max-w-xl"
+              className="pt-6 border-t border-slate-200/80 dark:border-slate-800 grid grid-cols-3 gap-4 sm:gap-8 w-full max-w-xl"
             >
               <div>
-                <p className="font-outfit font-black text-2xl sm:text-3xl text-brand-navy tracking-tight">
+                <p className="font-outfit font-black text-2xl sm:text-3xl text-[#00144A] dark:text-white tracking-tight">
                   150+
                 </p>
-                <p className="font-jakarta text-xs font-semibold text-slate-500 uppercase tracking-wider mt-0.5">
+                <p className="font-jakarta text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-0.5">
                   Delivered Platforms
                 </p>
               </div>
@@ -182,25 +182,25 @@ export const HeroSection: React.FC = () => {
                 <p className="font-outfit font-black text-2xl sm:text-3xl text-[#0099BE] tracking-tight">
                   340%
                 </p>
-                <p className="font-jakarta text-xs font-semibold text-slate-500 uppercase tracking-wider mt-0.5">
+                <p className="font-jakarta text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-0.5">
                   Average ROI Surge
                 </p>
               </div>
 
               <div>
-                <p className="font-outfit font-black text-2xl sm:text-3xl text-brand-navy tracking-tight">
+                <p className="font-outfit font-black text-2xl sm:text-3xl text-[#00144A] dark:text-white tracking-tight">
                   99.4%
                 </p>
-                <p className="font-jakarta text-xs font-semibold text-slate-500 uppercase tracking-wider mt-0.5">
+                <p className="font-jakarta text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-0.5">
                   Client Retention
                 </p>
               </div>
             </motion.div>
           </div>
 
-          {/* Right Column: Clean Interactive Tech Particle Web Canvas with Floating Marketing Nodes */}
+          {/* Right Column: Particle Web Canvas with Floating Marketing Nodes */}
           <div className="lg:col-span-5 relative flex items-center justify-center min-h-[440px] sm:min-h-[520px]">
-            <div className="relative w-full h-[460px] sm:h-[520px] rounded-3xl bg-gradient-to-b from-slate-50/90 to-slate-100/70 border border-slate-200 shadow-tactile overflow-hidden flex items-center justify-center">
+            <div className="relative w-full h-[460px] sm:h-[520px] rounded-3xl bg-gradient-to-b from-slate-50/90 to-slate-100/70 dark:from-[#001133] dark:to-[#000517] border border-slate-200 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark overflow-hidden flex items-center justify-center">
               
               {/* Particle Canvas */}
               {particlesInit && (
@@ -215,12 +215,12 @@ export const HeroSection: React.FC = () => {
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-6 left-6 z-10 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm pointer-events-none"
+                className="absolute top-6 left-6 z-10 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-[#001133]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm pointer-events-none"
               >
-                <div className="w-6 h-6 rounded-lg bg-[#00144A] text-[#00D2FF] flex items-center justify-center">
+                <div className="w-6 h-6 rounded-lg bg-[#00144A] dark:bg-[#000517] text-[#00D2FF] flex items-center justify-center">
                   <Code2 className="w-3.5 h-3.5" />
                 </div>
-                <span className="font-outfit font-bold text-xs text-brand-navy">
+                <span className="font-outfit font-bold text-xs text-[#00144A] dark:text-white">
                   Web Architecture
                 </span>
               </motion.div>
@@ -228,12 +228,12 @@ export const HeroSection: React.FC = () => {
               <motion.div
                 animate={{ y: [0, 7, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-                className="absolute top-8 right-6 z-10 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm pointer-events-none"
+                className="absolute top-8 right-6 z-10 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-[#001133]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm pointer-events-none"
               >
-                <div className="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center">
+                <div className="w-6 h-6 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center">
                   <TrendingUp className="w-3.5 h-3.5" />
                 </div>
-                <span className="font-outfit font-bold text-xs text-brand-navy">
+                <span className="font-outfit font-bold text-xs text-[#00144A] dark:text-white">
                   Growth & SEO
                 </span>
               </motion.div>
@@ -241,12 +241,12 @@ export const HeroSection: React.FC = () => {
               <motion.div
                 animate={{ y: [0, 6, 0] }}
                 transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                className="absolute bottom-8 left-6 z-10 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm pointer-events-none"
+                className="absolute bottom-8 left-6 z-10 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-[#001133]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm pointer-events-none"
               >
-                <div className="w-6 h-6 rounded-lg bg-cyan-50 text-[#0099BE] border border-[#00D2FF]/40 flex items-center justify-center">
+                <div className="w-6 h-6 rounded-lg bg-cyan-50 dark:bg-cyan-950 text-[#0099BE] dark:text-[#00D2FF] border border-[#00D2FF]/40 flex items-center justify-center">
                   <Target className="w-3.5 h-3.5" />
                 </div>
-                <span className="font-outfit font-bold text-xs text-brand-navy">
+                <span className="font-outfit font-bold text-xs text-[#00144A] dark:text-white">
                   High-ROAS Ads
                 </span>
               </motion.div>
@@ -254,12 +254,12 @@ export const HeroSection: React.FC = () => {
               <motion.div
                 animate={{ y: [0, -7, 0] }}
                 transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 2.2 }}
-                className="absolute bottom-6 right-6 z-10 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm pointer-events-none"
+                className="absolute bottom-6 right-6 z-10 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-[#001133]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm pointer-events-none"
               >
-                <div className="w-6 h-6 rounded-lg bg-[#00144A] text-[#00D2FF] flex items-center justify-center">
+                <div className="w-6 h-6 rounded-lg bg-[#00144A] dark:bg-[#000517] text-[#00D2FF] flex items-center justify-center">
                   <Cpu className="w-3.5 h-3.5" />
                 </div>
-                <span className="font-outfit font-bold text-xs text-brand-navy">
+                <span className="font-outfit font-bold text-xs text-[#00144A] dark:text-white">
                   AI Marketing
                 </span>
               </motion.div>

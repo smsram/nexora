@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "@/components/global/Navbar";
 import Footer from "@/components/global/Footer";
 import FloatingWhatsApp from "@/components/global/FloatingWhatsApp";
+import GlobalLeadModal from "@/components/global/GlobalLeadModal";
 
 export default function PublicLayout({
   children,
@@ -9,7 +10,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col bg-white text-[#00144A]">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#000517] text-[#00144A] dark:text-white transition-colors duration-200">
       {/* Top Glassmorphic Navigation */}
       <Navbar />
 
@@ -21,6 +22,9 @@ export default function PublicLayout({
 
       {/* Persistent Floating WhatsApp Widget */}
       <FloatingWhatsApp />
+
+      {/* Persistent Global Lead Capture Modal (10s initial / 30s recurring on dismiss) */}
+      <GlobalLeadModal />
     </div>
   );
 }

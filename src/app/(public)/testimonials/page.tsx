@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Star,
   Play,
@@ -12,11 +12,10 @@ import {
   ShieldCheck,
   Heart,
   ArrowRight,
-  Sparkles,
-  TrendingUp,
   Quote,
   CheckCircle2,
 } from "lucide-react";
+import FilterPill from "@/components/ui/FilterPill";
 
 export interface TestimonialItem {
   id: string;
@@ -148,87 +147,75 @@ export default function TestimonialsPage() {
       : testimonialsData.filter((item) => item.industry === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#FAFBFD] dark:bg-[#000517] text-[#00144A] dark:text-white transition-colors duration-300">
       {/* Hero Header & Verified Trust Metrics */}
-      <section className="pt-36 pb-16 bg-gradient-to-b from-slate-50 via-white to-white border-b border-slate-200/80">
+      <section className="pt-36 pb-16 bg-gradient-to-b from-slate-50 via-[#FAFBFD] to-[#FAFBFD] dark:from-[#000517] dark:via-[#000517] dark:to-[#000517] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-[#0099BE] border border-slate-200 mb-4 shadow-sm">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#000F2E] text-[#0099BE] dark:text-[#00D2FF] border border-slate-200 dark:border-slate-800 mb-4 shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00D2FF]" />
               Executive Testimonials & Verified Case Verdicts
             </span>
-            <h1 className="font-outfit text-4xl sm:text-5xl md:text-6xl font-black text-[#00144A] tracking-tight leading-[1.1] mb-6">
+            <h1 className="font-outfit text-4xl sm:text-5xl md:text-6xl font-black text-[#00144A] dark:text-white tracking-tight leading-[1.1] mb-6">
               Client Verdicts & <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] via-[#0099BE] to-[#00D2FF]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] dark:from-white via-[#0099BE] to-[#00D2FF]">
                 Verified Impact.
               </span>
             </h1>
-            <p className="font-jakarta text-slate-600 text-base sm:text-lg md:text-xl leading-relaxed">
+            <p className="font-jakarta text-slate-600 dark:text-slate-400 text-base sm:text-lg md:text-xl leading-relaxed">
               Real results from verified enterprise founders, CMOs, and growth directors scaling with Nexora&apos;s tactile web platforms and algorithmic media engines.
             </p>
           </div>
 
           {/* Key Metrics Bar */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10">
-            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-tactile">
-              <div className="font-outfit text-3xl font-black text-[#00144A] mb-1">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark">
+              <div className="font-outfit text-3xl font-black text-[#00144A] dark:text-white mb-1">
                 99.4%
               </div>
-              <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 Client SLA Retention
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-tactile">
-              <div className="font-outfit text-3xl font-black text-[#00144A] mb-1">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark">
+              <div className="font-outfit text-3xl font-black text-[#00144A] dark:text-white mb-1">
                 4.2x
               </div>
-              <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 Average ROAS Surge
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-tactile">
-              <div className="font-outfit text-3xl font-black text-[#00144A] mb-1">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark">
+              <div className="font-outfit text-3xl font-black text-[#00144A] dark:text-white mb-1">
                 150+
               </div>
-              <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 Platforms Delivered
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#00144A] text-white border border-[#00D2FF]/40 shadow-tactile">
+            <div className="p-5 rounded-2xl bg-[#00144A] dark:bg-[#000F2E] text-white border border-[#00D2FF]/40 shadow-tactile dark:shadow-tactile-dark">
               <div className="font-outfit text-3xl font-black text-[#00D2FF] mb-1">
                 $45M+
               </div>
-              <div className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+              <div className="text-xs font-bold text-slate-300 dark:text-slate-400 uppercase tracking-wider">
                 Client Revenue Scaled
               </div>
             </div>
           </div>
 
-          {/* Filter Pills */}
+          {/* Filter Pills with 0.5s White Line Flash */}
           <div className="flex items-center gap-2 overflow-x-auto pt-10 pb-2 scrollbar-none">
-            {categories.map((cat) => {
-              const isSelected = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  type="button"
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold font-jakarta whitespace-nowrap transition-all duration-200 cursor-pointer ${
-                    isSelected
-                      ? "bg-[#00144A] text-white shadow-tactile translate-y-0"
-                      : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-[#00144A]"
-                  }`}
-                >
-                  {isSelected && (
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#00D2FF] mr-2" />
-                  )}
-                  {cat}
-                </button>
-              );
-            })}
+            {categories.map((cat) => (
+              <FilterPill
+                key={cat}
+                label={cat}
+                isActive={selectedCategory === cat}
+                onClick={() => setSelectedCategory(cat)}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -246,12 +233,12 @@ export default function TestimonialsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
-              className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 md:p-10 shadow-tactile hover:shadow-tactile-hover transition-all duration-300 flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch"
+              className="bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800/80 rounded-3xl p-6 sm:p-8 md:p-10 shadow-tactile dark:shadow-tactile-dark hover:shadow-tactile-hover transition-all duration-300 flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch"
             >
               {/* Left 50%: Video Reel Container */}
               <div className="w-full lg:w-[45%] flex-shrink-0">
                 <div
-                  className={`relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br ${item.videoPosterGradient} text-white p-6 flex flex-col justify-between border border-slate-800 shadow-inner group`}
+                  className={`relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br ${item.videoPosterGradient} text-white p-6 flex flex-col justify-between border border-slate-300 dark:border-slate-700/60 shadow-inner group`}
                 >
                   {/* Top Video Header */}
                   <div className="relative z-10 flex items-center justify-between">
@@ -300,7 +287,7 @@ export default function TestimonialsPage() {
                     <button
                       onClick={() => setIsMuted(!isMuted)}
                       type="button"
-                      className="p-1.5 rounded-lg bg-black/40 text-slate-300 hover:text-white"
+                      className="p-1.5 rounded-lg bg-black/40 text-slate-300 hover:text-white cursor-pointer"
                       aria-label="Toggle mute"
                     >
                       {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -321,7 +308,7 @@ export default function TestimonialsPage() {
                           className="w-5 h-5 fill-amber-400 text-amber-400"
                         />
                       ))}
-                      <span className="ml-2 text-xs font-bold text-slate-600">
+                      <span className="ml-2 text-xs font-bold text-slate-600 dark:text-slate-400">
                         5.0 Verified Rating
                       </span>
                     </div>
@@ -329,7 +316,7 @@ export default function TestimonialsPage() {
                     <button
                       onClick={(e) => toggleLike(e, item.id)}
                       type="button"
-                      className="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-400 hover:text-[#FF4B72] hover:border-[#FF4B72]/40 transition-all focus:outline-none"
+                      className="p-2 rounded-xl bg-slate-50 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-[#FF4B72] hover:border-[#FF4B72]/40 transition-all focus:outline-none cursor-pointer"
                       aria-label="Bookmark review"
                     >
                       <Heart
@@ -345,24 +332,24 @@ export default function TestimonialsPage() {
                   {/* Headline Pull Quote */}
                   <div className="relative mb-4">
                     <Quote className="w-8 h-8 text-[#0099BE]/20 absolute -top-4 -left-2 pointer-events-none" />
-                    <h3 className="font-outfit text-xl sm:text-2xl font-extrabold text-[#00144A] tracking-tight leading-snug">
+                    <h3 className="font-outfit text-xl sm:text-2xl font-extrabold text-[#00144A] dark:text-white tracking-tight leading-snug">
                       &ldquo;{item.headlineQuote}&rdquo;
                     </h3>
                   </div>
 
                   {/* Full Client Review Text */}
-                  <p className="font-jakarta text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
+                  <p className="font-jakarta text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
                     {item.fullReview}
                   </p>
 
                   {/* Key Outcome Metric Pills */}
-                  <div className="grid grid-cols-3 gap-3 mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+                  <div className="grid grid-cols-3 gap-3 mb-6 p-4 rounded-2xl bg-slate-100 dark:bg-[#00144A] border border-slate-200 dark:border-[#002277]">
                     {item.outcomes.map((outcome, oIdx) => (
                       <div key={oIdx} className="text-center sm:text-left">
-                        <div className="font-outfit text-lg sm:text-xl font-black text-[#00144A]">
+                        <div className="font-outfit text-lg sm:text-xl font-black text-[#00144A] dark:text-[#00D2FF]">
                           {outcome.metric}
                         </div>
-                        <div className="text-[10px] sm:text-[11px] font-bold text-[#0099BE] uppercase tracking-wider">
+                        <div className="text-[10px] sm:text-[11px] font-bold text-[#0099BE] dark:text-slate-300 uppercase tracking-wider">
                           {outcome.label}
                         </div>
                       </div>
@@ -371,26 +358,26 @@ export default function TestimonialsPage() {
                 </div>
 
                 {/* Client Profile Footer */}
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-xl bg-[#00144A] text-[#00D2FF] font-outfit font-black text-sm flex items-center justify-center border border-[#00D2FF]/40 shadow-sm flex-shrink-0">
+                    <div className="w-11 h-11 rounded-xl bg-[#00144A] dark:bg-[#000517] text-[#00D2FF] font-outfit font-black text-sm flex items-center justify-center border border-[#00D2FF]/40 shadow-sm flex-shrink-0">
                       {item.avatarInitials}
                     </div>
                     <div>
-                      <div className="font-outfit font-bold text-sm text-[#00144A] flex items-center gap-1.5">
+                      <div className="font-outfit font-bold text-sm text-[#00144A] dark:text-white flex items-center gap-1.5">
                         <span>{item.clientName}</span>
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
                       </div>
-                      <div className="text-xs text-slate-500 font-medium">
+                      <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                         {item.clientRole} •{" "}
-                        <span className="font-bold text-slate-700">
+                        <span className="font-bold text-slate-700 dark:text-slate-300">
                           {item.companyName}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <span className="hidden sm:inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                  <span className="hidden sm:inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-[#000517] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">
                     {item.industry}
                   </span>
                 </div>
@@ -401,7 +388,7 @@ export default function TestimonialsPage() {
       </section>
 
       {/* Bottom Consultation CTA */}
-      <section className="py-20 bg-[#00144A] text-white relative overflow-hidden">
+      <section className="py-20 bg-[#00144A] dark:bg-[#000F2E] text-white relative overflow-hidden border-t border-[#002277] dark:border-slate-800">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,210,255,0.15)_0%,transparent_60%)] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
@@ -409,7 +396,7 @@ export default function TestimonialsPage() {
             <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-4 leading-tight">
               Ready to write your own verified growth case study?
             </h2>
-            <p className="font-jakarta text-slate-300 text-base sm:text-lg">
+            <p className="font-jakarta text-slate-300 dark:text-slate-400 text-base sm:text-lg">
               Partner with Nexora to engineer your high-converting digital platform and algorithmic media engine.
             </p>
           </div>

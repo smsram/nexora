@@ -6,12 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   ChevronLeft, 
   ChevronRight, 
-  Linkedin, 
-  Twitter, 
   Quote, 
   Sparkles,
-  Award,
-  Layers
+  Award
 } from "lucide-react";
 
 interface TeamMember {
@@ -96,21 +93,21 @@ export const TeamSlider: React.FC = () => {
   const currentMember = teamMembers[currentIndex];
 
   return (
-    <section id="team" className="py-24 bg-white relative overflow-hidden">
+    <section id="team" className="py-24 bg-white dark:bg-[#000517] relative overflow-hidden transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-100 border border-slate-200 shadow-[0_2px_0_#94a3b8] mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xl bg-slate-100 dark:bg-[#001133] border border-slate-200 dark:border-slate-800 shadow-[0_2px_0_#94a3b8] dark:shadow-[0_2px_0_#00030d] mb-4">
               <Sparkles className="w-3.5 h-3.5 text-[#0099BE]" />
-              <span className="font-outfit text-xs font-bold uppercase tracking-wider text-brand-navy">
+              <span className="font-outfit text-xs font-bold uppercase tracking-wider text-[#00144A] dark:text-white">
                 Leadership & Craft
               </span>
             </div>
-            <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl font-black text-brand-navy tracking-tight leading-tight">
+            <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl font-black text-[#00144A] dark:text-white tracking-tight leading-tight">
               Architects Behind the{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] to-[#00D2FF]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] dark:from-white via-[#0099BE] to-[#00D2FF]">
                 Machine.
               </span>
             </h2>
@@ -123,7 +120,7 @@ export const TeamSlider: React.FC = () => {
               className="tactile-btn tactile-btn-white p-3 rounded-2xl"
               aria-label="Previous Team Member"
             >
-              <ChevronLeft className="w-5 h-5 text-brand-navy" />
+              <ChevronLeft className="w-5 h-5 text-[#00144A] dark:text-white" />
             </button>
             <button
               onClick={() => paginate(1)}
@@ -149,11 +146,11 @@ export const TeamSlider: React.FC = () => {
                 x: { type: "spring", stiffness: 350, damping: 30 },
                 opacity: { duration: 0.25 },
               }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white rounded-3xl border border-slate-200 shadow-tactile p-6 sm:p-10 lg:p-12"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white dark:bg-[#001133] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark p-6 sm:p-10 lg:p-12"
             >
               {/* Left: Image / Portrait Card */}
               <div className="lg:col-span-5 relative">
-                <div className="relative aspect-[4/5] sm:aspect-square lg:aspect-[4/5] w-full rounded-2xl border border-slate-200 shadow-[0_5px_0_#000B2B] overflow-hidden bg-slate-900 group">
+                <div className="relative aspect-[4/5] sm:aspect-square lg:aspect-[4/5] w-full rounded-2xl border border-slate-200 dark:border-slate-800 shadow-[0_5px_0_#000B2B] dark:shadow-[0_5px_0_#00030d] overflow-hidden bg-slate-900 group">
                   <Image
                     src={currentMember.image}
                     alt={currentMember.name}
@@ -167,7 +164,7 @@ export const TeamSlider: React.FC = () => {
 
                   {/* Corner Badge */}
                   <div className="absolute top-4 left-4">
-                    <span className="tactile-key-pill uppercase tracking-wider text-[11px] bg-white/90 backdrop-blur-md">
+                    <span className="tactile-key-pill uppercase tracking-wider text-[11px] bg-white/90 dark:bg-[#001133]/90 backdrop-blur-md">
                       {currentMember.badge}
                     </span>
                   </div>
@@ -189,26 +186,26 @@ export const TeamSlider: React.FC = () => {
                 {/* Quote */}
                 <div className="relative pl-6 border-l-4 border-[#00D2FF]">
                   <Quote className="w-8 h-8 text-[#00D2FF]/40 absolute -top-4 -left-3 rotate-180" />
-                  <p className="font-outfit text-xl sm:text-2xl font-bold text-brand-navy italic leading-snug">
-                    "{currentMember.quote}"
+                  <p className="font-outfit text-xl sm:text-2xl font-bold text-[#00144A] dark:text-white italic leading-snug">
+                    &quot;{currentMember.quote}&quot;
                   </p>
                 </div>
 
                 {/* Biography */}
-                <p className="font-jakarta text-slate-600 text-sm sm:text-base leading-relaxed">
+                <p className="font-jakarta text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
                   {currentMember.bio}
                 </p>
 
                 {/* Specialization Tags */}
                 <div>
-                  <h4 className="font-outfit text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">
+                  <h4 className="font-outfit text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2.5">
                     Core Specializations
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {currentMember.specializations.map((spec, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-brand-navy font-jakarta text-xs font-semibold"
+                        className="px-3 py-1 rounded-lg bg-slate-100 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 text-[#00144A] dark:text-white font-jakarta text-xs font-semibold"
                       >
                         {spec}
                       </span>
@@ -217,10 +214,10 @@ export const TeamSlider: React.FC = () => {
                 </div>
 
                 {/* Metric Strip & Slider Indicators */}
-                <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-2">
                     <Award className="w-4 h-4 text-[#0099BE]" />
-                    <span className="font-outfit font-bold text-xs text-brand-navy">
+                    <span className="font-outfit font-bold text-xs text-[#00144A] dark:text-white">
                       {currentMember.metrics}
                     </span>
                   </div>
@@ -234,8 +231,8 @@ export const TeamSlider: React.FC = () => {
                         aria-label={`Go to slide ${idx + 1}`}
                         className={`h-2.5 rounded-full transition-all duration-200 ${
                           idx === currentIndex
-                            ? "w-8 bg-[#00144A]"
-                            : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                            ? "w-8 bg-[#00144A] dark:bg-[#00D2FF]"
+                            : "w-2.5 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400"
                         }`}
                       />
                     ))}

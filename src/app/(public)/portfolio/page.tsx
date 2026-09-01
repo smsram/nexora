@@ -5,19 +5,17 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
-  ExternalLink,
   Sparkles,
   ChevronLeft,
   ChevronRight,
   X,
-  ShieldCheck,
-  Cpu,
   Layers,
-  TrendingUp,
   Maximize2,
   CheckCircle2,
+  Play,
 } from "lucide-react";
 import BeforeAfterSlider from "@/components/portfolio/BeforeAfterSlider";
+import FilterPill from "@/components/ui/FilterPill";
 
 export interface SubDeliverable {
   title: string;
@@ -30,6 +28,8 @@ export interface SubDeliverable {
 export interface CaseStudy {
   id: string;
   clientName: string;
+  clientLogoInitials: string;
+  clientLogoBg: string;
   category: "SEO Strategy" | "Paid Ads" | "Web Architecture" | "Social Campaigns";
   industry: string;
   tagline: string;
@@ -37,8 +37,12 @@ export interface CaseStudy {
   coreMetric: string;
   coreMetricLabel: string;
   hasBeforeAfter: boolean;
-  beforeStats: { label: string; value: string };
-  afterStats: { label: string; value: string };
+  beforeImage?: string;
+  afterImage?: string;
+  beforeStats?: { label: string; value: string };
+  afterStats?: { label: string; value: string };
+  mediaType: "video" | "image";
+  posterGradient: string;
   techStack: string[];
   subDeliverables: SubDeliverable[];
   galleryImages: Array<{ title: string; subtitle: string; gradient: string }>;
@@ -48,6 +52,8 @@ const caseStudiesData: CaseStudy[] = [
   {
     id: "hyperion-ai",
     clientName: "Hyperion AI Platform",
+    clientLogoInitials: "HA",
+    clientLogoBg: "bg-blue-600",
     category: "Web Architecture",
     industry: "Enterprise SaaS & AI",
     tagline: "Sub-50ms Edge Infrastructure & High-Converting Self-Serve Signup Funnel",
@@ -58,6 +64,8 @@ const caseStudiesData: CaseStudy[] = [
     hasBeforeAfter: true,
     beforeStats: { label: "Legacy TTFB", value: "320ms" },
     afterStats: { label: "Nexora Edge TTFB", value: "38ms" },
+    mediaType: "video",
+    posterGradient: "from-blue-900 via-indigo-950 to-[#00144A]",
     techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Vercel Edge", "GraphQL", "Framer Motion"],
     subDeliverables: [
       {
@@ -100,6 +108,8 @@ const caseStudiesData: CaseStudy[] = [
   {
     id: "sterling-atelier",
     clientName: "Sterling Atelier Luxury",
+    clientLogoInitials: "SA",
+    clientLogoBg: "bg-amber-600",
     category: "Paid Ads",
     industry: "Luxury E-Commerce",
     tagline: "Algorithmic Media Buying Matrix & Server-Side CAPI First-Party Scaling",
@@ -110,6 +120,8 @@ const caseStudiesData: CaseStudy[] = [
     hasBeforeAfter: true,
     beforeStats: { label: "Legacy Blended ROAS", value: "2.1x" },
     afterStats: { label: "Nexora Scaled ROAS", value: "4.8x" },
+    mediaType: "video",
+    posterGradient: "from-slate-900 via-cyan-950 to-[#00144A]",
     techStack: ["Meta Conversions API", "Google Server GTM", "TikTok Ads API", "Triple Whale", "Looker Studio"],
     subDeliverables: [
       {
@@ -152,6 +164,8 @@ const caseStudiesData: CaseStudy[] = [
   {
     id: "aetheria-biotech",
     clientName: "Aetheria Biotech Lab",
+    clientLogoInitials: "AB",
+    clientLogoBg: "bg-teal-600",
     category: "SEO Strategy",
     industry: "Healthcare & Biotech",
     tagline: "Programmatic Search Architecture & HIPAA-Compliant Trial Intake",
@@ -159,9 +173,9 @@ const caseStudiesData: CaseStudy[] = [
       "Aetheria required patient recruitment across 450+ distinct clinical trial search terms. We built an automated programmatic SEO directory with rich JSON-LD schema graphs, ranking them #1 across 450+ keywords and driving +310% in validated intake submissions.",
     coreMetric: "#1 Rank",
     coreMetricLabel: "450+ Keyword Dominance",
-    hasBeforeAfter: true,
-    beforeStats: { label: "Legacy Monthly Search", value: "2.4K" },
-    afterStats: { label: "Nexora Programmatic Search", value: "38.5K" },
+    hasBeforeAfter: false,
+    mediaType: "image",
+    posterGradient: "from-teal-950 via-blue-950 to-[#00144A]",
     techStack: ["Next.js Dynamic Routes", "Ahrefs API", "JSON-LD Schemas", "Google Search Console", "Vercel Edge"],
     subDeliverables: [
       {
@@ -204,6 +218,8 @@ const caseStudiesData: CaseStudy[] = [
   {
     id: "captable-fintech",
     clientName: "CapTable Fintech Systems",
+    clientLogoInitials: "CT",
+    clientLogoBg: "bg-indigo-600",
     category: "Social Campaigns",
     industry: "Enterprise Fintech & B2B",
     tagline: "Viral LinkedIn B2B Loops & Creator Whitelisting Ecosystem",
@@ -212,8 +228,8 @@ const caseStudiesData: CaseStudy[] = [
     coreMetric: "$18M+",
     coreMetricLabel: "Qualified Pipeline Generated",
     hasBeforeAfter: false,
-    beforeStats: { label: "Monthly Impressions", value: "120K" },
-    afterStats: { label: "Nexora Social Scale", value: "1.8M+" },
+    mediaType: "video",
+    posterGradient: "from-indigo-950 via-slate-900 to-[#00144A]",
     techStack: ["LinkedIn Ads API", "ManyChat B2B", "CapCut Pro", "HubSpot CRM", "Looker Studio"],
     subDeliverables: [
       {
@@ -276,7 +292,6 @@ export default function PortfolioPage() {
     currentIndex: 0,
   });
 
-  // Lock body scroll when any modal or lightbox is open
   useEffect(() => {
     const isModalActive = activeCaseStudy !== null || lightboxState.isOpen;
     if (isModalActive) {
@@ -289,7 +304,6 @@ export default function PortfolioPage() {
     };
   }, [activeCaseStudy, lightboxState.isOpen]);
 
-  // Lightbox keyboard navigation (Esc, ArrowLeft, ArrowRight)
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (lightboxState.isOpen) {
@@ -343,10 +357,8 @@ export default function PortfolioPage() {
       : caseStudiesData.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* ========================================================================= */}
+    <div className="min-h-screen bg-white dark:bg-[#000517] text-[#00144A] dark:text-white transition-colors duration-200">
       {/* Level 3: Fullscreen Zoomable Lightbox */}
-      {/* ========================================================================= */}
       <AnimatePresence>
         {lightboxState.isOpen && (
           <motion.div
@@ -356,7 +368,6 @@ export default function PortfolioPage() {
             className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-xl flex flex-col justify-between p-4 sm:p-8 select-none"
             onClick={() => setLightboxState((prev) => ({ ...prev, isOpen: false }))}
           >
-            {/* Top Bar: Counter + Close */}
             <div className="flex items-center justify-between text-white z-10">
               <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
                 {lightboxState.currentIndex + 1} of {lightboxState.images.length}
@@ -374,7 +385,6 @@ export default function PortfolioPage() {
               </button>
             </div>
 
-            {/* Center Image Display with Navigation Arrows */}
             <div
               className="relative max-w-5xl w-full mx-auto aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl border border-white/20 flex items-center justify-center p-8 text-center text-white my-auto"
               onClick={(e) => e.stopPropagation()}
@@ -395,7 +405,6 @@ export default function PortfolioPage() {
                 </p>
               </div>
 
-              {/* Left Arrow */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -414,7 +423,6 @@ export default function PortfolioPage() {
                 <ChevronLeft className="w-6 h-6" />
               </button>
 
-              {/* Right Arrow */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -434,7 +442,6 @@ export default function PortfolioPage() {
               </button>
             </div>
 
-            {/* Bottom Caption Bar */}
             <div className="text-center text-xs text-slate-400 z-10">
               Use <kbd className="px-2 py-0.5 rounded bg-white/10 text-white">←</kbd> and{" "}
               <kbd className="px-2 py-0.5 rounded bg-white/10 text-white">→</kbd> to navigate,{" "}
@@ -444,9 +451,7 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* ========================================================================= */}
       {/* Level 2: Project Breakdown Lightbox Modal */}
-      {/* ========================================================================= */}
       <AnimatePresence>
         {activeCaseStudy && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-8">
@@ -455,22 +460,22 @@ export default function PortfolioPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setActiveCaseStudy(null)}
-              className="fixed inset-0 bg-[#000B2B]/75 backdrop-blur-md cursor-pointer"
+              className="fixed inset-0 bg-[#000517]/80 backdrop-blur-md cursor-pointer"
             />
 
             <motion.div
               layoutId={`case-study-${activeCaseStudy.id}`}
-              className="relative w-full max-w-5xl max-h-[92vh] bg-white rounded-3xl shadow-2xl border border-slate-200 z-10 text-[#00144A] flex flex-col overflow-hidden"
+              className="relative w-full max-w-5xl max-h-[92vh] bg-white dark:bg-[#001133] rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 z-10 text-[#00144A] dark:text-white flex flex-col overflow-hidden"
               transition={{ type: "spring", stiffness: 350, damping: 30 }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header Bar */}
-              <div className="sticky top-0 z-20 flex items-center justify-between px-6 sm:px-8 py-4 bg-white/95 backdrop-blur-md border-b border-slate-100">
+              <div className="sticky top-0 z-20 flex items-center justify-between px-6 sm:px-8 py-4 bg-white/95 dark:bg-[#001133]/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-3">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-[#0099BE] border border-slate-200">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#000517] text-[#0099BE] border border-slate-200 dark:border-slate-800">
                     {activeCaseStudy.category}
                   </span>
-                  <span className="text-xs font-semibold text-slate-500">
+                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                     {activeCaseStudy.industry}
                   </span>
                 </div>
@@ -478,7 +483,7 @@ export default function PortfolioPage() {
                 <button
                   onClick={() => setActiveCaseStudy(null)}
                   type="button"
-                  className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-brand-navy transition-colors focus:outline-none"
+                  className="p-2 rounded-full bg-slate-100 dark:bg-[#000517] hover:bg-slate-200 dark:hover:bg-[#001c4d] text-slate-600 dark:text-slate-300 transition-colors focus:outline-none"
                   aria-label="Close modal"
                 >
                   <X className="w-5 h-5" />
@@ -487,18 +492,31 @@ export default function PortfolioPage() {
 
               {/* Modal Body */}
               <div className="p-6 sm:p-8 md:p-10 overflow-y-auto flex-1 space-y-8">
-                {/* Header Info */}
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-6 border-b border-slate-100">
+                {/* Header Info with Client Logo */}
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
                   <div className="max-w-2xl">
-                    <h2 className="font-outfit text-3xl sm:text-4xl font-black text-[#00144A] tracking-tight mb-3">
-                      {activeCaseStudy.clientName}
-                    </h2>
-                    <p className="font-jakarta text-slate-600 text-base sm:text-lg leading-relaxed">
+                    <div className="flex items-center gap-3.5 mb-3">
+                      <div
+                        className={`w-12 h-12 rounded-2xl ${activeCaseStudy.clientLogoBg} text-white font-outfit font-black text-base flex items-center justify-center border border-white/20 shadow-tactile dark:shadow-tactile-dark flex-shrink-0`}
+                      >
+                        {activeCaseStudy.clientLogoInitials}
+                      </div>
+                      <div>
+                        <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A] dark:text-white">
+                          {activeCaseStudy.clientName}
+                        </h2>
+                        <span className="text-xs font-bold text-[#0099BE]">
+                          Verified Client Deployment
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="font-jakarta text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
                       {activeCaseStudy.overview}
                     </p>
                   </div>
 
-                  <div className="p-5 rounded-2xl bg-[#00144A] text-white border border-[#00D2FF]/40 shadow-tactile min-w-[200px] text-center flex-shrink-0">
+                  <div className="p-5 rounded-2xl bg-[#00144A] dark:bg-[#000517] text-white border border-[#00D2FF]/40 shadow-tactile dark:shadow-tactile-dark min-w-[200px] text-center flex-shrink-0">
                     <div className="font-outfit text-3xl font-black text-[#00D2FF] mb-1">
                       {activeCaseStudy.coreMetric}
                     </div>
@@ -508,14 +526,16 @@ export default function PortfolioPage() {
                   </div>
                 </div>
 
-                {/* Before & After Interactive Slider (if applicable) */}
-                {activeCaseStudy.hasBeforeAfter && (
+                {/* Conditional Draggable Before & After Comparison Slider */}
+                {activeCaseStudy.hasBeforeAfter && activeCaseStudy.beforeStats && activeCaseStudy.afterStats && (
                   <div>
-                    <h3 className="font-outfit text-lg font-bold text-[#00144A] mb-3 flex items-center gap-2">
+                    <h3 className="font-outfit text-lg font-bold mb-3 flex items-center gap-2 text-[#00144A] dark:text-white">
                       <Sparkles className="w-4 h-4 text-[#0099BE]" />
                       Interactive Telemetry Comparison
                     </h3>
                     <BeforeAfterSlider
+                      beforeImage={activeCaseStudy.beforeImage}
+                      afterImage={activeCaseStudy.afterImage}
                       beforeLabel="Legacy Performance"
                       afterLabel="Nexora Architecture"
                       beforeStats={activeCaseStudy.beforeStats}
@@ -527,7 +547,7 @@ export default function PortfolioPage() {
 
                 {/* Sub-Project Deliverables Completed */}
                 <div>
-                  <h3 className="font-outfit text-xl font-bold text-[#00144A] mb-4 flex items-center gap-2">
+                  <h3 className="font-outfit text-xl font-bold mb-4 flex items-center gap-2 text-[#00144A] dark:text-white">
                     <Layers className="w-5 h-5 text-[#0099BE]" />
                     Sub-Project Deliverables Completed
                   </h3>
@@ -536,20 +556,20 @@ export default function PortfolioPage() {
                     {activeCaseStudy.subDeliverables.map((deliverable, dIdx) => (
                       <div
                         key={dIdx}
-                        className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between"
+                        className="p-5 rounded-2xl bg-slate-50 dark:bg-[#000517] border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between"
                       >
                         <div>
                           <span className="text-[10px] font-bold text-[#0099BE] uppercase tracking-wider block mb-1">
                             {deliverable.category}
                           </span>
-                          <h4 className="font-outfit font-bold text-base text-[#00144A] mb-2">
+                          <h4 className="font-outfit font-bold text-base text-[#00144A] dark:text-white mb-2">
                             {deliverable.title}
                           </h4>
-                          <p className="font-jakarta text-xs text-slate-600 leading-relaxed mb-4">
+                          <p className="font-jakarta text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
                             {deliverable.description}
                           </p>
                         </div>
-                        <div className="pt-3 border-t border-slate-200 text-xs font-bold text-[#00144A] flex items-center gap-1.5">
+                        <div className="pt-3 border-t border-slate-200 dark:border-slate-800 text-xs font-bold text-[#00144A] dark:text-white flex items-center gap-1.5">
                           <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                           <span>{deliverable.metric}</span>
                         </div>
@@ -560,7 +580,7 @@ export default function PortfolioPage() {
 
                 {/* Zoomable Deliverable Gallery */}
                 <div>
-                  <h3 className="font-outfit text-lg font-bold text-[#00144A] mb-3 flex items-center gap-2">
+                  <h3 className="font-outfit text-lg font-bold mb-3 flex items-center gap-2 text-[#00144A] dark:text-white">
                     <Maximize2 className="w-4 h-4 text-[#0099BE]" />
                     Production Artifacts Gallery (Click to Zoom)
                   </h3>
@@ -592,14 +612,14 @@ export default function PortfolioPage() {
 
                 {/* Tech Stack Chips */}
                 <div>
-                  <h3 className="font-outfit text-sm font-bold text-slate-500 uppercase tracking-wider mb-2.5">
+                  <h3 className="font-outfit text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2.5">
                     Integrated Stack
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {activeCaseStudy.techStack.map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700"
+                        className="px-3 py-1 rounded-lg bg-slate-100 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300"
                       >
                         {tech}
                       </span>
@@ -609,8 +629,8 @@ export default function PortfolioPage() {
               </div>
 
               {/* Modal Footer CTA */}
-              <div className="sticky bottom-0 px-6 sm:px-8 py-4 bg-white border-t border-slate-100 flex items-center justify-between">
-                <span className="text-xs text-slate-500 hidden sm:inline">
+              <div className="sticky bottom-0 px-6 sm:px-8 py-4 bg-white dark:bg-[#001133] border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <span className="text-xs text-slate-500 dark:text-slate-400 hidden sm:inline">
                   Interested in similar architectural results for your business?
                 </span>
                 <Link
@@ -627,56 +647,40 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* ========================================================================= */}
       {/* Level 1: Hero Header & Category Filter Pills */}
-      {/* ========================================================================= */}
-      <section className="pt-36 pb-16 bg-gradient-to-b from-slate-50 via-white to-white border-b border-slate-200/80">
+      <section className="pt-36 pb-16 bg-gradient-to-b from-slate-50 via-white to-white dark:from-[#000517] dark:via-[#000517] dark:to-[#000517] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-[#0099BE] border border-slate-200 mb-4 shadow-sm">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#001133] text-[#0099BE] border border-slate-200 dark:border-slate-800 mb-4 shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00D2FF]" />
               Selected Works & Case Studies
             </span>
-            <h1 className="font-outfit text-4xl sm:text-5xl md:text-6xl font-black text-[#00144A] tracking-tight leading-[1.1] mb-6">
+            <h1 className="font-outfit text-4xl sm:text-5xl md:text-6xl font-black text-[#00144A] dark:text-white tracking-tight leading-[1.1] mb-6">
               Proven Deployments. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] via-[#0099BE] to-[#00D2FF]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] dark:from-white via-[#0099BE] to-[#00D2FF]">
                 Measurable Velocity.
               </span>
             </h1>
-            <p className="font-jakarta text-slate-600 text-base sm:text-lg md:text-xl leading-relaxed">
+            <p className="font-jakarta text-slate-600 dark:text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed">
               Explore our multi-level case studies across full-stack Next.js web applications, programmatic SEO networks, and algorithmic media engines.
             </p>
           </div>
 
-          {/* Category Filter Pills */}
+          {/* Category Filter Pills with 0.5s White Line Flash */}
           <div className="flex items-center gap-2 overflow-x-auto pt-10 pb-2 scrollbar-none">
-            {portfolioCategories.map((cat) => {
-              const isSelected = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  type="button"
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold font-jakarta whitespace-nowrap transition-all duration-200 cursor-pointer ${
-                    isSelected
-                      ? "bg-[#00144A] text-white shadow-tactile translate-y-0"
-                      : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-[#00144A]"
-                  }`}
-                >
-                  {isSelected && (
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#00D2FF] mr-2" />
-                  )}
-                  {cat}
-                </button>
-              );
-            })}
+            {portfolioCategories.map((cat) => (
+              <FilterPill
+                key={cat}
+                label={cat}
+                isActive={selectedCategory === cat}
+                onClick={() => setSelectedCategory(cat)}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ========================================================================= */}
       {/* Level 1: Client Overview Cards Grid */}
-      {/* ========================================================================= */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {filteredCaseStudies.map((study) => (
@@ -686,45 +690,68 @@ export default function PortfolioPage() {
               onClick={() => setActiveCaseStudy(study)}
               whileHover={{ y: -4 }}
               whileTap={{ y: 2 }}
-              className="bg-white border border-slate-200 rounded-3xl p-7 sm:p-8 shadow-tactile hover:shadow-tactile-hover transition-all duration-200 cursor-pointer flex flex-col justify-between select-none"
+              className="bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 rounded-3xl p-7 sm:p-8 shadow-tactile dark:shadow-tactile-dark hover:shadow-tactile-hover transition-all duration-200 cursor-pointer flex flex-col justify-between select-none"
             >
               <div>
-                {/* Header Meta */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-[#0099BE] border border-slate-200">
+                {/* Header Meta with Category and Industry */}
+                <div className="flex items-center justify-between mb-5">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#000517] text-[#0099BE] border border-slate-200 dark:border-slate-800">
                     {study.category}
                   </span>
-                  <span className="text-xs font-bold text-slate-500">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
                     {study.industry}
                   </span>
                 </div>
 
-                {/* Client Name & Tagline */}
-                <h3 className="font-outfit text-2xl sm:text-3xl font-black text-[#00144A] tracking-tight mb-2">
-                  {study.clientName}
-                </h3>
-                <p className="font-jakarta text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
+                {/* Client Logo & Title Block */}
+                <div className="flex items-center gap-3.5 mb-3">
+                  <div
+                    className={`w-11 h-11 rounded-2xl ${study.clientLogoBg} text-white font-outfit font-black text-sm flex items-center justify-center border border-white/20 shadow-sm flex-shrink-0`}
+                  >
+                    {study.clientLogoInitials}
+                  </div>
+                  <div>
+                    <h3 className="font-outfit text-2xl font-black text-[#00144A] dark:text-white tracking-tight leading-tight">
+                      {study.clientName}
+                    </h3>
+                  </div>
+                </div>
+
+                <p className="font-jakarta text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
                   {study.tagline}
                 </p>
 
-                {/* Embedded Before/After or Visual Preview */}
-                {study.hasBeforeAfter ? (
+                {/* Rich Media Canvas Thumbnail */}
+                {study.hasBeforeAfter && study.beforeStats && study.afterStats ? (
                   <div
                     className="mb-6 pointer-events-none"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <BeforeAfterSlider
+                      beforeImage={study.beforeImage}
+                      afterImage={study.afterImage}
                       beforeStats={study.beforeStats}
                       afterStats={study.afterStats}
                       aspectRatio="aspect-[16/10]"
                     />
                   </div>
                 ) : (
-                  <div className="mb-6 aspect-[16/10] rounded-2xl bg-gradient-to-br from-indigo-950 via-slate-900 to-[#00144A] text-white p-6 flex flex-col justify-between border border-slate-800 shadow-inner">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#00D2FF]/20 text-[#00D2FF] border border-[#00D2FF]/40 backdrop-blur-md w-max">
-                      Multi-Channel Ecosystem
-                    </span>
-                    <div>
+                  <div
+                    className={`relative mb-6 aspect-[16/10] rounded-2xl bg-gradient-to-br ${study.posterGradient} text-white p-6 flex flex-col justify-between border border-slate-800 shadow-inner overflow-hidden group`}
+                  >
+                    <div className="flex items-center justify-between z-10">
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#00D2FF]/20 text-[#00D2FF] border border-[#00D2FF]/40 backdrop-blur-md">
+                        {study.mediaType === "video" ? "4K Video Case Study" : "Production Architecture"}
+                      </span>
+
+                      {study.mediaType === "video" && (
+                        <div className="w-8 h-8 rounded-full bg-black/40 flex items-center justify-center text-white">
+                          <Play className="w-3.5 h-3.5 fill-white translate-x-0.5" />
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="z-10">
                       <div className="font-outfit text-3xl font-black text-[#00D2FF]">
                         {study.coreMetric}
                       </div>
@@ -737,17 +764,17 @@ export default function PortfolioPage() {
               </div>
 
               {/* Bottom Row */}
-              <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
+              <div className="pt-5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                 <div>
-                  <div className="font-outfit text-xl font-black text-[#00144A]">
+                  <div className="font-outfit text-xl font-black text-[#00144A] dark:text-white">
                     {study.coreMetric}
                   </div>
-                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                  <div className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     {study.coreMetricLabel}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#00144A] group-hover:text-[#00D2FF] transition-colors">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#00144A] dark:text-white group-hover:text-[#00D2FF] transition-colors">
                   <span>Explore Deliverables</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
@@ -758,7 +785,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Bottom CTA Banner */}
-      <section className="py-20 bg-[#00144A] text-white relative overflow-hidden">
+      <section className="py-20 bg-[#00144A] dark:bg-[#001133] text-white relative overflow-hidden border-t border-[#002277] dark:border-slate-800">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,210,255,0.15)_0%,transparent_60%)] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">

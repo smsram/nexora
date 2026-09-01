@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -30,6 +31,7 @@ const config: Config = {
       },
       boxShadow: {
         tactile: "0 6px 0 #000B2B",
+        "tactile-dark": "0 6px 0 #000518",
         "tactile-hover": "0 4px 0 #000B2B",
         "tactile-pressed": "0 2px 0 #000B2B",
         "tactile-cyan": "0 6px 0 #0099BE",

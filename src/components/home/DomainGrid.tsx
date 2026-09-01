@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { 
   CreditCard, 
   Stethoscope, 
@@ -29,7 +30,7 @@ const domains: DomainItem[] = [
     badge: "Financial Tech",
     title: "FinTech & Banking Infrastructure",
     description: "Bank-grade security portals, sub-second ledger dashboards, and conversion-optimized KYC onboarding funnels.",
-    icon: <CreditCard className="w-6 h-6 text-[#00144A]" />,
+    icon: <CreditCard className="w-6 h-6 text-[#00144A] dark:text-[#00D2FF]" />,
     metrics: "$12B+ Processed Securely",
     likes: 45,
   },
@@ -38,7 +39,7 @@ const domains: DomainItem[] = [
     badge: "Medical & Life Sciences",
     title: "Healthcare & Telemedicine",
     description: "HIPAA-compliant patient portals, automated booking engines, and authority-building medical SEO systems.",
-    icon: <Stethoscope className="w-6 h-6 text-emerald-600" />,
+    icon: <Stethoscope className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />,
     metrics: "100% HIPAA Compliance",
     likes: 36,
   },
@@ -47,7 +48,7 @@ const domains: DomainItem[] = [
     badge: "B2B Software",
     title: "Enterprise SaaS & Cloud",
     description: "Product-Led Growth (PLG) marketing funnels, interactive feature walkthroughs, and frictionless trial-to-paid conversions.",
-    icon: <Cloud className="w-6 h-6 text-[#0099BE]" />,
+    icon: <Cloud className="w-6 h-6 text-[#0099BE] dark:text-[#00D2FF]" />,
     metrics: "3.4x Free-to-Paid Lift",
     likes: 52,
   },
@@ -65,7 +66,7 @@ const domains: DomainItem[] = [
     badge: "Property & Assets",
     title: "Real Estate & Asset Portals",
     description: "Ultra-high-definition interactive property viewers, geo-targeted search filters, and luxury investor inquiry pipelines.",
-    icon: <Building className="w-6 h-6 text-amber-600" />,
+    icon: <Building className="w-6 h-6 text-amber-600 dark:text-amber-400" />,
     metrics: "Over $800M in Portfolio Value",
     likes: 39,
   },
@@ -74,7 +75,7 @@ const domains: DomainItem[] = [
     badge: "Bespoke Lifestyle",
     title: "Luxury & High-Touch D2C",
     description: "Editorial spatial design, tactile storytelling, and immersive visual campaigns crafted for discerning global clienteles.",
-    icon: <Sparkles className="w-6 h-6 text-purple-600" />,
+    icon: <Sparkles className="w-6 h-6 text-purple-600 dark:text-purple-400" />,
     metrics: "Top-Tier Brand Prestige",
     likes: 58,
   },
@@ -82,27 +83,27 @@ const domains: DomainItem[] = [
 
 export const DomainGrid: React.FC = () => {
   return (
-    <section id="domains" className="py-24 bg-slate-50/60 border-t border-slate-200/80 relative">
+    <section id="domains" className="py-24 bg-slate-50/60 dark:bg-[#000517] border-t border-slate-200/80 dark:border-slate-800 relative transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xl bg-white border border-slate-200 shadow-tactile mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-xl bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark mb-4">
             <ShieldCheck className="w-3.5 h-3.5 text-[#00D2FF]" />
-            <span className="font-outfit text-xs font-bold uppercase tracking-wider text-brand-navy">
+            <span className="font-outfit text-xs font-bold uppercase tracking-wider text-[#00144A] dark:text-white">
               Domain Expertise
             </span>
           </div>
 
-          <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl font-black text-brand-navy tracking-tight leading-tight mb-4">
+          <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl font-black text-[#00144A] dark:text-white tracking-tight leading-tight mb-4">
             Specialized Solutions for{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] via-[#0099BE] to-[#00D2FF]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] dark:from-white via-[#0099BE] to-[#00D2FF]">
               High-Stakes Verticals.
             </span>
           </h2>
 
-          <p className="font-jakarta text-slate-600 text-base leading-relaxed">
-            We don't apply cookie-cutter formulas. Every industry operates under distinct compliance, user psychology, and competitive dynamics.
+          <p className="font-jakarta text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+            We don&apos;t apply cookie-cutter formulas. Every industry operates under distinct compliance, user psychology, and competitive dynamics.
           </p>
         </div>
 
@@ -119,22 +120,25 @@ export const DomainGrid: React.FC = () => {
               showLikeButton={true}
               className="h-full flex flex-col justify-between"
             >
-              <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                 <span className="font-outfit text-xs font-bold text-[#0099BE]">
                   {domain.metrics}
                 </span>
 
-                <div className="flex items-center gap-1.5 text-xs font-outfit font-bold text-brand-navy group-hover:text-[#00D2FF] transition-colors">
+                <Link
+                  href="/portfolio"
+                  className="flex items-center gap-1.5 text-xs font-outfit font-bold text-[#00144A] dark:text-white group-hover:text-[#00D2FF] transition-colors"
+                >
                   <span>View Case Studies</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </div>
+                </Link>
               </div>
             </TactileCard>
           ))}
         </div>
 
         {/* Bottom CTA Banner inside Domain Section */}
-        <div className="mt-20 p-8 sm:p-12 rounded-3xl bg-[#00144A] border border-[#002277] shadow-tactile text-white relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="mt-20 p-8 sm:p-12 rounded-3xl bg-[#00144A] dark:bg-[#001133] border border-[#002277] dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark text-white relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="absolute -right-10 -bottom-10 w-80 h-80 bg-[#00D2FF]/20 rounded-full blur-3xl pointer-events-none" />
           
           <div className="relative z-10 max-w-xl text-center lg:text-left">
@@ -150,13 +154,13 @@ export const DomainGrid: React.FC = () => {
           </div>
 
           <div className="relative z-10 flex-shrink-0">
-            <a
-              href="#contact"
-              className="tactile-btn tactile-btn-cyan text-sm py-3.5 px-8 flex items-center gap-2"
+            <Link
+              href="/contact"
+              className="tactile-btn tactile-btn-cyan text-sm py-3.5 px-8 flex items-center gap-2 font-bold"
             >
               <span>Request Technical Teardown</span>
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
 

@@ -18,7 +18,6 @@ import {
   Volume2,
   VolumeX,
   CheckCircle2,
-  ShieldCheck,
   Sparkles,
 } from "lucide-react";
 
@@ -134,7 +133,7 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           onClick={onClose}
-          className="fixed inset-0 bg-[#000B2B]/85 backdrop-blur-xl cursor-pointer"
+          className="fixed inset-0 bg-black/70 backdrop-blur-md cursor-pointer"
         />
 
         {/* Floating Close Button */}
@@ -179,12 +178,10 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
           transition={{ type: "spring", stiffness: 350, damping: 28 }}
-          className="relative w-full max-w-6xl h-[88vh] bg-white rounded-3xl shadow-2xl border border-slate-200 z-10 text-[#00144A] flex flex-col lg:flex-row overflow-hidden"
+          className="relative w-full max-w-6xl h-[88vh] bg-white dark:bg-[#000F2E] rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 z-10 text-[#00144A] dark:text-white flex flex-col lg:flex-row overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* ========================================================================= */}
           {/* Left Side: Fixed Media Canvas */}
-          {/* ========================================================================= */}
           <div
             className={`w-full lg:w-[60%] h-[45%] lg:h-full bg-gradient-to-br ${currentItem.gradient} relative flex items-center justify-center p-6 text-white overflow-hidden`}
           >
@@ -215,7 +212,7 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
                     <button
                       onClick={() => setIsPlaying(!isPlaying)}
                       type="button"
-                      className="w-14 h-14 rounded-full bg-[#00D2FF] text-[#00144A] flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all"
+                      className="w-14 h-14 rounded-full bg-[#00D2FF] text-[#00144A] flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
                     >
                       {isPlaying ? (
                         <Pause className="w-6 h-6 fill-[#00144A]" />
@@ -227,7 +224,7 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
                     <button
                       onClick={() => setIsMuted(!isMuted)}
                       type="button"
-                      className="p-3 rounded-full bg-black/40 text-white border border-white/20 hover:bg-black/60 transition-colors"
+                      className="p-3 rounded-full bg-black/40 text-white border border-white/20 hover:bg-black/60 transition-colors cursor-pointer"
                     >
                       {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                     </button>
@@ -262,28 +259,26 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
             </div>
           </div>
 
-          {/* ========================================================================= */}
           {/* Right Side: Scrollable Details & Context */}
-          {/* ========================================================================= */}
-          <div className="w-full lg:w-[40%] h-[55%] lg:h-full bg-white flex flex-col justify-between overflow-hidden">
+          <div className="w-full lg:w-[40%] h-[55%] lg:h-full bg-white dark:bg-[#000B26] border-l border-slate-200 dark:border-slate-800 text-[#00144A] dark:text-slate-200 flex flex-col justify-between overflow-hidden">
             {/* Top Bar: Creator Info & Verification */}
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-white z-10">
+            <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between bg-white dark:bg-[#000B26] z-10">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#00144A] text-[#00D2FF] font-outfit font-black text-xs flex items-center justify-center border border-[#00D2FF]/40 shadow-sm flex-shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-[#00144A] dark:bg-[#000517] text-[#00D2FF] font-outfit font-black text-xs flex items-center justify-center border border-[#00D2FF]/40 shadow-sm flex-shrink-0">
                   NC
                 </div>
                 <div>
-                  <div className="font-outfit font-bold text-sm text-[#00144A] flex items-center gap-1.5">
+                  <div className="font-outfit font-bold text-sm text-[#00144A] dark:text-white flex items-center gap-1.5">
                     <span>Nexora Creative Studio</span>
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
                   </div>
-                  <div className="text-[11px] text-slate-500 font-medium">
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
                     Verified Production Archive
                   </div>
                 </div>
               </div>
 
-              <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+              <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-[#00144A] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#002277]">
                 {currentIndex + 1} / {mediaList.length}
               </span>
             </div>
@@ -291,47 +286,47 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
             {/* Middle Scrollable Content */}
             <div className="p-6 overflow-y-auto flex-1 space-y-6">
               <div>
-                <span className="px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-[#0099BE] border border-slate-200 inline-block mb-2">
+                <span className="px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#00144A] text-[#0099BE] dark:text-[#00D2FF] border border-slate-200 dark:border-[#002277] inline-block mb-2">
                   {currentItem.client}
                 </span>
-                <h2 className="font-outfit text-xl sm:text-2xl font-black text-[#00144A] tracking-tight mb-2">
+                <h2 className="font-outfit text-xl sm:text-2xl font-black text-[#00144A] dark:text-white tracking-tight mb-2">
                   {currentItem.title}
                 </h2>
-                <p className="font-jakarta text-slate-600 text-sm leading-relaxed">
+                <p className="font-jakarta text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                   {currentItem.caption}
                 </p>
               </div>
 
               {/* Technical Metadata Box */}
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2.5 text-xs">
-                <div className="flex items-center justify-between text-slate-600">
-                  <span className="flex items-center gap-1.5 font-semibold text-slate-500">
-                    <Calendar className="w-3.5 h-3.5 text-[#0099BE]" />
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#000517] border border-slate-200/80 dark:border-slate-800 space-y-2.5 text-xs">
+                <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
+                  <span className="flex items-center gap-1.5 font-semibold text-slate-500 dark:text-slate-400">
+                    <Calendar className="w-3.5 h-3.5 text-[#0099BE] dark:text-[#00D2FF]" />
                     Date Recorded:
                   </span>
-                  <span className="font-bold text-[#00144A]">{currentItem.date}</span>
+                  <span className="font-bold text-[#00144A] dark:text-white">{currentItem.date}</span>
                 </div>
 
-                <div className="flex items-center justify-between text-slate-600">
-                  <span className="flex items-center gap-1.5 font-semibold text-slate-500">
-                    <Camera className="w-3.5 h-3.5 text-[#0099BE]" />
+                <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
+                  <span className="flex items-center gap-1.5 font-semibold text-slate-500 dark:text-slate-400">
+                    <Camera className="w-3.5 h-3.5 text-[#0099BE] dark:text-[#00D2FF]" />
                     Equipment / Stack:
                   </span>
-                  <span className="font-bold text-[#00144A]">{currentItem.cameraOrTool}</span>
+                  <span className="font-bold text-[#00144A] dark:text-white">{currentItem.cameraOrTool}</span>
                 </div>
               </div>
 
               {/* Tag Cloud */}
               <div>
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2 flex items-center gap-1.5">
-                  <Tag className="w-3.5 h-3.5 text-[#0099BE]" />
+                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-2 flex items-center gap-1.5">
+                  <Tag className="w-3.5 h-3.5 text-[#0099BE] dark:text-[#00D2FF]" />
                   Campaign Tags
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {currentItem.tags.map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="px-2.5 py-1 rounded-lg bg-slate-100 text-[11px] font-semibold text-slate-700 hover:bg-slate-200 transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-[#00144A] text-[11px] font-semibold text-slate-700 dark:text-[#00D2FF] hover:bg-slate-200 dark:hover:bg-[#002277] transition-colors border border-transparent dark:border-[#002277]/50"
                     >
                       #{tag}
                     </span>
@@ -341,18 +336,18 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
             </div>
 
             {/* Bottom Engagement Action Bar */}
-            <div className="p-5 bg-slate-50/80 border-t border-slate-100 z-10">
+            <div className="p-5 bg-slate-50/80 dark:bg-[#00081C] border-t border-slate-100 dark:border-slate-800/80 z-10">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
                   {/* Like Button */}
                   <button
                     onClick={handleToggleLike}
                     type="button"
-                    className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#FF4B72] transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#00144A] dark:text-slate-400 dark:hover:text-[#00D2FF] transition-colors cursor-pointer"
                   >
                     <Heart
                       className={`w-5 h-5 transition-transform active:scale-125 ${
-                        isLiked ? "fill-[#FF4B72] text-[#FF4B72]" : "text-slate-500"
+                        isLiked ? "fill-[#FF4B72] text-[#FF4B72]" : "text-slate-500 dark:text-slate-400"
                       }`}
                     />
                     <span>{likes} Likes</span>
@@ -362,9 +357,9 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
                   <button
                     onClick={handleCopyShare}
                     type="button"
-                    className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#0099BE] transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#00144A] dark:text-slate-400 dark:hover:text-[#00D2FF] transition-colors cursor-pointer"
                   >
-                    <Share2 className="w-4 h-4 text-slate-500" />
+                    <Share2 className="w-4 h-4 text-slate-500 dark:text-slate-400" />
                     <span>{copiedLink ? "Link Copied!" : "Share"}</span>
                   </button>
                 </div>
@@ -372,14 +367,14 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
                 <button
                   onClick={handleCopyShare}
                   type="button"
-                  className="p-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-[#00144A] transition-colors"
+                  className="p-2 rounded-xl bg-white dark:bg-[#00144A] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-[#00144A] dark:hover:text-white transition-colors cursor-pointer"
                   aria-label="Download asset"
                 >
                   <Download className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="text-[11px] text-slate-500 text-center sm:text-left">
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 text-center sm:text-left">
                 Production artifact archived under Nexora Client Commercial Rights.
               </div>
             </div>

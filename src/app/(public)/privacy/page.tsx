@@ -5,16 +5,13 @@ import Link from "next/link";
 import {
   ShieldCheck,
   Lock,
-  Eye,
   FileText,
   CheckCircle2,
   ChevronRight,
   Mail,
-  ArrowLeft,
   Sparkles,
   Server,
   UserCheck,
-  AlertCircle,
   Menu,
 } from "lucide-react";
 
@@ -64,47 +61,47 @@ export default function PrivacyPolicyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#FAFBFD] dark:bg-[#000517] text-[#00144A] dark:text-white transition-colors duration-300">
       {/* Hero Header Strip */}
-      <section className="pt-36 pb-16 bg-gradient-to-b from-slate-50 via-white to-white border-b border-slate-200/80">
+      <section className="pt-36 pb-16 bg-gradient-to-b from-slate-50 via-[#FAFBFD] to-[#FAFBFD] dark:from-[#000517] dark:via-[#000517] dark:to-[#000517] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-xs font-jakarta text-slate-500 mb-6">
-            <Link href="/" className="hover:text-[#00144A] transition-colors">
+          <nav className="flex items-center gap-2 text-xs font-jakarta text-slate-500 dark:text-slate-400 mb-6">
+            <Link href="/" className="hover:text-[#00144A] dark:hover:text-white transition-colors">
               Home
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
             <span className="text-slate-400">Legal Governance</span>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-            <span className="text-[#0099BE] font-bold">Privacy Policy</span>
+            <span className="text-[#0099BE] dark:text-[#00D2FF] font-bold">Privacy Policy</span>
           </nav>
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="max-w-3xl">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-[#0099BE] border border-slate-200 mb-4 shadow-sm">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#000F2E] text-[#0099BE] dark:text-[#00D2FF] border border-slate-200 dark:border-slate-800 mb-4 shadow-sm">
                 <ShieldCheck className="w-4 h-4 text-[#00D2FF]" />
                 Security & Data Protection Framework
               </span>
-              <h1 className="font-outfit text-4xl sm:text-5xl md:text-6xl font-black text-[#00144A] tracking-tight leading-[1.1] mb-4">
+              <h1 className="font-outfit text-4xl sm:text-5xl md:text-6xl font-black text-[#00144A] dark:text-white tracking-tight leading-[1.1] mb-4">
                 Privacy Architecture & <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] via-[#0099BE] to-[#00D2FF]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] dark:from-white via-[#0099BE] to-[#00D2FF]">
                   Data Governance
                 </span>
               </h1>
-              <p className="font-jakarta text-slate-600 text-base sm:text-lg leading-relaxed">
+              <p className="font-jakarta text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed">
                 How Nexora Creations GROUP collects, secures, encrypts, and processes client and visitor data in compliance with international privacy mandates.
               </p>
             </div>
 
             {/* Version & Date Metadata Pill */}
-            <div className="flex-shrink-0 p-5 rounded-2xl bg-white border border-slate-200 shadow-tactile text-left sm:text-right min-w-[220px]">
-              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+            <div className="flex-shrink-0 p-5 rounded-2xl bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark text-left sm:text-right min-w-[220px]">
+              <div className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
                 Policy Telemetry
               </div>
-              <div className="font-outfit text-lg font-black text-[#00144A]">
+              <div className="font-outfit text-lg font-black text-[#00144A] dark:text-white">
                 Version 2.4 Active
               </div>
-              <div className="text-xs text-slate-500 font-medium">
+              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                 Effective: January 01, 2026
               </div>
             </div>
@@ -119,19 +116,19 @@ export default function PrivacyPolicyPage() {
           <button
             onClick={() => setMobileTocOpen(!mobileTocOpen)}
             type="button"
-            className="w-full p-4 rounded-2xl bg-slate-50 border border-slate-200 text-[#00144A] font-bold text-xs flex items-center justify-between shadow-sm"
+            className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 text-[#00144A] dark:text-white font-bold text-xs flex items-center justify-between shadow-sm"
           >
             <span className="flex items-center gap-2">
-              <Menu className="w-4 h-4 text-[#0099BE]" />
+              <Menu className="w-4 h-4 text-[#0099BE] dark:text-[#00D2FF]" />
               <span>Table of Contents ({tocSections.length} Sections)</span>
             </span>
-            <span className="text-[#0099BE]">
+            <span className="text-[#0099BE] dark:text-[#00D2FF]">
               {mobileTocOpen ? "Collapse" : "Expand"}
             </span>
           </button>
 
           {mobileTocOpen && (
-            <div className="mt-2 p-4 rounded-2xl bg-white border border-slate-200 shadow-tactile space-y-1">
+            <div className="mt-2 p-4 rounded-2xl bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 shadow-tactile space-y-1">
               {tocSections.map((sec) => (
                 <button
                   key={sec.id}
@@ -139,8 +136,8 @@ export default function PrivacyPolicyPage() {
                   type="button"
                   className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold font-jakarta transition-all ${
                     activeSection === sec.id
-                      ? "bg-[#00144A] text-white"
-                      : "text-slate-600 hover:bg-slate-50"
+                      ? "bg-[#00144A] text-white dark:bg-[#00D2FF] dark:text-[#000517]"
+                      : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-[#001c4d]"
                   }`}
                 >
                   {sec.title}
@@ -151,14 +148,12 @@ export default function PrivacyPolicyPage() {
         </div>
 
         <div className="flex flex-col lg:flex-row items-start gap-10">
-          {/* ========================================================================= */}
           {/* Desktop Sticky Sidebar TOC */}
-          {/* ========================================================================= */}
           <aside className="hidden lg:block w-1/4 sticky top-28 space-y-6">
-            <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-tactile">
-              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-100">
-                <FileText className="w-4 h-4 text-[#0099BE]" />
-                <span className="font-outfit font-bold text-xs uppercase tracking-wider text-[#00144A]">
+            <div className="p-6 rounded-3xl bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark">
+              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <FileText className="w-4 h-4 text-[#0099BE] dark:text-[#00D2FF]" />
+                <span className="font-outfit font-bold text-xs uppercase tracking-wider text-[#00144A] dark:text-white">
                   Contents
                 </span>
               </div>
@@ -171,15 +166,15 @@ export default function PrivacyPolicyPage() {
                       <button
                         onClick={() => scrollToSection(sec.id)}
                         type="button"
-                        className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold font-jakarta transition-all duration-200 cursor-pointer flex items-center justify-between ${
+                        className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-jakarta transition-all duration-200 cursor-pointer flex items-center justify-between ${
                           isActive
-                            ? "bg-[#00144A] text-white shadow-sm font-bold"
-                            : "text-slate-600 hover:bg-slate-50 hover:text-[#00144A]"
+                            ? "bg-[#00144A] text-white dark:bg-[#00D2FF] dark:text-[#000517] shadow-sm font-semibold"
+                            : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-[#001c4d] hover:text-[#00144A] dark:hover:text-white"
                         }`}
                       >
                         <span className="truncate">{sec.title}</span>
                         {isActive && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#00D2FF] flex-shrink-0" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#00D2FF] dark:bg-[#000517] flex-shrink-0" />
                         )}
                       </button>
                     </li>
@@ -189,12 +184,12 @@ export default function PrivacyPolicyPage() {
             </div>
 
             {/* Quick Contact Legal Card */}
-            <div className="p-6 rounded-3xl bg-[#00144A] text-white border border-[#00D2FF]/30 shadow-tactile space-y-3">
+            <div className="p-6 rounded-3xl bg-[#00144A] dark:bg-[#000F2E] text-white border border-[#00D2FF]/30 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark space-y-3">
               <div className="flex items-center gap-2 text-xs font-bold text-[#00D2FF]">
                 <Lock className="w-3.5 h-3.5" />
                 <span>Privacy Officer</span>
               </div>
-              <p className="font-jakarta text-xs text-slate-300 leading-relaxed">
+              <p className="font-jakarta text-xs text-slate-300 dark:text-slate-400 leading-relaxed">
                 Have specific data inquiry or CCPA/GDPR compliance questions?
               </p>
               <a
@@ -207,39 +202,37 @@ export default function PrivacyPolicyPage() {
             </div>
           </aside>
 
-          {/* ========================================================================= */}
           {/* Main Editorial Content Card */}
-          {/* ========================================================================= */}
-          <main className="w-full lg:w-3/4 bg-[#FAFBFD] border border-slate-200 rounded-3xl p-6 sm:p-10 md:p-12 shadow-tactile space-y-12 text-[#00144A]">
+          <main className="w-full lg:w-3/4 bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-10 md:p-12 shadow-xl space-y-12 text-slate-700 dark:text-slate-300">
             {/* Section 1 */}
             <section id="data-collection" className="space-y-4 pt-2">
-              <span className="text-[10px] font-bold text-[#0099BE] uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-[#0099BE] dark:text-[#00D2FF] uppercase tracking-wider">
                 Section 01
               </span>
-              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A]">
+              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A] dark:text-white">
                 1. Data Collection & Information Scope
               </h2>
-              <p className="font-jakarta text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="font-jakarta text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
                 Nexora Creations GROUP (&quot;Nexora&quot;, &quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) operates as a premier digital marketing, web engineering, and enterprise creative systems group. When you visit our website, submit discovery briefs, or engage our retainers, we collect information necessary to deliver our capabilities with maximum precision.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                <div className="p-4 rounded-2xl bg-white border border-slate-200/80">
-                  <h3 className="font-outfit font-bold text-sm text-[#00144A] mb-1.5 flex items-center gap-2">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#000517] border border-slate-200/80 dark:border-slate-800">
+                  <h3 className="font-outfit font-bold text-sm text-[#00144A] dark:text-white mb-1.5 flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                     Directly Submitted Information
                   </h3>
-                  <p className="font-jakarta text-xs text-slate-600 leading-relaxed">
+                  <p className="font-jakarta text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     Full name, work email address, company URL, project budget requirements, and custom brief parameters submitted via our contact forms.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white border border-slate-200/80">
-                  <h3 className="font-outfit font-bold text-sm text-[#00144A] mb-1.5 flex items-center gap-2">
-                    <Server className="w-4 h-4 text-[#0099BE]" />
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#000517] border border-slate-200/80 dark:border-slate-800">
+                  <h3 className="font-outfit font-bold text-sm text-[#00144A] dark:text-white mb-1.5 flex items-center gap-2">
+                    <Server className="w-4 h-4 text-[#0099BE] dark:text-[#00D2FF]" />
                     Automated Technical Telemetry
                   </h3>
-                  <p className="font-jakarta text-xs text-slate-600 leading-relaxed">
+                  <p className="font-jakarta text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     Browser type, Time-to-First-Byte (TTFB) latency metrics, IP geography, device viewport dimensions, and anonymized session heatmaps.
                   </p>
                 </div>
@@ -247,46 +240,46 @@ export default function PrivacyPolicyPage() {
             </section>
 
             {/* Section 2 */}
-            <section id="use-of-information" className="space-y-4 pt-4 border-t border-slate-200/80">
-              <span className="text-[10px] font-bold text-[#0099BE] uppercase tracking-wider">
+            <section id="use-of-information" className="space-y-4 pt-4 border-t border-slate-200/80 dark:border-slate-800">
+              <span className="text-[10px] font-bold text-[#0099BE] dark:text-[#00D2FF] uppercase tracking-wider">
                 Section 02
               </span>
-              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A]">
+              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A] dark:text-white">
                 2. Use of Information & Zero Data-Broker Guarantee
               </h2>
-              <p className="font-jakarta text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="font-jakarta text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
                 We strictly utilize collected client and visitor information to deliver and optimize our engineering and media buying services.
               </p>
 
-              <ul className="space-y-3 font-jakarta text-xs sm:text-sm text-slate-700">
+              <ul className="space-y-3 font-jakarta text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
                   <span>
-                    <strong>Architecture Discovery:</strong> Evaluating technical infrastructure, server load capacities, and ad attribution tracking setups.
+                    <strong className="text-[#00144A] dark:text-white">Architecture Discovery:</strong> Evaluating technical infrastructure, server load capacities, and ad attribution tracking setups.
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
                   <span>
-                    <strong>Campaign Calibration:</strong> Building customized media buying strategies, creative testing matrices, and programmatic SEO hubs.
+                    <strong className="text-[#00144A] dark:text-white">Campaign Calibration:</strong> Building customized media buying strategies, creative testing matrices, and programmatic SEO hubs.
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
                   <span>
-                    <strong>Communications:</strong> Responding to discovery requests, scheduling strategy calls, and sending the weekly Nexora Growth Digest (with one-click unsubscribe).
+                    <strong className="text-[#00144A] dark:text-white">Communications:</strong> Responding to discovery requests, scheduling strategy calls, and sending the weekly Nexora Growth Digest (with one-click unsubscribe).
                   </span>
                 </li>
               </ul>
 
-              {/* Cyan Highlight Callout */}
-              <div className="p-5 rounded-2xl bg-cyan-50/80 border-2 border-[#00D2FF] flex items-start gap-4">
-                <Sparkles className="w-5 h-5 text-[#0099BE] flex-shrink-0 mt-0.5" />
+              {/* Cyan Key Takeaway Callout Box */}
+              <div className="p-5 rounded-2xl bg-[#00D2FF]/5 dark:bg-[#00D2FF]/10 border-l-4 border-[#00D2FF] flex items-start gap-4 text-[#00144A] dark:text-slate-200">
+                <Sparkles className="w-5 h-5 text-[#0099BE] dark:text-[#00D2FF] flex-shrink-0 mt-0.5" />
                 <div className="space-y-1">
-                  <div className="font-outfit font-bold text-sm text-[#00144A]">
+                  <div className="font-outfit font-bold text-sm text-[#00144A] dark:text-white">
                     Zero Data-Broker Sale Commitment
                   </div>
-                  <p className="font-jakarta text-xs text-slate-700 leading-relaxed">
+                  <p className="font-jakarta text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                     Nexora does NOT sell, rent, or trade client or prospect personal data to third-party brokers, advertisers, or programmatic aggregators. All client telemetry remains strictly confidential.
                   </p>
                 </div>
@@ -294,109 +287,109 @@ export default function PrivacyPolicyPage() {
             </section>
 
             {/* Section 3 */}
-            <section id="data-security" className="space-y-4 pt-4 border-t border-slate-200/80">
-              <span className="text-[10px] font-bold text-[#0099BE] uppercase tracking-wider">
+            <section id="data-security" className="space-y-4 pt-4 border-t border-slate-200/80 dark:border-slate-800">
+              <span className="text-[10px] font-bold text-[#0099BE] dark:text-[#00D2FF] uppercase tracking-wider">
                 Section 03
               </span>
-              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A]">
+              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A] dark:text-white">
                 3. Data Security, Storage & Encryption Protocols
               </h2>
-              <p className="font-jakarta text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="font-jakarta text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
                 We employ military-grade TLS 1.3 encryption for all data in transit and AES-256 encryption for data at rest. Infrastructure is hosted on SOC2-certified multi-region cloud edge environments.
               </p>
 
-              <div className="p-5 rounded-2xl bg-white border border-slate-200 space-y-3">
-                <div className="font-outfit font-bold text-sm text-[#00144A]">
+              <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 space-y-3">
+                <div className="font-outfit font-bold text-sm text-[#00144A] dark:text-white">
                   Infrastructure Security Standards
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/60">
-                    <div className="font-bold text-[#00144A]">TLS 1.3 & HSTS</div>
-                    <div className="text-slate-500">Encrypted in Transit</div>
+                  <div className="p-3 rounded-xl bg-white dark:bg-[#000F2E] border border-slate-200/60 dark:border-slate-800">
+                    <div className="font-bold text-[#00144A] dark:text-white">TLS 1.3 & HSTS</div>
+                    <div className="text-slate-500 dark:text-slate-400">Encrypted in Transit</div>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/60">
-                    <div className="font-bold text-[#00144A]">AES-256 Storage</div>
-                    <div className="text-slate-500">Encrypted at Rest</div>
+                  <div className="p-3 rounded-xl bg-white dark:bg-[#000F2E] border border-slate-200/60 dark:border-slate-800">
+                    <div className="font-bold text-[#00144A] dark:text-white">AES-256 Storage</div>
+                    <div className="text-slate-500 dark:text-slate-400">Encrypted at Rest</div>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/60">
-                    <div className="font-bold text-[#00144A]">SOC2 & HIPAA Ready</div>
-                    <div className="text-slate-500">Compliant Partners</div>
+                  <div className="p-3 rounded-xl bg-white dark:bg-[#000F2E] border border-slate-200/60 dark:border-slate-800">
+                    <div className="font-bold text-[#00144A] dark:text-white">SOC2 & HIPAA Ready</div>
+                    <div className="text-slate-500 dark:text-slate-400">Compliant Partners</div>
                   </div>
                 </div>
               </div>
             </section>
 
             {/* Section 4 */}
-            <section id="user-rights" className="space-y-4 pt-4 border-t border-slate-200/80">
-              <span className="text-[10px] font-bold text-[#0099BE] uppercase tracking-wider">
+            <section id="user-rights" className="space-y-4 pt-4 border-t border-slate-200/80 dark:border-slate-800">
+              <span className="text-[10px] font-bold text-[#0099BE] dark:text-[#00D2FF] uppercase tracking-wider">
                 Section 04
               </span>
-              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A]">
+              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A] dark:text-white">
                 4. User Rights & International Compliance (GDPR / CCPA)
               </h2>
-              <p className="font-jakarta text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="font-jakarta text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
                 Under the European General Data Protection Regulation (GDPR) and California Consumer Privacy Act (CCPA), you retain the following statutory rights regarding your personal information:
               </p>
 
-              <div className="space-y-3 font-jakarta text-xs sm:text-sm text-slate-700">
-                <div className="p-4 rounded-xl bg-white border border-slate-200 flex items-start gap-3">
-                  <UserCheck className="w-4 h-4 text-[#0099BE] flex-shrink-0 mt-0.5" />
+              <div className="space-y-3 font-jakarta text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+                  <UserCheck className="w-4 h-4 text-[#0099BE] dark:text-[#00D2FF] flex-shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-[#00144A]">Right to Access & Portability:</strong> You may request a complete export of any data records associated with your email.
+                    <strong className="text-[#00144A] dark:text-white">Right to Access & Portability:</strong> You may request a complete export of any data records associated with your email.
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white border border-slate-200 flex items-start gap-3">
-                  <UserCheck className="w-4 h-4 text-[#0099BE] flex-shrink-0 mt-0.5" />
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+                  <UserCheck className="w-4 h-4 text-[#0099BE] dark:text-[#00D2FF] flex-shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-[#00144A]">Right to Erasure (&quot;Right to be Forgotten&quot;):</strong> You may request the permanent purge of your contact submissions and analytics history.
+                    <strong className="text-[#00144A] dark:text-white">Right to Erasure (&quot;Right to be Forgotten&quot;):</strong> You may request the permanent purge of your contact submissions and analytics history.
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white border border-slate-200 flex items-start gap-3">
-                  <UserCheck className="w-4 h-4 text-[#0099BE] flex-shrink-0 mt-0.5" />
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+                  <UserCheck className="w-4 h-4 text-[#0099BE] dark:text-[#00D2FF] flex-shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-[#00144A]">Right to Opt-Out:</strong> You may disable non-essential analytics cookies through your browser settings or directly via written request.
+                    <strong className="text-[#00144A] dark:text-white">Right to Opt-Out:</strong> You may disable non-essential analytics cookies through your browser settings or directly via written request.
                   </div>
                 </div>
               </div>
             </section>
 
             {/* Section 5 */}
-            <section id="third-party-integrations" className="space-y-4 pt-4 border-t border-slate-200/80">
-              <span className="text-[10px] font-bold text-[#0099BE] uppercase tracking-wider">
+            <section id="third-party-integrations" className="space-y-4 pt-4 border-t border-slate-200/80 dark:border-slate-800">
+              <span className="text-[10px] font-bold text-[#0099BE] dark:text-[#00D2FF] uppercase tracking-wider">
                 Section 05
               </span>
-              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A]">
+              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A] dark:text-white">
                 5. Third-Party Integrations & First-Party CAPI
               </h2>
-              <p className="font-jakarta text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="font-jakarta text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
                 In our paid media work, we engineer server-to-server Conversions API (CAPI) pipelines through Google Tag Manager and Meta Ads API. These connections process transaction events authenticated via client first-party domain cookies, eliminating invasive third-party cross-site trackers.
               </p>
             </section>
 
             {/* Section 6 */}
-            <section id="legal-contact" className="space-y-4 pt-4 border-t border-slate-200/80">
-              <span className="text-[10px] font-bold text-[#0099BE] uppercase tracking-wider">
+            <section id="legal-contact" className="space-y-4 pt-4 border-t border-slate-200/80 dark:border-slate-800">
+              <span className="text-[10px] font-bold text-[#0099BE] dark:text-[#00D2FF] uppercase tracking-wider">
                 Section 06
               </span>
-              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A]">
+              <h2 className="font-outfit text-2xl sm:text-3xl font-black tracking-tight text-[#00144A] dark:text-white">
                 6. Contact Legal & Privacy Officer
               </h2>
-              <p className="font-jakarta text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="font-jakarta text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
                 To exercise your privacy rights, file a data inquiry, or request policy clarifications, contact our designated privacy department:
               </p>
 
-              <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="p-6 rounded-3xl bg-slate-50 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-[#00144A] text-[#00D2FF] font-outfit font-black text-sm flex items-center justify-center border border-[#00D2FF]/40 shadow-sm flex-shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#00144A] dark:bg-[#000F2E] text-[#00D2FF] font-outfit font-black text-sm flex items-center justify-center border border-[#00D2FF]/40 shadow-sm flex-shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="font-outfit font-bold text-sm text-[#00144A]">
+                    <div className="font-outfit font-bold text-sm text-[#00144A] dark:text-white">
                       Nexora Legal & Compliance Office
                     </div>
-                    <div className="text-xs text-slate-500 font-jakarta">
+                    <div className="text-xs text-slate-500 dark:text-slate-400 font-jakarta">
                       Direct Email: legal@nexoracreations.com
                     </div>
                   </div>
@@ -404,7 +397,7 @@ export default function PrivacyPolicyPage() {
 
                 <a
                   href="mailto:legal@nexoracreations.com?subject=Privacy%20Data%20Inquiry"
-                  className="tactile-btn tactile-btn-navy text-xs py-2.5 px-5 whitespace-nowrap"
+                  className="tactile-btn tactile-btn-navy dark:tactile-btn-cyan text-xs py-2.5 px-5 whitespace-nowrap"
                 >
                   Submit Privacy Request
                 </a>

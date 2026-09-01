@@ -5,16 +5,11 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Folder,
-  Image as ImageIcon,
-  Film,
-  Layers,
   Heart,
   ArrowLeft,
   ArrowRight,
-  Sparkles,
   Maximize2,
   Play,
-  CheckCircle2,
 } from "lucide-react";
 import InstagramSplitModal, {
   MediaItem,
@@ -311,7 +306,7 @@ export default function GalleryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#FAFBFD] dark:bg-[#000517] text-[#00144A] dark:text-white transition-colors duration-300">
       {/* Instagram-Style Desktop Split Modal */}
       <InstagramSplitModal
         isOpen={modalState.isOpen}
@@ -324,40 +319,40 @@ export default function GalleryPage() {
       />
 
       {/* Hero Header Section */}
-      <section className="pt-36 pb-16 bg-gradient-to-b from-slate-50 via-white to-white border-b border-slate-200/80">
+      <section className="pt-36 pb-16 bg-gradient-to-b from-slate-50 via-[#FAFBFD] to-[#FAFBFD] dark:from-[#000517] dark:via-[#000517] dark:to-[#000517] border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="max-w-3xl">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-[#0099BE] border border-slate-200 mb-4 shadow-sm">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#000F2E] text-[#0099BE] dark:text-[#00D2FF] border border-slate-200 dark:border-slate-800 mb-4 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00D2FF]" />
                 Media Hub & Creative Vault
               </span>
-              <h1 className="font-outfit text-4xl sm:text-5xl md:text-6xl font-black text-[#00144A] tracking-tight leading-[1.1] mb-4">
+              <h1 className="font-outfit text-4xl sm:text-5xl md:text-6xl font-black text-[#00144A] dark:text-white tracking-tight leading-[1.1] mb-4">
                 Visual Vault & <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] via-[#0099BE] to-[#00D2FF]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00144A] dark:from-white via-[#0099BE] to-[#00D2FF]">
                   Creative Archives.
                 </span>
               </h1>
-              <p className="font-jakarta text-slate-600 text-base sm:text-lg leading-relaxed">
+              <p className="font-jakarta text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed">
                 A curated repository of 4K studio photography, high-retention video reels, tactile design systems, and behind-the-scenes production moments.
               </p>
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-tactile text-center min-w-[140px]">
-                <div className="font-outfit text-2xl font-black text-[#00144A]">
+              <div className="p-4 rounded-2xl bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 shadow-tactile dark:shadow-tactile-dark text-center min-w-[140px]">
+                <div className="font-outfit text-2xl font-black text-[#00144A] dark:text-white">
                   48+
                 </div>
-                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                <div className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   Curated Artifacts
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#00144A] text-white border border-[#00D2FF]/40 shadow-tactile text-center min-w-[140px]">
+              <div className="p-4 rounded-2xl bg-[#00144A] dark:bg-[#000F2E] text-white border border-[#00D2FF]/40 shadow-tactile dark:shadow-tactile-dark text-center min-w-[140px]">
                 <div className="font-outfit text-2xl font-black text-[#00D2FF]">
                   4K UHD
                 </div>
-                <div className="text-[10px] font-bold text-slate-300 uppercase tracking-wider">
+                <div className="text-[10px] font-bold text-slate-300 dark:text-slate-400 uppercase tracking-wider">
                   Master Quality
                 </div>
               </div>
@@ -370,9 +365,7 @@ export default function GalleryPage() {
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatePresence mode="wait">
           {!selectedFolder ? (
-            /* ========================================================================= */
             /* View 1: Google Photos-Style Multi-Layered Folder Grid */
-            /* ========================================================================= */
             <motion.div
               key="folder-grid"
               initial={{ opacity: 0, y: 10 }}
@@ -382,15 +375,15 @@ export default function GalleryPage() {
             >
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h2 className="font-outfit text-2xl sm:text-3xl font-black text-[#00144A]">
+                  <h2 className="font-outfit text-2xl sm:text-3xl font-black text-[#00144A] dark:text-white">
                     Organized Media Collections
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-500 font-jakarta">
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-jakarta">
                     Select a folder collection to explore high-res artifacts and production details.
                   </p>
                 </div>
 
-                <span className="text-xs font-bold text-[#0099BE] bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+                <span className="text-xs font-bold text-[#0099BE] dark:text-[#00D2FF] bg-slate-100 dark:bg-[#000F2E] px-3 py-1 rounded-full border border-slate-200 dark:border-slate-800">
                   {galleryFoldersData.length} Folders Available
                 </span>
               </div>
@@ -404,15 +397,15 @@ export default function GalleryPage() {
                       onClick={() => setSelectedFolder(folder)}
                       whileHover={{ y: -6 }}
                       whileTap={{ y: 2 }}
-                      className="group relative bg-white border border-slate-200 rounded-3xl p-6 shadow-tactile hover:shadow-tactile-hover transition-all duration-200 cursor-pointer select-none flex flex-col justify-between"
+                      className="group relative bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-tactile dark:shadow-tactile-dark hover:shadow-tactile-hover transition-all duration-200 cursor-pointer select-none flex flex-col justify-between"
                     >
                       <div>
                         {/* Multi-Layered Folder Stack Visual */}
                         <div className="relative w-full aspect-[4/3] mb-5">
                           {/* Back Stack Layer 2 */}
-                          <div className="absolute top-0 left-3 right-3 h-full rounded-2xl bg-slate-200/80 scale-[0.92] -translate-y-2 opacity-60 border border-slate-300" />
+                          <div className="absolute top-0 left-3 right-3 h-full rounded-2xl bg-slate-200/80 dark:bg-[#00144A]/60 scale-[0.92] -translate-y-2 opacity-60 border border-slate-300 dark:border-slate-800" />
                           {/* Back Stack Layer 1 */}
-                          <div className="absolute top-0 left-1.5 right-1.5 h-full rounded-2xl bg-slate-300/80 scale-[0.96] -translate-y-1 opacity-80 border border-slate-400" />
+                          <div className="absolute top-0 left-1.5 right-1.5 h-full rounded-2xl bg-slate-300/80 dark:bg-[#00144A]/90 scale-[0.96] -translate-y-1 opacity-80 border border-slate-400 dark:border-slate-700" />
 
                           {/* Front Primary Folder Card */}
                           <div
@@ -441,7 +434,7 @@ export default function GalleryPage() {
 
                         {/* Folder Info */}
                         <div className="flex items-start justify-between gap-2 mb-2">
-                          <h3 className="font-outfit text-lg font-bold text-[#00144A] group-hover:text-[#0099BE] transition-colors">
+                          <h3 className="font-outfit text-lg font-bold text-[#00144A] dark:text-white group-hover:text-[#00D2FF] transition-colors">
                             {folder.title}
                           </h3>
 
@@ -449,7 +442,7 @@ export default function GalleryPage() {
                           <button
                             onClick={(e) => toggleFolderLike(e, folder.id)}
                             type="button"
-                            className="p-1.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-400 hover:text-[#FF4B72] hover:border-[#FF4B72]/40 transition-all focus:outline-none"
+                            className="p-1.5 rounded-lg bg-slate-50 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-[#FF4B72] hover:border-[#FF4B72]/40 transition-all focus:outline-none cursor-pointer"
                             aria-label="Bookmark folder"
                           >
                             <Heart
@@ -462,12 +455,12 @@ export default function GalleryPage() {
                           </button>
                         </div>
 
-                        <p className="font-jakarta text-slate-600 text-xs leading-relaxed line-clamp-2">
+                        <p className="font-jakarta text-slate-600 dark:text-slate-400 text-xs leading-relaxed line-clamp-2">
                           {folder.description}
                         </p>
                       </div>
 
-                      <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#00144A] group-hover:text-[#00D2FF] transition-colors">
+                      <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-[#00144A] dark:text-white group-hover:text-[#00D2FF] transition-colors">
                         <span>Browse Media</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -477,9 +470,7 @@ export default function GalleryPage() {
               </div>
             </motion.div>
           ) : (
-            /* ========================================================================= */
             /* View 2: Media Items Grid inside Selected Folder */
-            /* ========================================================================= */
             <motion.div
               key="media-grid"
               initial={{ opacity: 0, y: 10 }}
@@ -489,25 +480,25 @@ export default function GalleryPage() {
               className="space-y-8"
             >
               {/* Back to Folders Button & Breadcrumb */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setSelectedFolder(null)}
                     type="button"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-jakarta text-xs font-bold transition-all cursor-pointer shadow-sm hover:-translate-x-0.5"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-[#000F2E] hover:bg-slate-200 dark:hover:bg-[#001c4d] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 font-jakarta text-xs font-bold transition-all cursor-pointer shadow-sm hover:-translate-x-0.5"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Back to Folders</span>
                   </button>
 
-                  <div className="h-4 w-px bg-slate-300 hidden sm:block" />
+                  <div className="h-4 w-px bg-slate-300 dark:bg-slate-700 hidden sm:block" />
 
-                  <span className="font-outfit text-xl font-extrabold text-[#00144A]">
+                  <span className="font-outfit text-xl font-extrabold text-[#00144A] dark:text-white">
                     {selectedFolder.title}
                   </span>
                 </div>
 
-                <span className="text-xs font-bold text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 w-max">
+                <span className="text-xs font-bold text-[#0099BE] dark:text-[#00D2FF] bg-slate-50 dark:bg-[#000F2E] px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 w-max">
                   {selectedFolder.items.length} Production Artifacts
                 </span>
               </div>
@@ -520,7 +511,7 @@ export default function GalleryPage() {
                     onClick={() => openMediaModal(selectedFolder.items, idx)}
                     whileHover={{ y: -4 }}
                     whileTap={{ y: 2 }}
-                    className="group relative bg-white border border-slate-200 rounded-3xl p-5 shadow-tactile hover:shadow-tactile-hover transition-all duration-200 cursor-pointer select-none flex flex-col justify-between overflow-hidden"
+                    className="group relative bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-tactile dark:shadow-tactile-dark hover:shadow-tactile-hover transition-all duration-200 cursor-pointer select-none flex flex-col justify-between overflow-hidden"
                   >
                     <div>
                       {/* Media Thumbnail Canvas */}
@@ -551,17 +542,17 @@ export default function GalleryPage() {
                       </div>
 
                       {/* Title & Caption */}
-                      <h4 className="font-outfit font-bold text-base text-[#00144A] group-hover:text-[#0099BE] transition-colors line-clamp-1 mb-1.5">
+                      <h4 className="font-outfit font-bold text-base text-[#00144A] dark:text-white group-hover:text-[#00D2FF] transition-colors line-clamp-1 mb-1.5">
                         {item.title}
                       </h4>
-                      <p className="font-jakarta text-slate-500 text-xs line-clamp-2 leading-relaxed">
+                      <p className="font-jakarta text-slate-500 dark:text-slate-400 text-xs line-clamp-2 leading-relaxed">
                         {item.caption}
                       </p>
                     </div>
 
-                    <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                    <div className="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400 font-medium">
                       <span>{item.date}</span>
-                      <span className="text-[#00144A] font-bold flex items-center gap-1">
+                      <span className="text-[#00144A] dark:text-[#00D2FF] font-bold flex items-center gap-1">
                         <Heart className="w-3 h-3 text-[#FF4B72] fill-[#FF4B72]" />
                         {item.likesCount}
                       </span>
@@ -575,7 +566,7 @@ export default function GalleryPage() {
       </section>
 
       {/* Bottom CTA Banner */}
-      <section className="py-20 bg-[#00144A] text-white relative overflow-hidden">
+      <section className="py-20 bg-[#00144A] dark:bg-[#000F2E] text-white relative overflow-hidden border-t border-[#002277] dark:border-slate-800">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,210,255,0.15)_0%,transparent_60%)] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
@@ -583,7 +574,7 @@ export default function GalleryPage() {
             <h2 className="font-outfit text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-4 leading-tight">
               Need custom visual production for your brand?
             </h2>
-            <p className="font-jakarta text-slate-300 text-base sm:text-lg">
+            <p className="font-jakarta text-slate-300 dark:text-slate-400 text-base sm:text-lg">
               Our in-house studio produces commercial photography, vertical motion ad sets, and tailored design token libraries.
             </p>
           </div>

@@ -16,7 +16,7 @@ export interface NexoraLogoProps {
 export const NexoraLogo: React.FC<NexoraLogoProps> = ({
   showText = true,
   size = "md",
-  variant = "light",
+  variant = "auto",
   className,
   animated = true,
 }) => {
@@ -56,22 +56,35 @@ export const NexoraLogo: React.FC<NexoraLogoProps> = ({
 
   const currentSize = sizeMap[size];
 
-  // Theme text styling
-  const isDark = variant === "dark";
-  const titleColor = isDark ? "text-white" : "text-brand-navy";
-  const subtitleColor = isDark ? "text-slate-300" : "text-slate-700";
+  // Dynamic text coloring based on variant & dark mode support
+  let titleColor = "text-[#00144A] dark:text-white";
+  let subtitleColor = "text-slate-600 dark:text-slate-300";
+
+  if (variant === "dark") {
+    titleColor = "text-white";
+    subtitleColor = "text-slate-300";
+  } else if (variant === "light") {
+    titleColor = "text-[#00144A]";
+    subtitleColor = "text-slate-700";
+  }
 
   const content = (
-    <div className={cn("inline-flex items-center select-none group cursor-pointer", currentSize.gap, className)}>
+    <div
+      className={cn(
+        "inline-flex items-center select-none group cursor-pointer",
+        currentSize.gap,
+        className
+      )}
+    >
       {/* Emblem Badge with Navy Brand Background for contrast */}
       <div
         className={cn(
-          "relative flex items-center justify-center bg-[#00144A] border border-[#00D2FF]/40 shadow-[0_3px_0_#000B2B] transition-all duration-200 group-hover:border-[#00D2FF] group-hover:shadow-[0_0_14px_rgba(0,210,255,0.45)] flex-shrink-0 overflow-hidden",
+          "relative flex items-center justify-center bg-[#00144A] border border-[#00D2FF]/40 shadow-[0_3px_0_#000B2B] dark:border-[#00D2FF]/60 dark:shadow-[0_0_14px_rgba(0,210,255,0.35)] transition-all duration-200 group-hover:border-[#00D2FF] group-hover:shadow-[0_0_16px_rgba(0,210,255,0.5)] flex-shrink-0 overflow-hidden",
           currentSize.badge
         )}
       >
         {/* Subtle ambient cyan glow inside badge */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#00D2FF]/20 via-transparent to-transparent opacity-60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00D2FF]/25 via-transparent to-transparent opacity-70 pointer-events-none" />
 
         {!imageError ? (
           <Image
