@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   Search,
@@ -234,12 +235,45 @@ const blogCategories = [
   "Conversion Architecture",
 ];
 
-export default function BlogsPage() {
+function BlogsContent() {
+  const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("All Articles");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeReadingModal, setActiveReadingModal] = useState<BlogPost | null>(null);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
+
+  // Deep-link auto-opening logic when navigating with ?post=[articleSlug]
+  useEffect(() => {
+    const postParam = searchParams.get("post");
+    if (postParam) {
+      const normalizedQuery = postParam.toLowerCase();
+      const matched = blogPostsData.find(
+        (p) =>
+          p.id.toLowerCase() === normalizedQuery ||
+          p.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").includes(normalizedQuery)
+      );
+      if (matched) {
+        setActiveReadingModal(matched);
+      }
+    } else {
+      setActiveReadingModal(null);
+    }
+  }, [searchParams]);
+
+  const handleOpenPost = (post: BlogPost) => {
+    setActiveReadingModal(post);
+    if (typeof window !== "undefined") {
+      window.history.pushState(null, "", `/blogs?post=${post.id}`);
+    }
+  };
+
+  const handleClosePost = () => {
+    setActiveReadingModal(null);
+    if (typeof window !== "undefined") {
+      window.history.pushState(null, "", "/blogs");
+    }
+  };
 
   const filteredPosts = blogPostsData.filter((post) => {
     const matchesCategory =
@@ -264,7 +298,7 @@ export default function BlogsPage() {
       {/* Paper-Like Reading Modal with layoutId */}
       <PaperModal
         post={activeReadingModal}
-        onClose={() => setActiveReadingModal(null)}
+        onClose={handleClosePost}
       />
 
       {/* Hero Header Section */}
@@ -272,7 +306,7 @@ export default function BlogsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div className="max-w-2xl">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#001133] text-[#0099BE] border border-slate-200 dark:border-slate-800 mb-4 shadow-sm">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#000F2E] text-[#0099BE] dark:text-[#00D2FF] border border-slate-200 dark:border-slate-800 mb-4 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00D2FF]" />
                 Technical Publications & Growth Telemetry
               </span>
@@ -296,7 +330,7 @@ export default function BlogsPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search articles, tactics, tags..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-[#00144A] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#00D2FF] shadow-sm"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-[#00144A] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#00D2FF] shadow-sm"
                 />
               </div>
             </div>
@@ -319,7 +353,7 @@ export default function BlogsPage() {
       {/* Bento Blog Cards Grid */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {filteredPosts.length === 0 ? (
-          <div className="text-center py-24 bg-slate-50 dark:bg-[#001133] rounded-3xl border border-slate-200 dark:border-slate-800 p-8">
+          <div className="text-center py-24 bg-slate-50 dark:bg-[#000F2E] rounded-3xl border border-slate-200 dark:border-slate-800 p-8">
             <BookOpen className="w-12 h-12 text-slate-400 mx-auto mb-3" />
             <h3 className="font-outfit text-xl font-bold text-[#00144A] dark:text-white mb-2">
               No matching articles found
@@ -345,15 +379,15 @@ export default function BlogsPage() {
                 <motion.div
                   key={post.id}
                   layoutId={`blog-card-${post.id}`}
-                  onClick={() => setActiveReadingModal(post)}
+                  onClick={() => handleOpenPost(post)}
                   whileHover={{ y: -4 }}
                   whileTap={{ y: 2 }}
-                  className="group relative bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 rounded-3xl p-7 flex flex-col justify-between shadow-tactile dark:shadow-tactile-dark hover:shadow-tactile-hover transition-all duration-200 cursor-pointer select-none overflow-hidden"
+                  className="group relative bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 text-[#00144A] dark:text-white rounded-3xl p-7 flex flex-col justify-between shadow-tactile dark:shadow-tactile-dark hover:shadow-tactile-hover transition-all duration-300 cursor-pointer select-none overflow-hidden"
                 >
                   <div>
                     {/* Top Meta: Category */}
                     <div className="mb-4">
-                      <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#000517] text-[#0099BE] border border-slate-200 dark:border-slate-800">
+                      <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#00144A] text-[#00144A] dark:text-[#00D2FF] border border-slate-200 dark:border-[#002277]">
                         {post.category}
                       </span>
                     </div>
@@ -364,13 +398,13 @@ export default function BlogsPage() {
                     </h3>
 
                     {/* Article Excerpt */}
-                    <p className="font-jakarta text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6 line-clamp-3">
+                    <p className="font-jakarta text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
                       {post.excerpt}
                     </p>
                   </div>
 
                   {/* Bottom Meta & Author Card */}
-                  <div className="pt-5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                  <div className="pt-5 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-slate-500 dark:text-slate-400">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-lg bg-[#00144A] dark:bg-[#000517] text-[#00D2FF] font-outfit font-black text-xs flex items-center justify-center border border-[#00D2FF]/40 shadow-sm flex-shrink-0">
                         {post.author.avatarInitials}
@@ -379,13 +413,13 @@ export default function BlogsPage() {
                         <div className="font-outfit font-bold text-xs text-[#00144A] dark:text-white">
                           {post.author.name}
                         </div>
-                        <div className="text-[10px] text-slate-400">
+                        <div className="text-[10px] text-slate-400 dark:text-slate-500">
                           {post.publishedAt}
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1 text-xs font-semibold text-[#0099BE]">
+                    <div className="flex items-center gap-1 text-xs font-semibold text-[#0099BE] dark:text-[#00D2FF]">
                       <Clock className="w-3.5 h-3.5" />
                       <span>{post.readTime}</span>
                     </div>
@@ -399,7 +433,7 @@ export default function BlogsPage() {
 
       {/* Newsletter Digest Subscription Bento Box */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#00144A] dark:bg-[#001133] rounded-3xl border border-[#002277] dark:border-slate-800 p-8 sm:p-12 shadow-tactile dark:shadow-tactile-dark text-white relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="bg-[#00144A] dark:bg-[#000F2E] rounded-3xl border border-[#002277] dark:border-slate-800 p-8 sm:p-12 shadow-tactile dark:shadow-tactile-dark text-white relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="absolute -right-10 -bottom-10 w-80 h-80 bg-[#00D2FF]/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-xl text-center lg:text-left">
@@ -447,5 +481,13 @@ export default function BlogsPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function BlogsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white dark:bg-[#000517]" />}>
+      <BlogsContent />
+    </Suspense>
   );
 }

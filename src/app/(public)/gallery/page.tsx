@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Folder,
@@ -275,7 +276,8 @@ const galleryFoldersData: GalleryFolder[] = [
   },
 ];
 
-export default function GalleryPage() {
+function GalleryContent() {
+  const searchParams = useSearchParams();
   const [selectedFolder, setSelectedFolder] = useState<GalleryFolder | null>(null);
   const [modalState, setModalState] = useState<{
     isOpen: boolean;
@@ -287,12 +289,115 @@ export default function GalleryPage() {
     items: [],
   });
 
-  const openMediaModal = (items: MediaItem[], index: number) => {
+  // Deep-link auto-opening logic when navigating with ?folder=[slug] or ?media=[id]
+  useEffect(() => {
+    const folderParam = searchParams.get("folder");
+    const mediaParam = searchParams.get("media");
+
+    let activeFolder: GalleryFolder | null = null;
+
+    if (folderParam) {
+      const found = galleryFoldersData.find(
+        (f) => f.id.toLowerCase() === folderParam.toLowerCase()
+      );
+      if (found) {
+        activeFolder = found;
+        setSelectedFolder(found);
+      }
+    } else {
+      setSelectedFolder(null);
+    }
+
+    if (mediaParam) {
+      const targetFolders = activeFolder ? [activeFolder] : galleryFoldersData;
+      let foundFolder: GalleryFolder | null = null;
+      let foundIdx = -1;
+
+      for (const folder of targetFolders) {
+        const idx = folder.items.findIndex(
+          (item) => item.id.toLowerCase() === mediaParam.toLowerCase()
+        );
+        if (idx !== -1) {
+          foundFolder = folder;
+          foundIdx = idx;
+          break;
+        }
+      }
+
+      if (foundIdx === -1) {
+        for (const folder of galleryFoldersData) {
+          const idx = folder.items.findIndex(
+            (item) => item.id.toLowerCase() === mediaParam.toLowerCase()
+          );
+          if (idx !== -1) {
+            foundFolder = folder;
+            foundIdx = idx;
+            break;
+          }
+        }
+      }
+
+      if (foundFolder && foundIdx !== -1) {
+        setSelectedFolder(foundFolder);
+        setModalState({
+          isOpen: true,
+          currentIndex: foundIdx,
+          items: foundFolder.items,
+        });
+      }
+    } else {
+      setModalState((prev) => ({ ...prev, isOpen: false }));
+    }
+  }, [searchParams]);
+
+  const handleSelectFolder = (folder: GalleryFolder) => {
+    setSelectedFolder(folder);
+    if (typeof window !== "undefined") {
+      window.history.pushState(null, "", `/gallery?folder=${folder.id}`);
+    }
+  };
+
+  const handleBackToFolders = () => {
+    setSelectedFolder(null);
+    if (typeof window !== "undefined") {
+      window.history.pushState(null, "", "/gallery");
+    }
+  };
+
+  const handleOpenMedia = (folder: GalleryFolder, index: number) => {
     setModalState({
       isOpen: true,
       currentIndex: index,
-      items,
+      items: folder.items,
     });
+    const item = folder.items[index];
+    if (typeof window !== "undefined" && item) {
+      window.history.pushState(null, "", `/gallery?folder=${folder.id}&media=${item.id}`);
+    }
+  };
+
+  const handleCloseMediaModal = () => {
+    setModalState((prev) => ({ ...prev, isOpen: false }));
+    if (typeof window !== "undefined") {
+      if (selectedFolder) {
+        window.history.pushState(null, "", `/gallery?folder=${selectedFolder.id}`);
+      } else {
+        window.history.pushState(null, "", "/gallery");
+      }
+    }
+  };
+
+  const handleNavigateMedia = (newIndex: number) => {
+    setModalState((prev) => ({ ...prev, currentIndex: newIndex }));
+    const item = modalState.items[newIndex];
+    if (typeof window !== "undefined" && item) {
+      const folderSlug = selectedFolder?.id;
+      if (folderSlug) {
+        window.history.pushState(null, "", `/gallery?folder=${folderSlug}&media=${item.id}`);
+      } else {
+        window.history.pushState(null, "", `/gallery?media=${item.id}`);
+      }
+    }
   };
 
   return (
@@ -302,10 +407,8 @@ export default function GalleryPage() {
         isOpen={modalState.isOpen}
         mediaList={modalState.items}
         currentIndex={modalState.currentIndex}
-        onClose={() => setModalState((prev) => ({ ...prev, isOpen: false }))}
-        onNavigate={(newIndex) =>
-          setModalState((prev) => ({ ...prev, currentIndex: newIndex }))
-        }
+        onClose={handleCloseMediaModal}
+        onNavigate={handleNavigateMedia}
       />
 
       {/* Hero Header Section */}
@@ -383,7 +486,7 @@ export default function GalleryPage() {
                   return (
                     <motion.div
                       key={folder.id}
-                      onClick={() => setSelectedFolder(folder)}
+                      onClick={() => handleSelectFolder(folder)}
                       whileHover={{ y: -6 }}
                       whileTap={{ y: 2 }}
                       className="group relative bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-tactile dark:shadow-tactile-dark hover:shadow-tactile-hover transition-all duration-200 cursor-pointer select-none flex flex-col justify-between"
@@ -456,7 +559,7 @@ export default function GalleryPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
                 <div className="flex items-center gap-3">
                   <button
-                    onClick={() => setSelectedFolder(null)}
+                    onClick={handleBackToFolders}
                     type="button"
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-[#000F2E] hover:bg-slate-200 dark:hover:bg-[#001c4d] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 font-jakarta text-xs font-bold transition-all cursor-pointer shadow-sm hover:-translate-x-0.5"
                   >
@@ -481,7 +584,7 @@ export default function GalleryPage() {
                 {selectedFolder.items.map((item, idx) => (
                   <motion.div
                     key={item.id}
-                    onClick={() => openMediaModal(selectedFolder.items, idx)}
+                    onClick={() => handleOpenMedia(selectedFolder, idx)}
                     whileHover={{ y: -4 }}
                     whileTap={{ y: 2 }}
                     className="group relative bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-tactile dark:shadow-tactile-dark hover:shadow-tactile-hover transition-all duration-200 cursor-pointer select-none flex flex-col justify-between overflow-hidden"
@@ -563,5 +666,13 @@ export default function GalleryPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function GalleryPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FAFBFD] dark:bg-[#000517]" />}>
+      <GalleryContent />
+    </Suspense>
   );
 }

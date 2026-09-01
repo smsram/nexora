@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -279,7 +280,8 @@ const portfolioCategories = [
   "Social Campaigns",
 ];
 
-export default function PortfolioPage() {
+function PortfolioContent() {
+  const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [activeCaseStudy, setActiveCaseStudy] = useState<CaseStudy | null>(null);
   const [lightboxState, setLightboxState] = useState<{
@@ -291,6 +293,36 @@ export default function PortfolioPage() {
     images: [],
     currentIndex: 0,
   });
+
+  // Deep-link auto-opening logic when navigating with ?project=[slug]
+  useEffect(() => {
+    const projectParam = searchParams.get("project");
+    if (projectParam) {
+      const normalizedQuery = projectParam.toLowerCase();
+      const matched = caseStudiesData.find(
+        (cs) =>
+          cs.id.toLowerCase() === normalizedQuery ||
+          cs.clientName.toLowerCase().replace(/[^a-z0-9]+/g, "-").includes(normalizedQuery)
+      );
+      if (matched) {
+        setActiveCaseStudy(matched);
+      }
+    }
+  }, [searchParams]);
+
+  const handleOpenCaseStudy = (study: CaseStudy) => {
+    setActiveCaseStudy(study);
+    if (typeof window !== "undefined") {
+      window.history.pushState(null, "", `/portfolio?project=${study.id}`);
+    }
+  };
+
+  const handleCloseCaseStudy = () => {
+    setActiveCaseStudy(null);
+    if (typeof window !== "undefined") {
+      window.history.pushState(null, "", "/portfolio");
+    }
+  };
 
   useEffect(() => {
     const isModalActive = activeCaseStudy !== null || lightboxState.isOpen;
@@ -328,7 +360,7 @@ export default function PortfolioPage() {
         }
       } else if (activeCaseStudy) {
         if (e.key === "Escape") {
-          setActiveCaseStudy(null);
+          handleCloseCaseStudy();
         }
       }
     },
@@ -459,7 +491,7 @@ export default function PortfolioPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setActiveCaseStudy(null)}
+              onClick={handleCloseCaseStudy}
               className="fixed inset-0 bg-[#000517]/80 backdrop-blur-md cursor-pointer"
             />
 
@@ -481,9 +513,9 @@ export default function PortfolioPage() {
                 </div>
 
                 <button
-                  onClick={() => setActiveCaseStudy(null)}
+                  onClick={handleCloseCaseStudy}
                   type="button"
-                  className="p-2 rounded-full bg-slate-100 dark:bg-[#000517] hover:bg-slate-200 dark:hover:bg-[#001c4d] text-slate-600 dark:text-slate-300 transition-colors focus:outline-none"
+                  className="p-2 rounded-full bg-slate-100 dark:bg-[#000517] hover:bg-slate-200 dark:hover:bg-[#001c4d] text-slate-600 dark:text-slate-300 transition-colors focus:outline-none cursor-pointer"
                   aria-label="Close modal"
                 >
                   <X className="w-5 h-5" />
@@ -635,7 +667,7 @@ export default function PortfolioPage() {
                 </span>
                 <Link
                   href={`/contact?case_study=${encodeURIComponent(activeCaseStudy.clientName)}`}
-                  onClick={() => setActiveCaseStudy(null)}
+                  onClick={handleCloseCaseStudy}
                   className="tactile-btn tactile-btn-cyan text-xs py-2.5 px-6 flex items-center gap-2 font-bold ml-auto"
                 >
                   <span>Inquire About Similar Architecture</span>
@@ -687,7 +719,7 @@ export default function PortfolioPage() {
             <motion.div
               key={study.id}
               layoutId={`case-study-${study.id}`}
-              onClick={() => setActiveCaseStudy(study)}
+              onClick={() => handleOpenCaseStudy(study)}
               whileHover={{ y: -4 }}
               whileTap={{ y: 2 }}
               className="bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 rounded-3xl p-7 sm:p-8 shadow-tactile dark:shadow-tactile-dark hover:shadow-tactile-hover transition-all duration-200 cursor-pointer flex flex-col justify-between select-none"
@@ -810,5 +842,13 @@ export default function PortfolioPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function PortfolioPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white dark:bg-[#000517]" />}>
+      <PortfolioContent />
+    </Suspense>
   );
 }
