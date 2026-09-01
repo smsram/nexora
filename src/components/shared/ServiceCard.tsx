@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -12,7 +12,6 @@ import {
   Palette,
   Layers,
   ArrowRight,
-  Heart,
   Sparkles,
   CheckCircle2,
 } from "lucide-react";
@@ -23,8 +22,6 @@ interface ServiceCardProps {
   service: ServiceItem;
   onClick?: () => void;
   href?: string;
-  isLiked?: boolean;
-  onToggleLike?: (e: React.MouseEvent) => void;
   showCheckpoints?: boolean;
   className?: string;
 }
@@ -54,53 +51,22 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   service,
   onClick,
   href,
-  isLiked: externalIsLiked,
-  onToggleLike,
   showCheckpoints = true,
   className,
 }) => {
-  const [internalLiked, setInternalLiked] = useState(false);
-  const isLiked = externalIsLiked !== undefined ? externalIsLiked : internalLiked;
-
-  const handleLike = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (onToggleLike) {
-      onToggleLike(e);
-    } else {
-      setInternalLiked(!internalLiked);
-    }
-  };
-
   const cardContent = (
     <div className="flex flex-col h-full justify-between">
       {/* Top Section */}
       <div>
-        {/* Top Header: Custom Icon Badge on Left, Category Pill & Like Heart on Right */}
+        {/* Top Header: Custom Icon Badge on Left, Category Pill on Right */}
         <div className="flex items-center justify-between gap-3 mb-5">
           <div className="w-11 h-11 rounded-xl bg-[#000517] dark:bg-[#000517] border border-slate-800 flex items-center justify-center shadow-sm group-hover:border-[#00D2FF]/50 transition-colors">
             {getServiceIcon(service.iconName)}
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#000517] text-[#00D2FF] border border-slate-800 shadow-sm">
-              {service.category}
-            </span>
-
-            <button
-              onClick={handleLike}
-              type="button"
-              className="p-2 rounded-xl bg-[#000517] border border-slate-800 text-slate-400 hover:text-[#FF4B72] hover:border-[#FF4B72]/40 transition-all focus:outline-none cursor-pointer"
-              aria-label="Bookmark service"
-            >
-              <Heart
-                className={cn(
-                  "w-3.5 h-3.5 transition-transform active:scale-125",
-                  isLiked ? "fill-[#FF4B72] text-[#FF4B72] scale-110" : "text-slate-400"
-                )}
-              />
-            </button>
-          </div>
+          <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#000517] text-[#00D2FF] border border-slate-800 shadow-sm">
+            {service.category}
+          </span>
         </div>
 
         {/* Body: Bold Title & Concise Description */}

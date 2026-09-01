@@ -10,7 +10,6 @@ import {
   Volume2,
   VolumeX,
   ShieldCheck,
-  Heart,
   ArrowRight,
   Quote,
   CheckCircle2,
@@ -127,18 +126,9 @@ export default function TestimonialsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All Verdicts");
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(true);
-  const [likedReviews, setLikedReviews] = useState<Record<string, boolean>>({});
 
   const togglePlay = (id: string) => {
     setPlayingVideoId((prev) => (prev === id ? null : id));
-  };
-
-  const toggleLike = (e: React.MouseEvent, id: string) => {
-    e.stopPropagation();
-    setLikedReviews((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
   };
 
   const filteredTestimonials =
@@ -224,7 +214,6 @@ export default function TestimonialsPage() {
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {filteredTestimonials.map((item) => {
           const isPlaying = playingVideoId === item.id;
-          const isLiked = likedReviews[item.id];
 
           return (
             <motion.div
@@ -299,7 +288,7 @@ export default function TestimonialsPage() {
               {/* Right 50%: Endorsement & Quantified Results */}
               <div className="flex-1 flex flex-col justify-between">
                 <div>
-                  {/* Top Bar: Stars + Like Button */}
+                  {/* Top Bar: Stars */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-1">
                       {[...Array(item.rating)].map((_, rIdx) => (
@@ -312,21 +301,6 @@ export default function TestimonialsPage() {
                         5.0 Verified Rating
                       </span>
                     </div>
-
-                    <button
-                      onClick={(e) => toggleLike(e, item.id)}
-                      type="button"
-                      className="p-2 rounded-xl bg-slate-50 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-[#FF4B72] hover:border-[#FF4B72]/40 transition-all focus:outline-none cursor-pointer"
-                      aria-label="Bookmark review"
-                    >
-                      <Heart
-                        className={`w-4 h-4 transition-transform active:scale-125 ${
-                          isLiked
-                            ? "fill-[#FF4B72] text-[#FF4B72] scale-110"
-                            : "text-slate-400"
-                        }`}
-                      />
-                    </button>
                   </div>
 
                   {/* Headline Pull Quote */}

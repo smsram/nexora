@@ -33,7 +33,6 @@ function ServicesContent() {
   const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("All Capabilities");
   const [activeServiceModal, setActiveServiceModal] = useState<ServiceItem | null>(null);
-  const [likedServices, setLikedServices] = useState<Record<string, boolean>>({});
 
   // Deep-link auto-opening logic when navigating with ?service=[slug]
   useEffect(() => {
@@ -64,13 +63,6 @@ function ServicesContent() {
     if (typeof window !== "undefined") {
       window.history.pushState(null, "", `/services?service=${service.slug}`);
     }
-  };
-
-  const toggleLike = (id: string) => {
-    setLikedServices((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
   };
 
   const filteredServices =
@@ -130,8 +122,6 @@ function ServicesContent() {
               key={service.id}
               service={service}
               onClick={() => handleOpenModal(service)}
-              isLiked={likedServices[service.id]}
-              onToggleLike={() => toggleLike(service.id)}
               showCheckpoints={true}
             />
           ))}

@@ -7,7 +7,6 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  Heart,
   Share2,
   Download,
   Calendar,
@@ -34,7 +33,7 @@ export interface MediaItem {
   client: string;
   cameraOrTool: string;
   tags: string[];
-  likesCount: number;
+  likesCount?: number;
 }
 
 interface InstagramSplitModalProps {
@@ -53,17 +52,13 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
   onNavigate,
 }) => {
   const currentItem = mediaList[currentIndex];
-  const [isLiked, setIsLiked] = useState(false);
-  const [likes, setLikes] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [copiedLink, setCopiedLink] = useState(false);
 
-  // Sync likes state when active media changes
+  // Sync state when active media changes
   useEffect(() => {
     if (currentItem) {
-      setLikes(currentItem.likesCount);
-      setIsLiked(false);
       setCopiedLink(false);
       setIsPlaying(true);
     }
@@ -102,16 +97,6 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
-
-  const handleToggleLike = () => {
-    if (isLiked) {
-      setLikes((prev) => prev - 1);
-      setIsLiked(false);
-    } else {
-      setLikes((prev) => prev + 1);
-      setIsLiked(true);
-    }
-  };
 
   const handleCopyShare = () => {
     if (typeof window !== "undefined") {
@@ -339,20 +324,6 @@ export const InstagramSplitModal: React.FC<InstagramSplitModalProps> = ({
             <div className="p-5 bg-slate-50/80 dark:bg-[#00081C] border-t border-slate-100 dark:border-slate-800/80 z-10">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  {/* Like Button */}
-                  <button
-                    onClick={handleToggleLike}
-                    type="button"
-                    className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#00144A] dark:text-slate-400 dark:hover:text-[#00D2FF] transition-colors cursor-pointer"
-                  >
-                    <Heart
-                      className={`w-5 h-5 transition-transform active:scale-125 ${
-                        isLiked ? "fill-[#FF4B72] text-[#FF4B72]" : "text-slate-500 dark:text-slate-400"
-                      }`}
-                    />
-                    <span>{likes} Likes</span>
-                  </button>
-
                   {/* Share Link Button */}
                   <button
                     onClick={handleCopyShare}

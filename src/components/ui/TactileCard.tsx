@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
-import LikeButton from "./LikeButton";
 
 export interface TactileCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -10,8 +9,6 @@ export interface TactileCardProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode;
   title?: string;
   description?: string;
-  showLikeButton?: boolean;
-  initialLikes?: number;
   variant?: "white" | "navy" | "cyan" | "dark";
   className?: string;
 }
@@ -22,14 +19,10 @@ export const TactileCard: React.FC<TactileCardProps> = ({
   icon,
   title,
   description,
-  showLikeButton = true,
-  initialLikes = 18,
   variant = "white",
   className,
   ...props
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   const variantStyles = {
     white:
       "bg-white dark:bg-[#001133] border-slate-200 dark:border-slate-800 text-[#00144A] dark:text-white shadow-tactile dark:shadow-tactile-dark",
@@ -43,8 +36,6 @@ export const TactileCard: React.FC<TactileCardProps> = ({
 
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       className={cn(
         "tactile-card group relative p-6 sm:p-7 flex flex-col justify-between overflow-hidden cursor-pointer",
         variantStyles[variant],
@@ -52,14 +43,6 @@ export const TactileCard: React.FC<TactileCardProps> = ({
       )}
       {...props}
     >
-      {/* Interactive Heart / Like Button in corner */}
-      {showLikeButton && (
-        <LikeButton
-          initialCount={initialLikes}
-          isCardHovered={isHovered}
-        />
-      )}
-
       {/* Decorative subtle top keycap highlight */}
       <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/80 dark:via-cyan-400/40 to-transparent opacity-60 pointer-events-none" />
 

@@ -21,7 +21,6 @@ interface DomainItem {
   description: string;
   icon: React.ReactNode;
   metrics: string;
-  likes: number;
 }
 
 const domains: DomainItem[] = [
@@ -32,7 +31,6 @@ const domains: DomainItem[] = [
     description: "Bank-grade security portals, sub-second ledger dashboards, and conversion-optimized KYC onboarding funnels.",
     icon: <CreditCard className="w-6 h-6 text-[#00144A] dark:text-[#00D2FF]" />,
     metrics: "$12B+ Processed Securely",
-    likes: 45,
   },
   {
     id: "healthtech",
@@ -41,7 +39,6 @@ const domains: DomainItem[] = [
     description: "HIPAA-compliant patient portals, automated booking engines, and authority-building medical SEO systems.",
     icon: <Stethoscope className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />,
     metrics: "100% HIPAA Compliance",
-    likes: 36,
   },
   {
     id: "saas-cloud",
@@ -50,7 +47,6 @@ const domains: DomainItem[] = [
     description: "Product-Led Growth (PLG) marketing funnels, interactive feature walkthroughs, and frictionless trial-to-paid conversions.",
     icon: <Cloud className="w-6 h-6 text-[#0099BE] dark:text-[#00D2FF]" />,
     metrics: "3.4x Free-to-Paid Lift",
-    likes: 52,
   },
   {
     id: "ecommerce",
@@ -59,7 +55,6 @@ const domains: DomainItem[] = [
     description: "Headless Next.js storefronts, sub-500ms cart flows, and real-time inventory synchronization across global channels.",
     icon: <ShoppingBag className="w-6 h-6 text-[#FF4B72]" />,
     metrics: "Sub-Second Global Checkout",
-    likes: 64,
   },
   {
     id: "realestate",
@@ -68,7 +63,6 @@ const domains: DomainItem[] = [
     description: "Ultra-high-definition interactive property viewers, geo-targeted search filters, and luxury investor inquiry pipelines.",
     icon: <Building className="w-6 h-6 text-amber-600 dark:text-amber-400" />,
     metrics: "Over $800M in Portfolio Value",
-    likes: 39,
   },
   {
     id: "luxury",
@@ -77,7 +71,6 @@ const domains: DomainItem[] = [
     description: "Editorial spatial design, tactile storytelling, and immersive visual campaigns crafted for discerning global clienteles.",
     icon: <Sparkles className="w-6 h-6 text-purple-600 dark:text-purple-400" />,
     metrics: "Top-Tier Brand Prestige",
-    likes: 58,
   },
 ];
 
@@ -116,8 +109,6 @@ export const DomainGrid: React.FC = () => {
               icon={domain.icon}
               title={domain.title}
               description={domain.description}
-              initialLikes={domain.likes}
-              showLikeButton={true}
               className="h-full flex flex-col justify-between"
             >
               <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">

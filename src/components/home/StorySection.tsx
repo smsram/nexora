@@ -78,7 +78,6 @@ export const StorySection: React.FC = () => {
               badge="Scale Metric"
               title="$48.5M+"
               description="Verifiable revenue generated across our portfolio of high-growth partners in the last 24 months."
-              initialLikes={84}
             />
 
             <TactileCard
@@ -86,7 +85,6 @@ export const StorySection: React.FC = () => {
               badge="Speed Benchmark"
               title="340ms"
               description="Average global load time achieved via edge caching and streamlined React server components."
-              initialLikes={62}
             />
 
             <TactileCard
@@ -94,7 +92,6 @@ export const StorySection: React.FC = () => {
               badge="Retention"
               title="98.2%"
               description="Long-term annual client retention rate driven by transparent weekly ROI attribution dashboards."
-              initialLikes={71}
             />
 
             <TactileCard
@@ -102,7 +99,6 @@ export const StorySection: React.FC = () => {
               badge="Execution"
               title="14 Days"
               description="From rapid discovery sprint to production deployment of high-converting enterprise funnels."
-              initialLikes={59}
             />
           </div>
 

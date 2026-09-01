@@ -8,7 +8,6 @@ import {
   Calendar,
   Share2,
   Bookmark,
-  Heart,
   ArrowLeft,
   User,
   Sparkles,
@@ -45,7 +44,6 @@ interface PaperModalProps {
 
 export const PaperModal: React.FC<PaperModalProps> = ({ post, onClose }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -123,21 +121,8 @@ export const PaperModal: React.FC<PaperModalProps> = ({ post, onClose }) => {
                 <span>Back to Articles</span>
               </button>
 
-              {/* Action Buttons: Like, Bookmark, Close */}
+              {/* Action Buttons: Bookmark, Close */}
               <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setIsLiked(!isLiked)}
-                  type="button"
-                  className={`p-2 rounded-xl border transition-all ${
-                    isLiked
-                      ? "bg-rose-50 border-rose-200 text-[#FF4B72]"
-                      : "bg-white border-slate-200 text-slate-500 hover:text-[#FF4B72]"
-                  }`}
-                  aria-label="Like article"
-                >
-                  <Heart className={`w-4 h-4 ${isLiked ? "fill-[#FF4B72]" : ""}`} />
-                </button>
-
                 <button
                   onClick={() => setIsBookmarked(!isBookmarked)}
                   type="button"

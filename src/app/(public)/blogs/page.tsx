@@ -7,7 +7,6 @@ import {
   Search,
   BookOpen,
   ArrowRight,
-  Heart,
   Clock,
   Sparkles,
   Send,
@@ -239,17 +238,8 @@ export default function BlogsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All Articles");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeReadingModal, setActiveReadingModal] = useState<BlogPost | null>(null);
-  const [likedPosts, setLikedPosts] = useState<Record<string, boolean>>({});
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
-
-  const toggleLike = (e: React.MouseEvent, id: string) => {
-    e.stopPropagation();
-    setLikedPosts((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
 
   const filteredPosts = blogPostsData.filter((post) => {
     const matchesCategory =
@@ -351,7 +341,6 @@ export default function BlogsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredPosts.map((post) => {
-              const isLiked = likedPosts[post.id];
               return (
                 <motion.div
                   key={post.id}
@@ -362,27 +351,11 @@ export default function BlogsPage() {
                   className="group relative bg-white dark:bg-[#001133] border border-slate-200 dark:border-slate-800 rounded-3xl p-7 flex flex-col justify-between shadow-tactile dark:shadow-tactile-dark hover:shadow-tactile-hover transition-all duration-200 cursor-pointer select-none overflow-hidden"
                 >
                   <div>
-                    {/* Top Meta: Category + Like Button */}
-                    <div className="flex items-center justify-between mb-4">
+                    {/* Top Meta: Category */}
+                    <div className="mb-4">
                       <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-slate-100 dark:bg-[#000517] text-[#0099BE] border border-slate-200 dark:border-slate-800">
                         {post.category}
                       </span>
-
-                      {/* Interactive Like Button */}
-                      <button
-                        onClick={(e) => toggleLike(e, post.id)}
-                        type="button"
-                        className="p-2 rounded-xl bg-slate-50 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-[#FF4B72] hover:border-[#FF4B72]/40 transition-all focus:outline-none"
-                        aria-label="Like article"
-                      >
-                        <Heart
-                          className={`w-4 h-4 transition-transform active:scale-125 ${
-                            isLiked
-                              ? "fill-[#FF4B72] text-[#FF4B72] scale-110"
-                              : "text-slate-400"
-                          }`}
-                        />
-                      </button>
                     </div>
 
                     {/* Article Title */}

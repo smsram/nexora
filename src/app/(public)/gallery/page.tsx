@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Folder,
-  Heart,
   ArrowLeft,
   ArrowRight,
   Maximize2,
@@ -278,7 +277,6 @@ const galleryFoldersData: GalleryFolder[] = [
 
 export default function GalleryPage() {
   const [selectedFolder, setSelectedFolder] = useState<GalleryFolder | null>(null);
-  const [likedFolders, setLikedFolders] = useState<Record<string, boolean>>({});
   const [modalState, setModalState] = useState<{
     isOpen: boolean;
     currentIndex: number;
@@ -288,14 +286,6 @@ export default function GalleryPage() {
     currentIndex: 0,
     items: [],
   });
-
-  const toggleFolderLike = (e: React.MouseEvent, id: string) => {
-    e.stopPropagation();
-    setLikedFolders((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
 
   const openMediaModal = (items: MediaItem[], index: number) => {
     setModalState({
@@ -390,7 +380,6 @@ export default function GalleryPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {galleryFoldersData.map((folder) => {
-                  const isLiked = likedFolders[folder.id];
                   return (
                     <motion.div
                       key={folder.id}
@@ -433,26 +422,10 @@ export default function GalleryPage() {
                         </div>
 
                         {/* Folder Info */}
-                        <div className="flex items-start justify-between gap-2 mb-2">
+                        <div className="mb-2">
                           <h3 className="font-outfit text-lg font-bold text-[#00144A] dark:text-white group-hover:text-[#00D2FF] transition-colors">
                             {folder.title}
                           </h3>
-
-                          {/* Corner Like Heart Button */}
-                          <button
-                            onClick={(e) => toggleFolderLike(e, folder.id)}
-                            type="button"
-                            className="p-1.5 rounded-lg bg-slate-50 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-[#FF4B72] hover:border-[#FF4B72]/40 transition-all focus:outline-none cursor-pointer"
-                            aria-label="Bookmark folder"
-                          >
-                            <Heart
-                              className={`w-3.5 h-3.5 transition-transform active:scale-125 ${
-                                isLiked
-                                  ? "fill-[#FF4B72] text-[#FF4B72] scale-110"
-                                  : "text-slate-400"
-                              }`}
-                            />
-                          </button>
                         </div>
 
                         <p className="font-jakarta text-slate-600 dark:text-slate-400 text-xs leading-relaxed line-clamp-2">
@@ -552,9 +525,8 @@ export default function GalleryPage() {
 
                     <div className="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400 font-medium">
                       <span>{item.date}</span>
-                      <span className="text-[#00144A] dark:text-[#00D2FF] font-bold flex items-center gap-1">
-                        <Heart className="w-3 h-3 text-[#FF4B72] fill-[#FF4B72]" />
-                        {item.likesCount}
+                      <span className="text-[#00144A] dark:text-[#00D2FF] font-bold">
+                        {item.client}
                       </span>
                     </div>
                   </motion.div>
