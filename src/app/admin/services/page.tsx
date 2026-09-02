@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Code2,
   TrendingUp,
@@ -25,14 +24,8 @@ import {
   CheckCircle2,
   Globe,
   Briefcase,
-  CreditCard,
-  Stethoscope,
-  Cloud,
-  ShoppingBag,
-  Building2,
   Grid3X3,
   Square,
-  ArrowRight,
   ExternalLink,
 } from "lucide-react";
 import { servicesData, ServiceItem, ServiceDeliverable } from "@/data/servicesData";
@@ -41,6 +34,7 @@ import ServiceCard from "@/components/shared/ServiceCard";
 import DomainCard from "@/components/shared/DomainCard";
 import ServiceDetailModal from "@/components/services/ServiceDetailModal";
 import CustomDropdown from "@/components/admin/ui/CustomDropdown";
+import IconPicker from "@/components/admin/ui/IconPicker";
 import ConfirmModal from "@/components/admin/ui/ConfirmModal";
 import { useToast } from "@/components/admin/ui/NotificationHub";
 
@@ -53,32 +47,6 @@ const availableCategories = [
   "CREATIVE STUDIO",
   "OPTIMIZATION",
   "SCALE CHANNEL",
-];
-
-const capabilityIcons = [
-  { name: "Code2", label: "Web Code", icon: <Code2 className="w-4 h-4" /> },
-  { name: "TrendingUp", label: "Growth / ROAS", icon: <TrendingUp className="w-4 h-4" /> },
-  { name: "Search", label: "SEO / Search", icon: <Search className="w-4 h-4" /> },
-  { name: "Palette", label: "Design / UI", icon: <Palette className="w-4 h-4" /> },
-  { name: "Target", label: "CRO / Strategy", icon: <Target className="w-4 h-4" /> },
-  { name: "Share2", label: "Social / Viral", icon: <Share2 className="w-4 h-4" /> },
-  { name: "Layers", label: "Architecture", icon: <Layers className="w-4 h-4" /> },
-  { name: "Cpu", label: "Compute / AI", icon: <Cpu className="w-4 h-4" /> },
-  { name: "ShieldCheck", label: "Security / SLA", icon: <ShieldCheck className="w-4 h-4" /> },
-  { name: "Sparkles", label: "Bespoke", icon: <Sparkles className="w-4 h-4" /> },
-];
-
-const domainIcons = [
-  { name: "CreditCard", label: "FinTech / Card", icon: <CreditCard className="w-4 h-4" /> },
-  { name: "Stethoscope", label: "Health / Med", icon: <Stethoscope className="w-4 h-4" /> },
-  { name: "Cloud", label: "SaaS / Cloud", icon: <Cloud className="w-4 h-4" /> },
-  { name: "ShoppingBag", label: "Commerce / D2C", icon: <ShoppingBag className="w-4 h-4" /> },
-  { name: "Building2", label: "PropTech / Assets", icon: <Building2 className="w-4 h-4" /> },
-  { name: "Sparkles", label: "AI / Bespoke", icon: <Sparkles className="w-4 h-4" /> },
-  { name: "ShieldCheck", label: "Security / SLA", icon: <ShieldCheck className="w-4 h-4" /> },
-  { name: "Zap", label: "Velocity / Power", icon: <Zap className="w-4 h-4" /> },
-  { name: "Cpu", label: "Hardware / Compute", icon: <Cpu className="w-4 h-4" /> },
-  { name: "Layers", label: "Multi-tenant", icon: <Layers className="w-4 h-4" /> },
 ];
 
 const portfolioCaseStudyOptions = [
@@ -94,7 +62,7 @@ const portfolioCaseStudyOptions = [
 export default function AdminServicesManagerPage() {
   const toast = useToast();
 
-  // Top Section Switcher: Capabilities vs Domain Verticals
+  // Top Section Switcher: Core Capabilities vs Domain Expertise
   const [activeSectionTab, setActiveSectionTab] = useState<SectionTab>("capabilities");
 
   // ===========================================================================
@@ -117,7 +85,7 @@ export default function AdminServicesManagerPage() {
   const [deleteServiceModalOpen, setDeleteServiceModalOpen] = useState(false);
 
   // ===========================================================================
-  // STATE: SECTION 2 (Domain Verticals)
+  // STATE: SECTION 2 (Domain Expertise)
   // ===========================================================================
   const [allDomains, setAllDomains] = useState<DomainItem[]>(domainsData);
   const [selectedDomainSlug, setSelectedDomainSlug] = useState<string>(domainsData[0].slug);
@@ -265,7 +233,7 @@ export default function AdminServicesManagerPage() {
   };
 
   // ===========================================================================
-  // HANDLERS: SECTION 2 (Domain Verticals)
+  // HANDLERS: SECTION 2 (Domain Expertise)
   // ===========================================================================
   const handleSelectDomain = (slug: string) => {
     setSelectedDomainSlug(slug);
@@ -389,7 +357,7 @@ export default function AdminServicesManagerPage() {
               Services & Verticals Manager
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-jakarta mt-1">
-              Manage capabilities and high-stakes domain verticals with real-time live preview synchronization.
+              Configure capabilities and high-stakes domain verticals with real-time live preview synchronization.
             </p>
           </div>
 
@@ -439,7 +407,7 @@ export default function AdminServicesManagerPage() {
             }`}
           >
             <Globe className="w-4 h-4" />
-            <span>Domain Verticals</span>
+            <span>Domain Expertise</span>
             <span
               className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
                 activeSectionTab === "domains"
@@ -833,43 +801,26 @@ export default function AdminServicesManagerPage() {
                 </div>
               </div>
 
-              {/* 6. Icon Identifier */}
+              {/* 6. Icon Identifier using Reusable IconPicker */}
               <div className="bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-tactile dark:shadow-tactile-dark space-y-4">
                 <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
                   <Layers className="w-4 h-4 text-[#0099BE] dark:text-[#00D2FF]" />
                   <h2 className="font-outfit font-bold text-base text-[#00144A] dark:text-white">
-                    6. Icon Identifier
+                    6. Capability Icon Identifier
                   </h2>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
-                  {capabilityIcons.map((ic) => {
-                    const isSelected = serviceFormState.iconName === ic.name;
-                    return (
-                      <button
-                        key={ic.name}
-                        type="button"
-                        onClick={() =>
-                          setServiceFormState({ ...serviceFormState, iconName: ic.name })
-                        }
-                        className={`p-3 rounded-2xl flex flex-col items-center justify-center gap-2 border transition-all cursor-pointer ${
-                          isSelected
-                            ? "bg-[#00144A] text-[#00D2FF] border-[#00D2FF] shadow-tactile scale-[1.03]"
-                            : "bg-slate-50 dark:bg-[#000517] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-slate-300"
-                        }`}
-                      >
-                        {ic.icon}
-                        <span className="text-[10px] font-bold text-center truncate w-full">
-                          {ic.label}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                <IconPicker
+                  label="Selected Lucide Icon"
+                  value={serviceFormState.iconName}
+                  onChange={(name) =>
+                    setServiceFormState({ ...serviceFormState, iconName: name })
+                  }
+                />
               </div>
             </div>
 
-            {/* Right Column: Sticky Live Preview Canvas for Capabilities */}
+            {/* Right Column: Sticky Live Preview Canvas with Isolated Theme Switcher */}
             <div className="sticky top-24 space-y-4">
               <div className="p-4 rounded-2xl bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between gap-4">
                 <div>
@@ -920,29 +871,26 @@ export default function AdminServicesManagerPage() {
                 </div>
               </div>
 
-              <div
-                className={`p-6 sm:p-8 rounded-3xl border transition-all duration-300 ${
-                  servicePreviewTheme === "dark"
-                    ? "bg-[#000517] border-slate-800"
-                    : "bg-slate-100 border-slate-200 shadow-inner"
-                }`}
-              >
-                <div className="mb-4 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                  <span>SLOT: /services?service={serviceFormState.slug}</span>
-                  <span className="text-[#00D2FF]">● Interactive Card</span>
-                </div>
+              {/* Isolated Preview Canvas Wrapper with Immediate Ancestor .dark class */}
+              <div className={servicePreviewTheme === "dark" ? "dark" : ""}>
+                <div className="p-6 sm:p-8 rounded-3xl bg-[#FAFBFD] dark:bg-[#000517] text-[#00144A] dark:text-white border border-slate-200 dark:border-slate-800 transition-colors duration-300 shadow-inner dark:shadow-none">
+                  <div className="mb-4 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                    <span>SLOT: /services?service={serviceFormState.slug}</span>
+                    <span className="text-[#00D2FF]">● Interactive Card</span>
+                  </div>
 
-                <ServiceCard
-                  service={serviceFormState}
-                  onClick={() => setServiceDetailModalOpen(true)}
-                  showCheckpoints={true}
-                  showTags={true}
-                />
+                  <ServiceCard
+                    service={serviceFormState}
+                    onClick={() => setServiceDetailModalOpen(true)}
+                    showCheckpoints={true}
+                    showTags={true}
+                  />
 
-                <div className="mt-4 text-center">
-                  <span className="text-[10px] text-slate-400 font-jakarta">
-                    Clicking the card opens the full architectural modal view.
-                  </span>
+                  <div className="mt-4 text-center">
+                    <span className="text-[10px] text-slate-400 font-jakarta">
+                      Clicking the card opens the full architectural modal view.
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -951,7 +899,7 @@ export default function AdminServicesManagerPage() {
       )}
 
       {/* ========================================================================= */}
-      {/* SECTION 2: DOMAIN VERTICALS TAB */}
+      {/* SECTION 2: DOMAIN EXPERTISE TAB */}
       {/* ========================================================================= */}
       {activeSectionTab === "domains" && (
         <div className="space-y-6">
@@ -1031,7 +979,7 @@ export default function AdminServicesManagerPage() {
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 items-start">
             {/* Left Column: Domain Editor */}
             <div className="space-y-6">
-              {/* Section Header Controls (Global Header for Domains) */}
+              {/* Section Header Controls */}
               <div className="bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-tactile dark:shadow-tactile-dark space-y-4">
                 <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
                   <ShieldCheck className="w-4 h-4 text-[#0099BE] dark:text-[#00D2FF]" />
@@ -1170,45 +1118,25 @@ export default function AdminServicesManagerPage() {
                   />
                 </div>
 
-                {/* Domain Icon Picker */}
-                <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                    Vertical Icon Identifier
-                  </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
-                    {domainIcons.map((ic) => {
-                      const isSelected = domainFormState.iconName === ic.name;
-                      return (
-                        <button
-                          key={ic.name}
-                          type="button"
-                          onClick={() =>
-                            setDomainFormState({ ...domainFormState, iconName: ic.name })
-                          }
-                          className={`p-3 rounded-2xl flex flex-col items-center justify-center gap-2 border transition-all cursor-pointer ${
-                            isSelected
-                              ? "bg-[#00144A] text-[#00D2FF] border-[#00D2FF] shadow-tactile scale-[1.03]"
-                              : "bg-slate-50 dark:bg-[#000517] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-slate-300"
-                          }`}
-                        >
-                          {ic.icon}
-                          <span className="text-[10px] font-bold text-center truncate w-full">
-                            {ic.label}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
+                {/* Domain Icon Picker using Reusable IconPicker */}
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+                  <IconPicker
+                    label="Vertical Icon Identifier"
+                    value={domainFormState.iconName}
+                    onChange={(name) =>
+                      setDomainFormState({ ...domainFormState, iconName: name })
+                    }
+                  />
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Sticky Live Domain Preview */}
+            {/* Right Column: Sticky Live Domain Preview with Isolated Theme Switcher */}
             <div className="sticky top-24 space-y-4">
               <div className="p-4 rounded-2xl bg-white dark:bg-[#000F2E] border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between gap-4">
                 <div>
                   <div className="font-outfit font-bold text-xs text-[#00144A] dark:text-white">
-                    Domain Verticals Live Canvas
+                    Domain Expertise Live Canvas
                   </div>
                   <div className="text-[10px] text-slate-400 font-jakarta">
                     Real-time preview of public domain cards
@@ -1276,57 +1204,53 @@ export default function AdminServicesManagerPage() {
                 </div>
               </div>
 
-              {/* Simulated Canvas Viewport */}
-              <div
-                className={`p-6 sm:p-8 rounded-3xl border transition-all duration-300 ${
-                  domainPreviewTheme === "dark"
-                    ? "bg-[#000517] border-slate-800"
-                    : "bg-slate-100 border-slate-200 shadow-inner"
-                }`}
-              >
-                {/* Section header simulator when in grid mode */}
-                {domainPreviewMode === "grid" && (
-                  <div className="mb-8 text-center max-w-md mx-auto">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#00144A] text-[#00D2FF] text-[10px] font-bold uppercase tracking-wider mb-2">
-                      <ShieldCheck className="w-3 h-3" />
-                      <span>{domainSectionBadge}</span>
-                    </span>
-                    <h3 className="font-outfit text-lg font-black text-[#00144A] dark:text-white">
-                      {domainSectionHeadline}
-                    </h3>
-                  </div>
-                )}
-
-                {domainPreviewMode === "focus" ? (
-                  <div className="max-w-md mx-auto">
-                    <div className="mb-4 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                      <span>VERTICAL: {domainFormState.slug}</span>
-                      <span className="text-[#00D2FF]">● Active Focus</span>
+              {/* Isolated Simulated Canvas Viewport with Immediate Ancestor .dark class */}
+              <div className={domainPreviewTheme === "dark" ? "dark" : ""}>
+                <div className="p-6 sm:p-8 rounded-3xl bg-[#FAFBFD] dark:bg-[#000517] text-[#00144A] dark:text-white border border-slate-200 dark:border-slate-800 transition-colors duration-300 shadow-inner dark:shadow-none">
+                  {/* Section header simulator when in grid mode */}
+                  {domainPreviewMode === "grid" && (
+                    <div className="mb-8 text-center max-w-md mx-auto">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#00144A] text-[#00D2FF] text-[10px] font-bold uppercase tracking-wider mb-2">
+                        <ShieldCheck className="w-3 h-3" />
+                        <span>{domainSectionBadge}</span>
+                      </span>
+                      <h3 className="font-outfit text-lg font-black text-[#00144A] dark:text-white">
+                        {domainSectionHeadline}
+                      </h3>
                     </div>
+                  )}
 
-                    <DomainCard domain={domainFormState} isActive={true} />
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[500px] overflow-y-auto p-1 scrollbar-none">
-                    {allDomains.map((dom) => {
-                      const isEditing = dom.slug === selectedDomainSlug;
-                      const activeData = isEditing ? domainFormState : dom;
-                      return (
-                        <DomainCard
-                          key={dom.slug}
-                          domain={activeData}
-                          isActive={isEditing}
-                          onClick={() => handleSelectDomain(dom.slug)}
-                        />
-                      );
-                    })}
-                  </div>
-                )}
+                  {domainPreviewMode === "focus" ? (
+                    <div className="max-w-md mx-auto">
+                      <div className="mb-4 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                        <span>VERTICAL: {domainFormState.slug}</span>
+                        <span className="text-[#00D2FF]">● Active Focus</span>
+                      </div>
 
-                <div className="mt-4 text-center">
-                  <span className="text-[10px] text-slate-400 font-jakarta">
-                    Card reflects live styling matching public /services and home page.
-                  </span>
+                      <DomainCard domain={domainFormState} isActive={true} />
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[500px] overflow-y-auto p-1 scrollbar-none">
+                      {allDomains.map((dom) => {
+                        const isEditing = dom.slug === selectedDomainSlug;
+                        const activeData = isEditing ? domainFormState : dom;
+                        return (
+                          <DomainCard
+                            key={dom.slug}
+                            domain={activeData}
+                            isActive={isEditing}
+                            onClick={() => handleSelectDomain(dom.slug)}
+                          />
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  <div className="mt-4 text-center">
+                    <span className="text-[10px] text-slate-400 font-jakarta">
+                      Card reflects live styling matching public /services and home page.
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

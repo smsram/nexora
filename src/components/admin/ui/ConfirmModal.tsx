@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertTriangle, HelpCircle, X } from "lucide-react";
 
@@ -27,6 +28,12 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
   onCancel,
   loading = false,
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Listen for Escape key to close
   useEffect(() => {
     if (!isOpen) return;
@@ -41,16 +48,18 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onCancel, loading]);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-          {/* Backdrop */}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          {/* Backdrop with zero layout displacement */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.15 }}
             onClick={() => {
               if (!loading) onCancel();
             }}
@@ -59,10 +68,10 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
 
           {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            initial={{ opacity: 0, scale: 0.95, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 10 }}
-            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            exit={{ opacity: 0, scale: 0.95, y: 8 }}
+            transition={{ type: "spring", stiffness: 450, damping: 32 }}
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-md bg-white dark:bg-[#000F2E] rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 z-10 text-[#00144A] dark:text-white"
           >
@@ -93,7 +102,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
                 )}
               </div>
 
-              <div>
+              <div className="pr-6">
                 <h3 className="font-outfit text-xl font-bold text-[#00144A] dark:text-white leading-snug">
                   {title}
                 </h3>
@@ -130,7 +139,8 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 
