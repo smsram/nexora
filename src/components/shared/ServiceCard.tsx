@@ -105,7 +105,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   );
 
   const containerClasses = cn(
-    "group relative bg-white dark:bg-[#000F2E] text-[#00144A] dark:text-white border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between shadow-xl shadow-slate-200/50 dark:shadow-none hover:border-[#00144A]/30 dark:hover:border-slate-700 transition-all duration-200 cursor-pointer select-none",
+    "group relative bg-white dark:bg-[#000F2E] text-[#00144A] dark:text-white border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between shadow-[0_6px_0_#000B2B] dark:shadow-[0_6px_0_#000517] hover:shadow-[0_8px_0_#000B2B] dark:hover:shadow-[0_8px_0_#000517] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_2px_0_#000B2B] dark:active:shadow-[0_2px_0_#000517] transition-all duration-200 cursor-pointer select-none",
     className
   );
 
@@ -114,8 +114,6 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       <Link href={href} className="block h-full">
         <motion.div
           layoutId={`service-card-${service.id}`}
-          whileHover={{ y: -4 }}
-          whileTap={{ y: 1 }}
           className={containerClasses}
         >
           {cardContent}
@@ -128,8 +126,6 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     <motion.div
       layoutId={`service-card-${service.id}`}
       onClick={onClick}
-      whileHover={{ y: -4 }}
-      whileTap={{ y: 1 }}
       className={containerClasses}
     >
       {cardContent}

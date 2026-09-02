@@ -111,18 +111,10 @@ export const DomainGrid: React.FC = () => {
               description={domain.description}
               className="h-full flex flex-col justify-between"
             >
-              <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+              <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center">
                 <span className="font-outfit text-xs font-bold text-[#0099BE]">
                   {domain.metrics}
                 </span>
-
-                <Link
-                  href="/portfolio"
-                  className="flex items-center gap-1.5 text-xs font-outfit font-bold text-[#00144A] dark:text-white group-hover:text-[#00D2FF] transition-colors"
-                >
-                  <span>View Case Studies</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </Link>
               </div>
             </TactileCard>
           ))}
