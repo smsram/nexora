@@ -1,13 +1,30 @@
+export interface ServiceDeliverable {
+  title: string;
+  description: string;
+}
+
+export interface ServiceTimelinePhase {
+  phase: string;
+  duration: string;
+  outcome: string;
+}
+
 export interface ServiceItem {
   id: string;
-  slug: string; // e.g., 'web-architecture'
+  slug: string; // e.g. 'web-architecture'
   title: string;
-  category: string; // e.g., 'ENGINEERING'
+  category: string; // e.g. 'ENGINEERING'
   description: string;
-  checkpoints: string[]; // Exactly 3 short bullet points for the card front
-  deliverables: { title: string; description: string }[]; // For the expanded modal
-  techStack: string[]; // e.g., ['Next.js 14', 'TypeScript', 'Tailwind']
-  iconName: string; // Lucide icon identifier
+  keyMetricValue?: string;
+  keyMetricLabel?: string;
+  checkpoints: string[];
+  tags?: string[];
+  deliverables: ServiceDeliverable[];
+  techStack: string[];
+  timeline?: ServiceTimelinePhase[];
+  roiTimeline?: string;
+  iconName: string;
+  likes?: number;
 }
 
 export const servicesData: ServiceItem[] = [
@@ -18,11 +35,14 @@ export const servicesData: ServiceItem[] = [
     category: "ENGINEERING",
     description:
       "Enterprise Next.js web applications, headless commerce systems, and ultra-low latency frontend architectures engineered for speed.",
+    keyMetricValue: "Sub-50ms",
+    keyMetricLabel: "Average TTFB Global Latency",
     checkpoints: [
       "Sub-50ms Global TTFB on Edge",
       "100/100 Lighthouse Performance",
       "Bespoke Tactile Component Systems",
     ],
+    tags: ["Next.js 14", "TypeScript", "Tailwind CSS", "Edge Compute"],
     deliverables: [
       {
         title: "Next.js 14 Server-Side Edge Architecture",
@@ -42,7 +62,9 @@ export const servicesData: ServiceItem[] = [
       },
     ],
     techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion", "GraphQL", "Vercel Edge"],
+    roiTimeline: "+320% conversion speedup and 40% reduction in bounce rate within 30 days.",
     iconName: "Code2",
+    likes: 42,
   },
   {
     id: "paid-acquisition",
@@ -51,11 +73,14 @@ export const servicesData: ServiceItem[] = [
     category: "GROWTH ENGINE",
     description:
       "Multi-channel performance marketing engines spanning Meta, Google Ads, TikTok, and algorithmic retargeting architectures.",
+    keyMetricValue: "4.2x",
+    keyMetricLabel: "Average Client ROAS Floor",
     checkpoints: [
       "4.2x Client ROAS Performance Floor",
       "Real-Time Dynamic Budget Reallocation",
       "Server-Side First-Party CAPI Tracking",
     ],
+    tags: ["Meta Ads", "Google PMax", "TikTok Ads", "CAPI Tracking"],
     deliverables: [
       {
         title: "Multi-Platform Media Buying Strategy",
@@ -75,7 +100,9 @@ export const servicesData: ServiceItem[] = [
       },
     ],
     techStack: ["Meta Ads Manager", "Google Ads Scripts", "TikTok Ads", "Triple Whale", "Server GTM", "Looker Studio"],
+    roiTimeline: "2.5x to 5.0x return on ad spend within the first 60 days of campaign deployment.",
     iconName: "TrendingUp",
+    likes: 38,
   },
   {
     id: "algorithmic-seo",
@@ -84,11 +111,14 @@ export const servicesData: ServiceItem[] = [
     category: "ORGANIC SEARCH",
     description:
       "High-intent keyword dominance, programmatic content generation systems, and technical JSON-LD schema graphs.",
+    keyMetricValue: "+240%",
+    keyMetricLabel: "Avg. Organic Traffic Lift in 90 Days",
     checkpoints: [
       "First-Page High-Intent Search Rankings",
       "AI Search Overview & Snippet Capture",
       "Programmatic Long-Tail Directory Pages",
     ],
+    tags: ["Technical SEO", "Programmatic Pages", "JSON-LD Schema"],
     deliverables: [
       {
         title: "Technical Indexability & Core Web Vitals Audit",
@@ -108,7 +138,9 @@ export const servicesData: ServiceItem[] = [
       },
     ],
     techStack: ["Ahrefs", "SEMrush", "Screaming Frog", "Google Search Console", "Next.js Metadata API", "SurferSEO"],
+    roiTimeline: "3x organic lead volume growth with compounding long-term traffic value.",
     iconName: "Search",
+    likes: 29,
   },
   {
     id: "brand-identity",
@@ -117,11 +149,14 @@ export const servicesData: ServiceItem[] = [
     category: "CREATIVE STUDIO",
     description:
       "High-end visual identity, design token systems, interactive 3D elements, and bespoke typography for premium brands.",
+    keyMetricValue: "100%",
+    keyMetricLabel: "Bespoke Design Token Systems",
     checkpoints: [
       "Comprehensive Digital Brand Bible",
       "Figma Design Token Repositories",
       "Interactive Micro-Interactions & Motion",
     ],
+    tags: ["Design Systems", "Tactile Micro-UX", "Motion Design"],
     deliverables: [
       {
         title: "Comprehensive Visual Brand Guidelines",
@@ -141,7 +176,9 @@ export const servicesData: ServiceItem[] = [
       },
     ],
     techStack: ["Figma", "Adobe Illustrator", "After Effects", "Framer Motion", "Spline 3D", "Tailwind Tokens"],
+    roiTimeline: "Significant uplift in perceived enterprise valuation and premium brand positioning.",
     iconName: "Palette",
+    likes: 56,
   },
   {
     id: "cro-optimization",
@@ -150,11 +187,14 @@ export const servicesData: ServiceItem[] = [
     category: "OPTIMIZATION",
     description:
       "Empirical user testing, multi-variant A/B experiments, and frictionless checkout optimization that unlock hidden revenue.",
+    keyMetricValue: "+64%",
+    keyMetricLabel: "Average Checkout Rate Improvement",
     checkpoints: [
       "+45% to +64% Sitewide Conversion Lift",
       "Frictionless One-Click Checkout Flows",
       "Behavioral Heatmap & Session Forensics",
     ],
+    tags: ["A/B Testing", "Heatmap Forensics", "Checkout UX"],
     deliverables: [
       {
         title: "Behavioral Heatmap & Telemetry Forensics",
@@ -174,7 +214,9 @@ export const servicesData: ServiceItem[] = [
       },
     ],
     techStack: ["Hotjar", "Microsoft Clarity", "Optimizely", "VWO", "PostHog", "Figma"],
+    roiTimeline: "+25% to +64% lift in sitewide conversion rate within 45 days.",
     iconName: "Target",
+    likes: 31,
   },
   {
     id: "performance-social",
@@ -183,11 +225,14 @@ export const servicesData: ServiceItem[] = [
     category: "SCALE CHANNEL",
     description:
       "Viral organic loops, brand amplification, and scalable influencer affiliate marketing networks that drive compounding reach.",
+    keyMetricValue: "1.8M+",
+    keyMetricLabel: "Monthly Organic Impressions Generated",
     checkpoints: [
       "Verified Creator Whitelisting Network",
       "High-Retention Vertical Video Pipeline",
       "Automated Social DM Keyword Funnels",
     ],
+    tags: ["Short-Form Video", "Creator Whitelisting", "Social Funnels"],
     deliverables: [
       {
         title: "Creator Match & Whitelisting Program",
@@ -207,7 +252,9 @@ export const servicesData: ServiceItem[] = [
       },
     ],
     techStack: ["CapCut Pro", "Adobe Premiere", "ManyChat API", "Billo", "Grin", "Meta Graph API"],
+    roiTimeline: "+180% engagement lift and 35% reduction in blended CPA.",
     iconName: "Share2",
+    likes: 47,
   },
 ];
 

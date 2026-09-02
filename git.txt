@@ -1,0 +1,40 @@
+### Commands to pull changes in specific branch
+# 1. Fetch all remote branches
+git fetch origin
+
+# 2. Switch to the branch
+git checkout branch-name
+
+
+### Commands to move into main branch and merge specific branch with main
+# 1. Switch back to your local main branch
+git checkout main
+
+# 2. Get the latest code from GitHub to ensure main is up-to-date
+git pull origin main
+
+# 3. Merge the feature branch into main
+git merge branch-name
+
+# 4. Push the merged main branch to GitHub
+git push origin main
+
+
+### Commands to create a branch and push changes into it
+git checkout -b fix-architects-arrows
+git status
+git add .
+git commit -m "Fix: Architects Arrows In Home Page." 
+git push -u origin fix-architects-arrows
+
+
+### Command to merge the pull request if blocks in local
+# 1. Save uncommitted local changes to the stash
+git stash
+
+# 2. Switch to the target branch
+git checkout fix-theme-and-links
+
+
+### Command to check current selected branch
+git branch

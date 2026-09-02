@@ -2,77 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import { 
-  CreditCard, 
-  Stethoscope, 
-  Cloud, 
-  ShoppingBag, 
-  Building, 
-  Sparkles,
-  ArrowRight,
-  ShieldCheck
-} from "lucide-react";
-import { TactileCard } from "@/components/ui/TactileCard";
-
-interface DomainItem {
-  id: string;
-  badge: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  metrics: string;
-}
-
-const domains: DomainItem[] = [
-  {
-    id: "fintech",
-    badge: "Financial Tech",
-    title: "FinTech & Banking Infrastructure",
-    description: "Bank-grade security portals, sub-second ledger dashboards, and conversion-optimized KYC onboarding funnels.",
-    icon: <CreditCard className="w-6 h-6 text-[#00144A] dark:text-[#00D2FF]" />,
-    metrics: "$12B+ Processed Securely",
-  },
-  {
-    id: "healthtech",
-    badge: "Medical & Life Sciences",
-    title: "Healthcare & Telemedicine",
-    description: "HIPAA-compliant patient portals, automated booking engines, and authority-building medical SEO systems.",
-    icon: <Stethoscope className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />,
-    metrics: "100% HIPAA Compliance",
-  },
-  {
-    id: "saas-cloud",
-    badge: "B2B Software",
-    title: "Enterprise SaaS & Cloud",
-    description: "Product-Led Growth (PLG) marketing funnels, interactive feature walkthroughs, and frictionless trial-to-paid conversions.",
-    icon: <Cloud className="w-6 h-6 text-[#0099BE] dark:text-[#00D2FF]" />,
-    metrics: "3.4x Free-to-Paid Lift",
-  },
-  {
-    id: "ecommerce",
-    badge: "Retail & D2C",
-    title: "High-Volume Omnichannel E-Commerce",
-    description: "Headless Next.js storefronts, sub-500ms cart flows, and real-time inventory synchronization across global channels.",
-    icon: <ShoppingBag className="w-6 h-6 text-[#FF4B72]" />,
-    metrics: "Sub-Second Global Checkout",
-  },
-  {
-    id: "realestate",
-    badge: "Property & Assets",
-    title: "Real Estate & Asset Portals",
-    description: "Ultra-high-definition interactive property viewers, geo-targeted search filters, and luxury investor inquiry pipelines.",
-    icon: <Building className="w-6 h-6 text-amber-600 dark:text-amber-400" />,
-    metrics: "Over $800M in Portfolio Value",
-  },
-  {
-    id: "luxury",
-    badge: "Bespoke Lifestyle",
-    title: "Luxury & High-Touch D2C",
-    description: "Editorial spatial design, tactile storytelling, and immersive visual campaigns crafted for discerning global clienteles.",
-    icon: <Sparkles className="w-6 h-6 text-purple-600 dark:text-purple-400" />,
-    metrics: "Top-Tier Brand Prestige",
-  },
-];
+import { ArrowRight, ShieldCheck } from "lucide-react";
+import { domainsData } from "@/data/domainsData";
+import DomainCard from "@/components/shared/DomainCard";
 
 export const DomainGrid: React.FC = () => {
   return (
@@ -102,21 +34,11 @@ export const DomainGrid: React.FC = () => {
 
         {/* 6 Tactile Domain Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {domains.map((domain) => (
-            <TactileCard
+          {domainsData.map((domain) => (
+            <DomainCard
               key={domain.id}
-              badge={domain.badge}
-              icon={domain.icon}
-              title={domain.title}
-              description={domain.description}
-              className="h-full flex flex-col justify-between"
-            >
-              <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center">
-                <span className="font-outfit text-xs font-bold text-[#0099BE]">
-                  {domain.metrics}
-                </span>
-              </div>
-            </TactileCard>
+              domain={domain}
+            />
           ))}
         </div>
 

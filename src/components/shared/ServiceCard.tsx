@@ -18,11 +18,12 @@ import {
 import { ServiceItem } from "@/data/servicesData";
 import { cn } from "@/lib/utils";
 
-interface ServiceCardProps {
+export interface ServiceCardProps {
   service: ServiceItem;
   onClick?: () => void;
   href?: string;
   showCheckpoints?: boolean;
+  showTags?: boolean;
   className?: string;
 }
 
@@ -52,6 +53,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   onClick,
   href,
   showCheckpoints = true,
+  showTags = true,
   className,
 }) => {
   const cardContent = (
@@ -79,7 +81,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 
         {/* Checkpoints: Clean Vertical List with Cyan Checkmarks */}
         {showCheckpoints && service.checkpoints && service.checkpoints.length > 0 && (
-          <div className="space-y-2.5 mb-6 pt-3 pb-1 border-t border-slate-100 dark:border-slate-800/80">
+          <div className="space-y-2.5 mb-5 pt-3 pb-1 border-t border-slate-100 dark:border-slate-800/80">
             {service.checkpoints.map((checkpoint, idx) => (
               <div key={idx} className="flex items-start gap-2.5 text-xs font-jakarta text-slate-700 dark:text-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-cyan-600 dark:text-[#00D2FF] flex-shrink-0 mt-0.5" />
@@ -88,13 +90,40 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             ))}
           </div>
         )}
+
+        {/* Strategy / Tech Tags */}
+        {showTags && service.tags && service.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-5">
+            {service.tags.map((tag, idx) => (
+              <span
+                key={idx}
+                className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-[#000517] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-jakarta text-[10px] font-semibold"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Bottom Action: Tactile Action Trigger */}
       <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between mt-auto">
-        <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider font-jakarta">
-          {service.techStack?.[0] ? `${service.techStack.length} Integrated Specs` : "Architecture"}
-        </span>
+        <div>
+          {service.keyMetricValue ? (
+            <div>
+              <div className="font-outfit text-lg font-black text-[#00144A] dark:text-white">
+                {service.keyMetricValue}
+              </div>
+              <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">
+                {service.keyMetricLabel || "Benchmark"}
+              </div>
+            </div>
+          ) : (
+            <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider font-jakarta">
+              {service.techStack?.[0] ? `${service.techStack.length} Integrated Specs` : "Architecture"}
+            </span>
+          )}
+        </div>
 
         <div className="flex items-center gap-1.5 text-xs font-bold text-[#00144A] hover:text-cyan-600 dark:text-[#00D2FF] dark:hover:text-white group-hover:translate-x-1 transition-all">
           <span>Inspect Specs</span>
@@ -105,7 +134,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   );
 
   const containerClasses = cn(
-    "group relative bg-white dark:bg-[#000F2E] text-[#00144A] dark:text-white border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between shadow-[0_6px_0_#000B2B] dark:shadow-[0_6px_0_#000517] hover:shadow-[0_8px_0_#000B2B] dark:hover:shadow-[0_8px_0_#000517] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_2px_0_#000B2B] dark:active:shadow-[0_2px_0_#000517] transition-all duration-200 cursor-pointer select-none",
+    "group relative bg-white dark:bg-[#000F2E] text-[#00144A] dark:text-white border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between shadow-xl shadow-slate-200/50 dark:shadow-none hover:border-[#00144A]/30 dark:hover:border-slate-700 transition-all duration-200 cursor-pointer select-none",
     className
   );
 
@@ -114,6 +143,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       <Link href={href} className="block h-full">
         <motion.div
           layoutId={`service-card-${service.id}`}
+          whileHover={{ y: -4 }}
+          whileTap={{ y: 1 }}
           className={containerClasses}
         >
           {cardContent}
@@ -126,6 +157,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     <motion.div
       layoutId={`service-card-${service.id}`}
       onClick={onClick}
+      whileHover={{ y: -4 }}
+      whileTap={{ y: 1 }}
       className={containerClasses}
     >
       {cardContent}
